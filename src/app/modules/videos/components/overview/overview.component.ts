@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FileData } from 'src/app/models/FileData';
 import { FileListService } from 'src/app/services/file-list.service';
 import { isVideo } from '../../videos-util';
+import { updateArrayInPlace } from '../../../../utils/streamDataUtils';
 
 @Component({
   selector: 'app-overview',
@@ -24,13 +25,12 @@ export class OverviewComponent implements OnInit {
     this.fileListService.streamRecent()
       .subscribe((data: FileData[]) => {
         const filtered = data.filter(e => isVideo(e.name));
-
-        //brute force compare
-        if (JSON.stringify(this.latest) === JSON.stringify(filtered)) {
-          console.log('DONT NEED TO UPDATE');
+        if (!this.latest) {
+          this.latest = filtered;
         }
         else {
-          this.latest = filtered;
+          // special in place update
+          updateArrayInPlace<FileData>(this.latest, filtered);
         }
       });
 

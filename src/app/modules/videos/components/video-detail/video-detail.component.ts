@@ -35,6 +35,7 @@ export class VideoDetailComponent implements OnInit {
   private getThumbnails() {
     this.thumbnailService.getThumbnailList(this.video.id)
       .subscribe((data: string[]) => {
+        console.log(data);
         // set data if it's not empty
         if (data.length > 0) {
           this.thumbnailList = data;
