@@ -1,5 +1,8 @@
-$bar-size: 250px;
+@import "src/colours.scss";
+
+$bar-size: 350px;
 $header-height: 3rem;
+$header-content-width: 1280px;
 
 .header {
     height: $header-height;
@@ -7,12 +10,24 @@ $header-height: 3rem;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 
-    box-shadow: 0 4px 4px rgba(0,0,0,.06);
-    border-bottom: solid 1px #CCCCCC;
+    background-color: $header-background-colour;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+    border-bottom: solid 1px $header-border-bottom-colour;
 
-    & > * {
+    .header-container {
+        flex-grow: 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        // max-width: $header-content-width;
+        height: 3rem;
+    }
+
+    .header-container > * {
         display: flex;
         align-items: center;
         height: 3rem;
@@ -24,10 +39,30 @@ $header-height: 3rem;
     }
 
     .left {
+        margin-left: 0.5rem;
 
-        .logo {
-            display: inline-block;
+        .navigation {
+            display: flex;
+
+            .nav-item {
+                margin-right: 0.75rem;
+
+                a {
+                    text-decoration: none;
+                    font-size: 0.9em;
+                    color: #9d9d9d;
+                }
+
+                a:hover {
+                    color: #ffffff;
+                }
+            }
         }
+    }
+
+    .middle {
+        flex-grow: 1;
+        justify-content: space-around;
 
         h1.title {
             display: inline-block;
@@ -39,20 +74,17 @@ $header-height: 3rem;
 
             /* colours */
             background-image: -webkit-gradient( linear, left top, right top,
-                color-stop(0, #22f),
+                color-stop(0, #66f),
                 color-stop(0.5, #f2f),
-                color-stop(1, #f22)) !important;
+                color-stop(1, #f66)) !important;
 
             color: transparent !important;
             -webkit-background-clip: text;
         }
     }
 
-    .middle {
-        flex-grow: 1;
-    }
-
     .right {
         flex-direction: row-reverse;
+        margin-right: 0.5rem;
     }
 }

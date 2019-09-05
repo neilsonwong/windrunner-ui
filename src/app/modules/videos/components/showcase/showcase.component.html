@@ -1,8 +1,10 @@
-<div>
+<div class="showcase">
     <div class="showcase-title-container">
-        <h3>{{ title }}</h3>
+        <h2>{{ title }}</h2>
     </div>
     <div class="showcase-contents">
-        
+        <app-video-detail *ngFor="let v of contents" 
+            [video]="v">
+        </app-video-detail>
     </div>
 </div>

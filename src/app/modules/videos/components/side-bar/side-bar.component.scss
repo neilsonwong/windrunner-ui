@@ -1,5 +1,9 @@
 $bar-size: 250px;
 
+:host {
+    display: inline-block;
+}
+
 .side-bar {
     display: block;
     width: 300px;

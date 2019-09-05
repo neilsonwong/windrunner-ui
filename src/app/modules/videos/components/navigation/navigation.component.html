@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div>navigation works! {{ place }}</div>
 <div>navigation display
     <div>nav header
@@ -9,4 +8,9 @@
         display options icons, rows
     </div>
     <div>nav contents</div>
+    <div *ngFor="let dir of directories">{{ dir.name }}</div>
+    <app-showcase
+      title="Videos"
+      [contents]="videos">
+    </app-showcase>
 </div>
