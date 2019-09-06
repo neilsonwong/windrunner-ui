@@ -16,21 +16,6 @@ export class ThumbnailService {
     private oboe: OboeWrapper) { 
   }
 
-  // getThumbnailList(fileId: string): Observable<string[]> {
-  //   const endpoint = `${apiRoot}/thumblist/${fileId}`;
-  //   return this.http.get<string[]>(endpoint, { observe: 'response' })
-  //     .pipe(
-  //       map(resp => {
-  //         if (resp.status === 202) {
-  //           throwError(`thumbnail list creation has been triggered for ${fileId}`);
-  //         }
-  //         else {
-  //           return resp.body;
-  //         }
-  //       }),
-  //       http_retry());
-  // }
-
   getThumbnailUrl(fileId: string, img: string): string {
     return `${apiRoot}/thumb/${fileId}/${img}`;
   }

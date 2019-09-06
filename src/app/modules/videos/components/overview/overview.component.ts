@@ -22,7 +22,7 @@ export class OverviewComponent implements OnInit {
   }
 
   getLatest() {
-    this.fileListService.streamRecent()
+    this.fileListService.getRecent()
       .subscribe((data: FileData[]) => {
         const filtered = data.filter(e => isVideo(e.name));
         if (!this.latest) {
@@ -39,5 +39,4 @@ export class OverviewComponent implements OnInit {
         this.curated = data;
       });
   }
-
 }
