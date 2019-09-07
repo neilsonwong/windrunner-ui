@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { LazyLoadImageDirective } from './directives/lazy-load-image.directive';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SearchBarComponent, LazyLoadImageDirective],
+  declarations: [HeaderComponent, SearchBarComponent, LazyLoadImageDirective, ErrorComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -17,7 +18,8 @@ import { LazyLoadImageDirective } from './directives/lazy-load-image.directive';
   ],
   exports: [
     HeaderComponent,
-    LazyLoadImageDirective
+    LazyLoadImageDirective,
+    ErrorComponent,
   ]
 })
 export class SharedModule { }

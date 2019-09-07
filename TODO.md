@@ -1,6 +1,6 @@
 fix ugly what's new title on box
-new page
-emoji error
+<!-- new page -->
+<!-- emoji error -->
 directory view
 pin 
 find button / page
