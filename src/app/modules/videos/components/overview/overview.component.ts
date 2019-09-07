@@ -17,7 +17,6 @@ export class OverviewComponent implements OnInit {
   constructor(private fileListService: FileListService) { }
 
   ngOnInit() {
-    // this.fileListService.testOboe();
     this.getLatest();
   }
 

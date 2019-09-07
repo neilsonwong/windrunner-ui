@@ -1,6 +1,6 @@
 @media only screen and (min-width: 960px) {
     :host {
-        flex-basis: 33%;
+        flex-basis: 33.33%;
     }
 }
 
@@ -17,7 +17,7 @@
 .video-details {
     display: block;
     position: relative;
-    margin: 0.25rem;
+    margin: 0.5rem;
     box-shadow: 1px 1px 4px #999;
 
     &:hover .video-thumbnail img {
