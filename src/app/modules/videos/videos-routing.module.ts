@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { OverviewComponent } from './components/overview/overview.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { VideosComponent } from './components/videos/videos.component';
+import { NewComponent } from './components/new/new.component';
 
 const routes: Routes = [
   { path: 'v', component: VideosComponent,
     children: [
     { path: '', component: OverviewComponent },
+    { path: 'new', component: NewComponent },
     { path: 'browse',
       // handle using wildcard cuz we are cheating with the folder paths
       children: [{ 

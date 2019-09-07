@@ -11,9 +11,10 @@ import { ShowcaseComponent } from './components/showcase/showcase.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { VideoDetailComponent } from './components/video-detail/video-detail.component';
 import { VideosComponent } from './components/videos/videos.component';
+import { NewComponent } from './components/new/new.component';
 
 @NgModule({
-  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent],
+  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent, NewComponent],
   imports: [
     CommonModule,
     HttpClientModule,
