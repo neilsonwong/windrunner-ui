@@ -1,9 +1,12 @@
 <div ngClass="directory-detail {{ dirClass }}">
-    <div class="title">
-        {{ directory.name }}
-    </div>
-    <div class="info">
-        <div>{{ directory.birthTime }}</div>
-        <div>{{ directory.metadata.fileCount}}</div>
-    </div>
+    <a [routerLink]="[linkUrl]">
+        <div class="title">
+            <h3>{{ directory.name }}</h3>
+        </div>
+        <div class="info">
+            <div>{{ directory.birthTime | date:'medium' }}</div>
+            <div>{{ directory.metadata.fileCount | i18nPlural:filePluralMapping }}</div>
+        </div>
+    </a>
+    <div class="hover-bar"></div>
 </div>

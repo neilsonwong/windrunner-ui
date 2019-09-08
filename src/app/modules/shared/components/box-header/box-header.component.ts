@@ -29,7 +29,8 @@ export class BoxHeaderComponent implements OnChanges {
     }
     // handle non videos
     else if (this.totalCount) {
-      this.additionalData.push(`${this.totalCount} items in folder`);
+      const itemOrItems = this.totalCount === 1 ? 'item' : 'items';
+      this.additionalData.push(`${this.totalCount} ${itemOrItems} in folder`);
     }
   }
 }

@@ -48,7 +48,6 @@ $header-content-width: 1280px;
                 margin-right: 0.75rem;
 
                 a {
-                    text-decoration: none;
                     font-size: 0.9em;
                     color: #9d9d9d;
                 }
@@ -81,7 +80,7 @@ $header-content-width: 1280px;
                 color-stop(1, #f66)) !important;
 
             color: transparent !important;
-            -webkit-background-clip: text;
+            background-clip: text;
         }
     }
 

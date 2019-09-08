@@ -9,10 +9,14 @@ import { FileData } from 'src/app/models/FileData';
 export class DirectoryDetailComponent implements OnInit {
   @Input() directory: FileData;
   dirClass: string;
+  linkUrl: string;
+  filePluralMapping: {[k: string]: string} = {'=1': '1 file', 'other': '# files'};
   
   constructor() { }
 
   ngOnInit() {
+    // TODO: fix this in the future
+    this.linkUrl = `/v/browse${this.directory.rel}`;
     this.setDirClass();
   }
 
