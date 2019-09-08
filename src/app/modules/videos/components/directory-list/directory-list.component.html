@@ -1,7 +1,11 @@
 <div class="directory-list">
-    <div class="directory-list-title-container">
-        <h2>{{ title }}</h2>
-    </div>
+    <app-box-header
+      [title]="title"
+      [watched]="watched"
+      [totalVideoCount]="totalVideoCount"
+      [totalCount]="totalCount"
+      [lastUpdated]="lastUpdated">
+    </app-box-header>
     <div class="directory-list-contents">
         <app-directory-detail *ngFor="let dir of directories" 
             [directory]="dir">

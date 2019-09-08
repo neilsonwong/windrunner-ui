@@ -44,10 +44,6 @@ export class VideoDetailComponent implements OnInit {
             this.nextThumbnail();
             this.loadingThumbnail = false;
           }
-          else {
-            console.log('i think this should have a lot of thumbnails?');
-            console.log(this.thumbnailList);
-          }
         }
       });
   }

@@ -27,16 +27,21 @@ export class NavigationComponent implements OnInit {
   }
 
   getDirListing() {
+    const dirs = [];
+    const vids = [];
+
     this.fileListService.getDirectoryList(this.place)
       .subscribe((data: FileData[]) => {
         for (const file of data) {
           if (file.type === FileType.DIRECTORY) {
-            this.directories.push(file);
+            dirs.push(file);
           }
           else if (file.type === FileType.VIDEO) {
-            this.videos.push(file);
+            vids.push(file);
           }
         }
+        this.directories = dirs;
+        this.videos = vids;
       });
   }
 

@@ -1,10 +1,10 @@
 <div class="showcase">
     <app-box-header
       [title]="title"
-      [watched]="0"
-      [totalCount]="contents ? contents.length : 0"
-      [lastUpdated]="lastUpdated"
-      >
+      [watched]="watched"
+      [totalVideoCount]="totalVideoCount"
+      [totalCount]="totalCount"
+      [lastUpdated]="lastUpdated">
     </app-box-header>
     <div class="showcase-contents">
         <div class="showcase-video-list" *ngIf="contents && contents.length > 0; else errorBlock">

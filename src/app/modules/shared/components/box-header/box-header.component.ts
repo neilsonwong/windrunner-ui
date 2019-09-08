@@ -9,6 +9,7 @@ import { formatDate } from '@angular/common';
 export class BoxHeaderComponent implements OnChanges {
   @Input() title: string;
   @Input() watched: number;
+  @Input() totalVideoCount: number;
   @Input() totalCount: number;
   @Input() lastUpdated: Date;
   additionalData: string[];
@@ -23,11 +24,11 @@ export class BoxHeaderComponent implements OnChanges {
     }
 
     // handle watched
-    if (this.watched !== undefined && this.totalCount !== undefined) {
-      this.additionalData.push(`Watched ${this.watched} of ${this.totalCount}`);
+    if (this.watched !== undefined && this.totalVideoCount !== undefined && this.totalVideoCount > 0) {
+      this.additionalData.push(`Watched ${this.watched} of ${this.totalVideoCount}`);
     }
-    else if (this.totalCount) {
-      this.additionalData.push(`${this.totalCount} items`);
+    else if (this.totalVideoCount) {
+      this.additionalData.push(`${this.totalVideoCount} items`);
     }
 
   }
