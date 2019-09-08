@@ -1,4 +1,5 @@
 <app-showcase
-  title="What's New"
+  *ngIf="latest && latest.length > 0"
+  title="New!!"
   [contents]="latest">
 </app-showcase>

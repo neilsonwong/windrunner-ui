@@ -1,7 +1,11 @@
 <div class="showcase">
-    <div class="showcase-title-container">
-        <h2>{{ title }}</h2>
-    </div>
+    <app-box-header
+      [title]="title"
+      [watched]="0"
+      [totalCount]="contents ? contents.length : 0"
+      [lastUpdated]="lastUpdated"
+      >
+    </app-box-header>
     <div class="showcase-contents">
         <div class="showcase-video-list" *ngIf="contents && contents.length > 0; else errorBlock">
             <app-video-detail *ngFor="let v of contents" 

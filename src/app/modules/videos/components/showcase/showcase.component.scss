@@ -5,27 +5,6 @@
     margin: 1rem;
     box-shadow: 1px 1px 4px #ccc;
 
-    h2 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #c39;
-        text-shadow: rgba(0,0,0,.01) 0 0 1px;
-
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    .showcase-title-container {
-        padding: 1.25rem 1.25rem 0 1.25rem;
-        // background-color: #fff;
-        // border-bottom: 1px solid rgba(0,0,0,0.1);
-        // background-image: -webkit-gradient(linear, left top, right bottom, 
-        //     color-stop(1, rgba(255, 204, 204, 0.5)),
-        //     color-stop(0.5, ), 
-        //     color-stop(0, rgba(204, 204, 255, 0.5)));
-    }
-
     .showcase-contents {
         padding: 1rem;
     }
