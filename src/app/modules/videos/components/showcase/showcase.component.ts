@@ -8,7 +8,7 @@ import { FileDataContainer } from '../../helper/file-data-container';
   styleUrls: ['./showcase.component.scss']
 })
 export class ShowcaseComponent extends FileDataContainer implements OnInit {
-  @Input() title: string;
+  @Input() showcaseTitle: string;
   @Input() contents: FileData[];
 
   constructor() { 

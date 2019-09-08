@@ -7,7 +7,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./box-header.component.scss']
 })
 export class BoxHeaderComponent implements OnChanges {
-  @Input() title: string;
+  @Input() heading: string;
   @Input() watched: number;
   @Input() totalVideoCount: number;
   @Input() totalCount: number;

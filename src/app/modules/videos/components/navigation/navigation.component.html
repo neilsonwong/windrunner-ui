@@ -1,12 +1,12 @@
 <div>
     <app-directory-list 
       *ngIf="directories.length > 0"
-      [title]="place === '/' ? rootName : place"
+      [baseDir]="place === '/' ? rootName : place"
       [directories]="directories">
     </app-directory-list>
     <app-showcase
       *ngIf="videos.length > 0"
-      [title]="place"
+      [showcaseTitle]="place"
       [contents]="videos">
     </app-showcase>
 </div>

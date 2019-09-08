@@ -8,7 +8,7 @@ import { FileDataContainer } from '../../helper/file-data-container';
   styleUrls: ['./directory-list.component.scss']
 })
 export class DirectoryListComponent extends FileDataContainer implements OnChanges {
-  @Input() title: string;
+  @Input() baseDir: string;
   @Input() directories: FileData[];
 
   constructor() {
