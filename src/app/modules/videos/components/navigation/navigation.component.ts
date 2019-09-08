@@ -19,7 +19,7 @@ export class NavigationComponent implements OnInit {
     private fileListService: FileListService) { }
 
   ngOnInit() {
-    this.rootName = 'Started from the bottom, and now we at /';
+    this.rootName = 'All Files';
     this.directories = [];
     this.videos = [];
 
@@ -47,7 +47,7 @@ export class NavigationComponent implements OnInit {
 
   private decodeLocationFromUrl() {
     this.route.url.subscribe((segments: UrlSegment[]) => {
-      this.place = segments
+      this.place = '/' + segments
         .map(e => decodeURIComponent(e.toString()))
         .join('/');
       this.getDirListing();

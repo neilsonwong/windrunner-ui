@@ -1,18 +1,12 @@
 <div>
-    <div>nav header
-        bread crumbs
-        x files
-        last updated
-        watched
-        display options icons, rows
-    </div>
-    <div>nav contents</div>
     <app-directory-list 
-      [title]="place || rootName"
+      *ngIf="directories.length > 0"
+      [title]="place === '/' ? rootName : place"
       [directories]="directories">
     </app-directory-list>
     <app-showcase
-      title="Videos"
+      *ngIf="videos.length > 0"
+      [title]="place"
       [contents]="videos">
     </app-showcase>
 </div>

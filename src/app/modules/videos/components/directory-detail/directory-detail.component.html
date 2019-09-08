@@ -1,1 +1,9 @@
-<div>{{ directory.name }}</div>
+<div ngClass="directory-detail {{ dirClass }}">
+    <div class="title">
+        {{ directory.name }}
+    </div>
+    <div class="info">
+        <div>{{ directory.birthTime }}</div>
+        <div>{{ directory.metadata.fileCount}}</div>
+    </div>
+</div>

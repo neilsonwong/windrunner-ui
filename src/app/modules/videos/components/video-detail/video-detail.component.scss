@@ -17,6 +17,7 @@
 .video-details {
     display: block;
     position: relative;
+    height: calc(100% - 1em);
     margin: 0.5rem;
     box-shadow: 1px 1px 4px #999;
 

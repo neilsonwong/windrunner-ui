@@ -27,9 +27,9 @@ export class BoxHeaderComponent implements OnChanges {
     if (this.watched !== undefined && this.totalVideoCount !== undefined && this.totalVideoCount > 0) {
       this.additionalData.push(`Watched ${this.watched} of ${this.totalVideoCount}`);
     }
-    else if (this.totalVideoCount) {
-      this.additionalData.push(`${this.totalVideoCount} items`);
+    // handle non videos
+    else if (this.totalCount) {
+      this.additionalData.push(`${this.totalCount} items in folder`);
     }
-
   }
 }
