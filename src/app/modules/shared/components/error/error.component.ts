@@ -8,8 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ErrorComponent implements OnInit {
   @Input() errorMessage: string;
   face: string;
-  private emojis = [`(;-;)`, `(='X'=)`, `(≥o≤)`, `(·.·)`,
-    `(˚Δ˚)b`, `(ノ*°▽°*)`, `\(^Д^)/`, `\(o_o)/`, `(>_<)`, `(^-^*)`];
+  private emojis = [
+    `(;-;)`, `(='X'=)`, `(≥o≤)`, `(·.·)`, `(^-^")`, `(T-T)`, `(╯°□°)╯︵ ┻━┻`,
+    `(˚Δ˚)b`, `(ノ*°▽°*)`, `\(^Д^)/`, `\(o_o)/`, `(>_<)`, `(^-^*)`
+  ];
 
   constructor() { }
 

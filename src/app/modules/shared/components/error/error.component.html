@@ -1,2 +1,2 @@
-<div class="emoji">{{ face }}</div>
+<div ngClass="emoji {{ face.length > 7 ? 'long' : ''}}">{{ face }}</div>
 <div class="message">{{ errorMessage }}</div>
