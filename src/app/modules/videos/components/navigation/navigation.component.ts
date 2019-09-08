@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { FileListService } from 'src/app/services/file-list.service';
 import { FileData } from 'src/app/models/FileData';
-import { LinkData } from 'src/app/models/LinkData';
 import { FileType } from 'src/app/models/FileType';
 
 @Component({

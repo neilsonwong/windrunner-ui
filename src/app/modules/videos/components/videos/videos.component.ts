@@ -19,7 +19,8 @@ export class VideosComponent implements OnInit {
     this.navigation = [
       new LinkData('Home', '/v'),
       new LinkData('New!', '/v/new'),
-      new LinkData('Browse', '/v/browse')
+      new LinkData('Favourites', '/v/favourites'),
+      new LinkData('Browse', '/v/browse'),
     ];
   }
 }
