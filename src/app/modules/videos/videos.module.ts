@@ -12,9 +12,11 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { VideoDetailComponent } from './components/video-detail/video-detail.component';
 import { VideosComponent } from './components/videos/videos.component';
 import { NewComponent } from './components/new/new.component';
+import { DirectoryListComponent } from './components/directory-list/directory-list.component';
+import { DirectoryDetailComponent } from './components/directory-detail/directory-detail.component';
 
 @NgModule({
-  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent, NewComponent],
+  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent, NewComponent, DirectoryListComponent, DirectoryDetailComponent],
   imports: [
     CommonModule,
     HttpClientModule,

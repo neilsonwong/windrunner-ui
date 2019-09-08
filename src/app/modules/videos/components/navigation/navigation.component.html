@@ -1,5 +1,4 @@
-<div>navigation works! {{ place }}</div>
-<div>navigation display
+<div>
     <div>nav header
         bread crumbs
         x files
@@ -8,7 +7,9 @@
         display options icons, rows
     </div>
     <div>nav contents</div>
-    <div *ngFor="let dir of directories">{{ dir.name }}</div>
+    <app-directory-list 
+      [title]="place || rootName"
+      [directories]="directories"></app-directory-list>
     <app-showcase
       title="Videos"
       [contents]="videos">

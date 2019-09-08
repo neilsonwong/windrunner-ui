@@ -11,6 +11,7 @@ import { FileType } from 'src/app/models/FileType';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  rootName: string;
   place: string;
   directories: FileData[];
   videos: FileData[];
@@ -19,6 +20,7 @@ export class NavigationComponent implements OnInit {
     private fileListService: FileListService) { }
 
   ngOnInit() {
+    this.rootName = 'Started from the bottom, and now we at /';
     this.directories = [];
     this.videos = [];
 

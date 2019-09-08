@@ -1,0 +1,10 @@
+<div class="directory-list">
+    <div class="directory-list-title-container">
+        <h2>{{ title }}</h2>
+    </div>
+    <div class="directory-list-contents">
+        <app-directory-detail *ngFor="let dir of directories" 
+            [directory]="dir">
+        </app-directory-detail>
+    </div>
+</div>
