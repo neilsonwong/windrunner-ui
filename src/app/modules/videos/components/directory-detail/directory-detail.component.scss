@@ -1,40 +1,38 @@
 :host {
     display: block;
     flex-basis: 50%;
+    /* nasty hack to force flex basis to be used as width */
+    /* fixes an annoying problem with long dir names */
+    width: 0px;
 }
 
 .directory-detail {
+    position: relative;
     margin: 0.5rem;
-    min-height: 5rem;
     padding: 0.5rem;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 2px #999;
+    border: 1px solid rgba(0,0,0,0.125);
+    box-shadow: 1px 1px 3px #ccc;
 
     .title {
+
         h3 {
             margin: 0;
             font-size: 1.25rem;
             font-weight: 600;
             color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        h3.too-long {
+            font-size: 1rem;
         }
     }
 
     .info {
         color: #333;
         font-size: 0.8rem;
-    }
-
-    &.new,
-    &.fav {
-        .title h3 {
-            background-image: -webkit-gradient( linear, left top, right top,
-                color-stop(0, #66f),
-                color-stop(0.5, #f2f),
-                color-stop(1, #f66)) !important;
-
-            color: transparent !important;
-            background-clip: text;
-        }
     }
 
     &.small {
@@ -47,5 +45,70 @@
 
     &.big {
 
+    }
+
+    &.rainbow-1 {
+        background-color: #ffdfdf;
+    }
+
+    &.rainbow-2 {
+        background-color: #fcf7de;
+    }
+    &.rainbow-3 {
+        background-color: #defde0;
+    }
+    &.rainbow-4 {
+        background-color: #def3fd;
+    }
+    &.rainbow-5 {
+        background-color: #f0defd;
+    }
+
+    .hover-bar {
+        position: absolute;
+        width: calc(100% - 0.5rem);
+        bottom: 0;
+        right: 0;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        max-height: 100%;
+        overflow: hidden;
+        text-align: right;
+    }
+
+    .hover-bar > * {
+        opacity: 0;
+    }
+
+    .hover-bar:hover > * {
+        opacity: 0.2;
+    }
+
+    .fav-icon {
+        display: inline-block;
+        font-size: 1.25rem;
+        transform: translateY(5px);
+        color: red;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    &.fav {
+        .title h3 {
+            background-image: -webkit-gradient( linear, left top, right top,
+                color-stop(0, #66f),
+                color-stop(0.5, #f2f),
+                color-stop(1, #f66)) !important;
+
+            color: transparent !important;
+            background-clip: text;
+        }
+    }
+
+    &.fav .fav-icon,
+    &.fav .hover-bar:hover .fav-icon,
+    .hover-bar:hover .fav-icon:hover {
+        opacity: 1;
     }
 }

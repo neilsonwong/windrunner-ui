@@ -1,12 +1,18 @@
-<div ngClass="directory-detail {{ dirClass }}">
+<div [class.directory-detail]="true"
+    [class.fav]="isFav"
+    ngClass="{{ dirClass }} {{ bgColour }}">
     <a [routerLink]="[linkUrl]">
-        <div class="title">
-            <h3>{{ directory.name }}</h3>
-        </div>
-        <div class="info">
-            <div>{{ directory.birthTime | date:'medium' }}</div>
-            <div>{{ directory.metadata.fileCount | i18nPlural:filePluralMapping }}</div>
+        <div class="wrapper">
+            <div class="title">
+                <h3 ngClass="{{ directory.name.length > 40 ? 'too-long' : ''}}" title="{{ directory.name }}">{{ directory.name }}</h3>
+            </div>
+            <div class="info">
+                <div>{{ directory.birthTime | date:'medium' }}</div>
+                <div>{{ directory.metadata.fileCount | i18nPlural:filePluralMapping }}</div>
+            </div>
         </div>
     </a>
-    <div class="hover-bar"></div>
+    <div class="hover-bar">
+        <button class="fav-icon" (click)="toggleFav()">❤</button>
+    </div>
 </div>

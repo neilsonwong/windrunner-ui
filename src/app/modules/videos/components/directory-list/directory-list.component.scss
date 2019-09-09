@@ -2,10 +2,13 @@
     background-color: #fff;
     margin: 1rem;
     box-shadow: 1px 1px 4px #ccc;
+    max-width: 1331px;
+    min-width: 960px;
 
     .directory-list-contents {
         padding: 1rem;
         display: flex;
+        flex-direction: row;
         flex-wrap: wrap;
     }
 }
