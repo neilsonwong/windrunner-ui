@@ -5,20 +5,22 @@
     style bg
     hover actions
         pin  -->
-
+mandatory
 video hover actions    
     play
+    play + trigger smb watch
     go to folder
 
 find button / page
 swapping images
-background image
-play + trigger smb watch
-link + moving around lag due to loading
-
 badges
-responsive design
 
+EZPZ
+<!-- background image -->
 update favicon
+
+nice to have
+link + moving around lag due to loading
+responsive design
 semantic html e.g. <header>
 skins

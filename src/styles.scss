@@ -4,6 +4,10 @@ body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   background-color: #F2F2F2;
+  background-image: url('/assets/rikka.png');
+  background-repeat: no-repeat;
+  background-position: right 30px bottom -20px;
+  background-attachment: fixed;
 }
 
 a {
