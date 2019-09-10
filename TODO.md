@@ -10,7 +10,8 @@ mandatory
     play
     play + trigger smb watch
     go to folder -->
-watch time
+<!-- watch time -->
+error msg for no recents loaded
 find button / page
 swapping images
 badges

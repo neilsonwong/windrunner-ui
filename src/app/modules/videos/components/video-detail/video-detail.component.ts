@@ -15,12 +15,13 @@ export class VideoDetailComponent implements OnInit {
   prettyName: string;
   prettySize: string;
   prettyDate: string;
-  loadingThumbnail: boolean;
   currentThumbnail: string;
+  loadingThumbnail: boolean;
+  noThumbStyle: string;
+  watchedStyle: { [klass: string]: any; }
 
   private thumbnailList: string[];
   private thumbIndex: number;
-  private noThumbStyle: string;
 
   constructor(private thumbnailService: ThumbnailService,
     private userPrefsService: UserPrefService,
@@ -30,12 +31,14 @@ export class VideoDetailComponent implements OnInit {
   ngOnInit() {
     this.thumbIndex = -1;
     this.loadingThumbnail = true;
+    this.watchedStyle = {};
 
     this.prettyName = this.getPrettyName(this.video.name);
     this.prettySize = this.formatBytes(this.video.size, undefined);
     this.prettyDate = this.video.birthTime.substring(0, 10);
 
     this.setNoThumbStyle();
+    this.setWatchTime();
     this.getThumbnails();
   }
 
@@ -70,9 +73,14 @@ export class VideoDetailComponent implements OnInit {
     return name.replace(/_/g, ' ').replace(/(\[[a-zA-Z0-9\- ~,\.\-&]+\]|\([a-zA-Z0-9\- ~,\.]+\))/g, '').replace(/(\.[avimk4]+$)/g, '').trim();
   }
 
-  private formatBytes(a,b) {
-    if(0===a)return"0 Bytes";
-    const c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]
+
+  private setWatchTime() {
+    if (this.video.metadata &&
+      this.video.metadata.watchTime !== undefined &&
+      this.video.metadata.totalTime !== undefined) {
+        const percentLen = Math.min(100, (this.video.metadata.watchTime / this.video.metadata.totalTime) * 100);
+        this.watchedStyle = {'width': `${percentLen}%`};
+      }
   }
 
   playFile() {
@@ -89,5 +97,10 @@ export class VideoDetailComponent implements OnInit {
     // TODO: find better way to do this later
     const parentFolder = this.video.rel.substring(1, this.video.rel.length - this.video.name.length);
     this.router.navigateByUrl(`/v/browse/${parentFolder}`);
+  }
+
+  private formatBytes(a,b) {
+    if(0===a)return"0 Bytes";
+    const c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]
   }
 }

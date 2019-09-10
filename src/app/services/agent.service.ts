@@ -16,7 +16,7 @@ export class AgentService {
   triggerPlay(fileRelPath: string): Observable<boolean> {
     const endpoint = `${agent}/play`;
     const payload = new HttpParams().set('file', fileRelPath);
-    return this.http.post(endpoint, payload, { observe: 'response' })
+    return this.http.post(endpoint, payload, { observe: 'response', responseType: 'text'})
       .pipe(map(resp => {
         return resp.status === 200;
       }));

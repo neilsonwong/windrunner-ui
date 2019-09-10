@@ -32,7 +32,7 @@ export class UserPrefService {
 
   notifyPlay(fileId: string): Observable<boolean> {
     const endpoint = `${api}/watch`;
-    return this.http.post(endpoint, fileId, { observe: 'response' })
+    return this.http.post(endpoint, fileId, { observe: 'response', responseType: 'text' })
       .pipe(map(resp => {
         return resp.status === 200;
       }));

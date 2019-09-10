@@ -146,6 +146,17 @@
             color: #fff;
         }
     }
+
+    .watch-bar {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        display: block;
+        height: 2px;
+
+        background-color: #f2f;
+    }
 }
 
 @for $i from 0 through 18 {
