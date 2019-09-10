@@ -3,6 +3,7 @@ import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { FileListService } from 'src/app/services/file-list.service';
 import { FileData } from 'src/app/models/FileData';
 import { FileType } from 'src/app/models/FileType';
+import { LinkData } from 'src/app/models/LinkData';
 
 @Component({
   selector: 'app-navigation',
@@ -12,8 +13,10 @@ import { FileType } from 'src/app/models/FileType';
 export class NavigationComponent implements OnInit {
   rootName: string;
   place: string;
+  headingTitle: Array<string | LinkData>;
   directories: FileData[];
   videos: FileData[];
+  loaded: boolean;
 
   constructor(private route: ActivatedRoute,
     private fileListService: FileListService) { }
@@ -22,6 +25,7 @@ export class NavigationComponent implements OnInit {
     this.rootName = 'All Files';
     this.directories = [];
     this.videos = [];
+    this.loaded = false;
 
     this.decodeLocationFromUrl();
   }
@@ -40,6 +44,7 @@ export class NavigationComponent implements OnInit {
             vids.push(file);
           }
         }
+        this.loaded = true;
         this.directories = dirs;
         this.videos = vids;
       });
@@ -47,8 +52,16 @@ export class NavigationComponent implements OnInit {
 
   private decodeLocationFromUrl() {
     this.route.url.subscribe((segments: UrlSegment[]) => {
+      // create heading title and place
+      let cumulativeUrl = '';
+      this.headingTitle = ['/'];
       this.place = '/' + segments
-        .map(e => decodeURIComponent(e.toString()))
+        .map(e => {
+          const decoded = decodeURIComponent(e.toString());
+          cumulativeUrl += `/${decoded}`;
+          this.headingTitle.push(new LinkData(decoded, cumulativeUrl));
+          return decoded;
+        })
         .join('/');
       this.getDirListing();
     });

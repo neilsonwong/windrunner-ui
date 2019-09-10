@@ -1,4 +1,5 @@
 <div>
+  <ng-container *ngIf="loaded; else loadingBlock">
     <app-directory-list 
       *ngIf="directories.length > 0"
       [baseDir]="place === '/' ? rootName : place"
@@ -9,4 +10,8 @@
       [showcaseTitle]="place"
       [contents]="videos">
     </app-showcase>
+  </ng-container>
+  <ng-template #loadingBlock>
+    loading
+  </ng-template>
 </div>

@@ -4,6 +4,8 @@ import { ThumbnailService } from 'src/app/services/thumbnail.service';
 import { AgentService } from 'src/app/services/agent.service';
 import { UserPrefService } from 'src/app/services/user-pref.service';
 import { Router } from '@angular/router';
+import { flatMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-video-detail',
@@ -60,7 +62,11 @@ export class VideoDetailComponent implements OnInit {
 
   private nextThumbnail() {
     const curThumbIndex = ++this.thumbIndex % this.thumbnailList.length;
-    this.currentThumbnail = this.thumbnailService.getThumbnailUrl(this.video.id, this.thumbnailList[curThumbIndex]);
+    // get the thumbnail to preload it before setting
+    // this.thumbnailService.getThumbnail(this.video.id, this.thumbnailList[curThumbIndex])
+    //   .subscribe((e) => {
+        this.currentThumbnail = this.thumbnailService.getThumbnailUrl(this.video.id, this.thumbnailList[curThumbIndex]);
+      // });
   }
 
   private setNoThumbStyle() {
@@ -79,18 +85,19 @@ export class VideoDetailComponent implements OnInit {
       this.video.metadata.watchTime !== undefined &&
       this.video.metadata.totalTime !== undefined) {
         const percentLen = Math.min(100, (this.video.metadata.watchTime / this.video.metadata.totalTime) * 100);
-        this.watchedStyle = {'width': `${percentLen}%`};
+        this.watchedStyle = {width: `${percentLen}%`};
       }
   }
 
   playFile() {
     // TODO: convert this to pipe
     this.agentService.triggerPlay(this.video.rel)
-      .subscribe((playOK) => {
-        if (playOK) {
-          this.userPrefsService.notifyPlay(this.video.id).subscribe();
-        }
-      });
+      .pipe(
+        flatMap((playOK) => {
+          return (playOK ? this.userPrefsService.notifyPlay(this.video.id)
+            : EMPTY);
+          })
+      ).subscribe();
   }
 
   jumpToFolder() {

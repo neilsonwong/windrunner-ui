@@ -11,14 +11,15 @@ mandatory
     play + trigger smb watch
     go to folder -->
 <!-- watch time -->
-error msg for no recents loaded
+<!-- error msg for no recents loaded -->
+navigation links
 find button / page
 swapping images
 badges
 
 EZPZ
 <!-- background image -->
-update favicon
+<!-- update favicon -->
 
 nice to have
 link + moving around lag due to loading

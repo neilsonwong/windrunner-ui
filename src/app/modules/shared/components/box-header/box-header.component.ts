@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { LinkData } from 'src/app/models/LinkData';
 
 @Component({
   selector: 'app-box-header',
@@ -7,16 +8,18 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./box-header.component.scss']
 })
 export class BoxHeaderComponent implements OnChanges {
-  @Input() heading: string;
+  @Input() heading: string | Array<string | LinkData>;
   @Input() watched: number;
   @Input() totalVideoCount: number;
   @Input() totalCount: number;
   @Input() lastUpdated: Date;
   additionalData: string[];
+  simpleHeading: boolean;
 
   constructor() { }
 
   ngOnChanges() {
+    this.simpleHeading = typeof this.heading === 'string';
     this.additionalData = [];
     // update time
     if (this.lastUpdated) {
