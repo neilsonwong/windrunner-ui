@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable  } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { OboeWrapper } from '../utils/oboeWrapper';
+import { environment } from '../../environments/environment';
 
-const apiRoot = 'http://localhost:8000/api/v2';
+const api = environment.api;
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +17,16 @@ export class ThumbnailService {
   }
 
   getThumbnailUrl(fileId: string, img: string): string {
-    return `${apiRoot}/thumb/${fileId}/${img}`;
+    return `${api}/thumb/${fileId}/${img}`;
   }
 
   getThumbnail(fileId: string, img: string): Observable<Blob> {
-    const endpoint = `${apiRoot}/thumb/${fileId}/${img}`;
+    const endpoint = `${api}/thumb/${fileId}/${img}`;
     return this.http.get(endpoint, { responseType: 'blob'});
   }
 
   getThumbnailList(fileId: string): Observable<string[]> {
-    const endpoint = `${apiRoot}/thumblist/${fileId}`;
+    const endpoint = `${api}/thumblist/${fileId}`;
     return this.oboe.get(endpoint)
       .pipe(map(x => <string[]>x));
   }

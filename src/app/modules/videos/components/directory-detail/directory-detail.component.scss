@@ -92,6 +92,7 @@
         cursor: pointer;
         border: none;
         background: none;
+        padding: 0;
     }
 
     &.fav {
@@ -101,8 +102,18 @@
                 color-stop(0.5, #f2f),
                 color-stop(1, #f66)) !important;
 
+            background-image: -webkit-gradient( linear, left top, right top,
+                color-stop(0, #66f),
+                color-stop(0.25, #f2f),
+                color-stop(0.5, #f66),
+                color-stop(0.25, #f2f),
+                color-stop(1, #66f)) !important;
+
+            background-size: 200% 200%;
+
             color: transparent !important;
             background-clip: text;
+            animation: rainbow 8s ease infinite;
         }
     }
 
@@ -111,4 +122,10 @@
     .hover-bar:hover .fav-icon:hover {
         opacity: 1;
     }
+}
+
+@keyframes rainbow { 
+    0% { background-position:0% 50% }
+    50% { background-position:100% 25% }
+    100% { background-position:0% 50% }
 }

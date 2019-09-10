@@ -6,11 +6,11 @@
     hover actions
         pin  -->
 mandatory
-video hover actions    
+<!-- video hover actions    
     play
     play + trigger smb watch
-    go to folder
-
+    go to folder -->
+watch time
 find button / page
 swapping images
 badges

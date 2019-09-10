@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FileData } from 'src/app/models/FileData';
 import { ThumbnailService } from 'src/app/services/thumbnail.service';
+import { AgentService } from 'src/app/services/agent.service';
+import { UserPrefService } from 'src/app/services/user-pref.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-video-detail',
@@ -19,7 +22,10 @@ export class VideoDetailComponent implements OnInit {
   private thumbIndex: number;
   private noThumbStyle: string;
 
-  constructor(private thumbnailService: ThumbnailService) { }
+  constructor(private thumbnailService: ThumbnailService,
+    private userPrefsService: UserPrefService,
+    private agentService: AgentService,
+    private router: Router) { }
 
   ngOnInit() {
     this.thumbIndex = -1;
@@ -29,6 +35,7 @@ export class VideoDetailComponent implements OnInit {
     this.prettySize = this.formatBytes(this.video.size, undefined);
     this.prettyDate = this.video.birthTime.substring(0, 10);
 
+    this.setNoThumbStyle();
     this.getThumbnails();
   }
 
@@ -48,17 +55,15 @@ export class VideoDetailComponent implements OnInit {
       });
   }
 
-
   private nextThumbnail() {
     const curThumbIndex = ++this.thumbIndex % this.thumbnailList.length;
     this.currentThumbnail = this.thumbnailService.getThumbnailUrl(this.video.id, this.thumbnailList[curThumbIndex]);
   }
 
-  private getNoThumbStyle() {
+  private setNoThumbStyle() {
     if (!this.noThumbStyle) {
       this.noThumbStyle = `no-thumb-deg-${Math.floor(Math.random()*18)}`;
     }
-    return this.noThumbStyle;
   }
 
   private getPrettyName(name) {
@@ -68,5 +73,21 @@ export class VideoDetailComponent implements OnInit {
   private formatBytes(a,b) {
     if(0===a)return"0 Bytes";
     const c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]
+  }
+
+  playFile() {
+    // TODO: convert this to pipe
+    this.agentService.triggerPlay(this.video.rel)
+      .subscribe((playOK) => {
+        if (playOK) {
+          this.userPrefsService.notifyPlay(this.video.id).subscribe();
+        }
+      });
+  }
+
+  jumpToFolder() {
+    // TODO: find better way to do this later
+    const parentFolder = this.video.rel.substring(1, this.video.rel.length - this.video.name.length);
+    this.router.navigateByUrl(`/v/browse/${parentFolder}`);
   }
 }

@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { OboeWrapper } from '../utils/oboeWrapper';
-
 import { FileData } from '../models/FileData';
+import { OboeWrapper } from '../utils/oboeWrapper';
+import { environment } from '../../environments/environment';
 
-const apiRoot = 'http://localhost:8000/api/v2';
+const api = environment.api;
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +18,18 @@ export class FileListService {
   }
 
   getDirectoryList(directory: string): Observable<FileData[]> {
-    const endpoint = `${apiRoot}/ls/${directory}`;
+    const endpoint = `${api}/ls/${directory}`;
     return this.http.get<FileData[]>(endpoint);
   }
 
   getRecent(): Observable<FileData[]> {
-    const endpoint = `${apiRoot}/recent`;
+    const endpoint = `${api}/recent`;
     return this.oboe.get(endpoint)
       .pipe(map(x => <FileData[]>x));
   }
   
   getPinned(): Observable<FileData[]> {
-    const endpoint = `${apiRoot}/pins`;
+    const endpoint = `${api}/pins`;
     return this.http.get<FileData[]>(endpoint);
   }
 
@@ -39,7 +38,7 @@ export class FileListService {
   }
 
   streamTest(): Observable<string[]> {
-    const endpoint = `${apiRoot}/streamTest`;
+    const endpoint = `${api}/streamTest`;
     return this.oboe.get(endpoint)
       .pipe(map(x => <string[]>x));
   }

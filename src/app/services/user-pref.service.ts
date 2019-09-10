@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
-const apiRoot = 'http://localhost:8000/api/v2';
+const api = environment.api;
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserPrefService {
   }
 
   addFavourite(folder: string): Observable<boolean> {
-    const endpoint = `${apiRoot}/pins/add`;
+    const endpoint = `${api}/pins/add`;
     return this.http.post(endpoint, folder, { observe: 'response', responseType: 'text' })
       .pipe(map(resp => {
         return resp.status === 201;
@@ -22,8 +23,16 @@ export class UserPrefService {
   }
 
   removeFavourite(folder: string): Observable<boolean> {
-    const endpoint = `${apiRoot}/pins/del`;
+    const endpoint = `${api}/pins/del`;
     return this.http.post(endpoint, folder, { observe: 'response', responseType: 'text' })
+      .pipe(map(resp => {
+        return resp.status === 200;
+      }));
+  }
+
+  notifyPlay(fileId: string): Observable<boolean> {
+    const endpoint = `${api}/watch`;
+    return this.http.post(endpoint, fileId, { observe: 'response' })
       .pipe(map(resp => {
         return resp.status === 200;
       }));
