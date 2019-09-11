@@ -8,9 +8,10 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { LazyLoadImageDirective } from './directives/lazy-load-image.directive';
 import { ErrorComponent } from './components/error/error.component';
 import { BoxHeaderComponent } from './components/box-header/box-header.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SearchBarComponent, LazyLoadImageDirective, ErrorComponent, BoxHeaderComponent],
+  declarations: [HeaderComponent, SearchBarComponent, LazyLoadImageDirective, ErrorComponent, BoxHeaderComponent, LoadingComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,6 +23,7 @@ import { BoxHeaderComponent } from './components/box-header/box-header.component
     LazyLoadImageDirective,
     ErrorComponent,
     BoxHeaderComponent,
+    LoadingComponent,
   ]
 })
 export class SharedModule { }
