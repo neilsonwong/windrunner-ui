@@ -54,7 +54,6 @@ export class VideoDetailComponent implements OnInit {
           // if init the thumbnail on the page, only on the first time
           if (this.loadingThumbnail) {
             this.nextThumbnail();
-            this.loadingThumbnail = false;
           }
         }
       });
@@ -63,10 +62,11 @@ export class VideoDetailComponent implements OnInit {
   private nextThumbnail() {
     const curThumbIndex = ++this.thumbIndex % this.thumbnailList.length;
     // get the thumbnail to preload it before setting
-    // this.thumbnailService.getThumbnail(this.video.id, this.thumbnailList[curThumbIndex])
-    //   .subscribe((e) => {
+    this.thumbnailService.getThumbnail(this.video.id, this.thumbnailList[curThumbIndex])
+      .subscribe((e) => {
         this.currentThumbnail = this.thumbnailService.getThumbnailUrl(this.video.id, this.thumbnailList[curThumbIndex]);
-      // });
+        this.loadingThumbnail = false;
+      });
   }
 
   private setNoThumbStyle() {

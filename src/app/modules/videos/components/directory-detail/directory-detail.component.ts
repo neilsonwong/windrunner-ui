@@ -46,9 +46,6 @@ export class DirectoryDetailComponent implements OnInit {
             this.directory.metadata.isPinned = false;
             this.isFav = false;
           }
-          else {
-            console.log('freaking dumbo')
-          }
         });
     }
     else {
@@ -57,9 +54,6 @@ export class DirectoryDetailComponent implements OnInit {
           if (addWorked) {
             this.directory.metadata.isPinned = true;
             this.isFav = true;
-          }
-          else {
-            console.log('freaking dumbo')
           }
         });
     }

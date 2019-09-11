@@ -10,12 +10,17 @@ import { FileDataContainer } from '../../helper/file-data-container';
 export class ShowcaseComponent extends FileDataContainer implements OnInit {
   @Input() showcaseTitle: string;
   @Input() contents: FileData[];
+  debouncer: boolean;
 
   constructor() { 
     super();
   }
 
   ngOnInit() {
+    this.debouncer = true;
+    setTimeout(() => {
+      this.debouncer = false;
+    }, 100);
     this.populate(this.contents);
   }
 }
