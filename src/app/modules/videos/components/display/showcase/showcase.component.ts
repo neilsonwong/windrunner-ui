@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FileData } from 'src/app/models/FileData';
-import { FileDataContainer } from '../../helper/file-data-container';
+import { FileDataContainer } from '../../../helper/file-data-container';
 
 @Component({
   selector: 'app-showcase',

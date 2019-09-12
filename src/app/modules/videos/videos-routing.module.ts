@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { OverviewComponent } from './components/overview/overview.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { OverviewComponent } from './components/pages/overview/overview.component';
+import { NavigationComponent } from './components/pages/navigation/navigation.component';
 import { VideosComponent } from './components/videos/videos.component';
-import { NewComponent } from './components/new/new.component';
+import { NewComponent } from './components/pages/new/new.component';
 
 const routes: Routes = [
   { path: 'v', component: VideosComponent,
