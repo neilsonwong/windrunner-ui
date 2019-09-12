@@ -71,17 +71,17 @@
         right: 0;
         padding-right: 0.5rem;
         padding-bottom: 0.5rem;
-        max-height: 100%;
+        height: 1.25rem;
         overflow: hidden;
         text-align: right;
     }
 
-    .hover-bar > * {
+    .hover-bar {
         opacity: 0;
     }
 
-    .hover-bar:hover > * {
-        opacity: 0.2;
+    .hover-bar:hover {
+        opacity: 1;
     }
 
     .fav-icon {

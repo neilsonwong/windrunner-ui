@@ -103,7 +103,7 @@ export class VideoDetailComponent implements OnInit {
   jumpToFolder() {
     // TODO: find better way to do this later
     const parentFolder = this.video.rel.substring(1, this.video.rel.length - this.video.name.length);
-    this.router.navigateByUrl(`/v/browse/${parentFolder}`);
+    this.router.navigate([`/v/browse/${parentFolder}`]);
   }
 
   private formatBytes(a,b) {

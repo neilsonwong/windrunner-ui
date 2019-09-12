@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FileData } from 'src/app/models/FileData';
 import { FileDataContainer } from '../../helper/file-data-container';
 
@@ -7,9 +7,10 @@ import { FileDataContainer } from '../../helper/file-data-container';
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss']
 })
-export class ShowcaseComponent extends FileDataContainer implements OnInit {
+export class ShowcaseComponent extends FileDataContainer implements OnInit, OnChanges {
   @Input() showcaseTitle: string;
   @Input() contents: FileData[];
+  @Input() baseDir: FileData;
   debouncer: boolean;
 
   constructor() { 
@@ -21,6 +22,9 @@ export class ShowcaseComponent extends FileDataContainer implements OnInit {
     setTimeout(() => {
       this.debouncer = false;
     }, 100);
+  }
+  
+  ngOnChanges() {
     this.populate(this.contents);
   }
 }

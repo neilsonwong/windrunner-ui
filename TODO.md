@@ -12,8 +12,11 @@ mandatory
     go to folder -->
 <!-- watch time -->
 <!-- error msg for no recents loaded -->
-navigation links
+<!-- navigation links -->
+add fav button on folders
+favourites page
 find button / page
+fix observable stalling when lading (all things need to finish before it loads)
 swapping images
 badges
 
@@ -21,8 +24,10 @@ EZPZ
 <!-- background image -->
 <!-- update favicon -->
 
+
 nice to have
-link + moving around lag due to loading
+big pictures when not loaded yet
+<!-- link + moving around lag due to loading -->
 responsive design
 semantic html e.g. <header>
 skins

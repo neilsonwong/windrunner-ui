@@ -14,9 +14,10 @@ import { VideosComponent } from './components/videos/videos.component';
 import { NewComponent } from './components/new/new.component';
 import { DirectoryListComponent } from './components/directory-list/directory-list.component';
 import { DirectoryDetailComponent } from './components/directory-detail/directory-detail.component';
+import { FavButtonComponent } from './components/fav-button/fav-button.component';
 
 @NgModule({
-  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent, NewComponent, DirectoryListComponent, DirectoryDetailComponent],
+  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent, NewComponent, DirectoryListComponent, DirectoryDetailComponent, FavButtonComponent],
   imports: [
     CommonModule,
     HttpClientModule,

@@ -2,13 +2,15 @@
   <ng-container *ngIf="loaded; else loadingBlock">
     <app-directory-list 
       *ngIf="directories.length > 0"
-      [baseDir]="headingTitle"
+      [baseDir]="baseDir"
+      [heading]="headingTitle"
       [directories]="directories">
     </app-directory-list>
     <app-showcase
       *ngIf="videos.length > 0"
       [showcaseTitle]="headingTitle"
-      [contents]="videos">
+      [contents]="videos"
+      [baseDir]="baseDir">
     </app-showcase>
   </ng-container>
   <ng-template #loadingBlock>

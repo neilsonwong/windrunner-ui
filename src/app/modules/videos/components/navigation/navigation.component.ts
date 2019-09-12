@@ -5,7 +5,7 @@ import { FileListService } from 'src/app/services/file-list.service';
 import { FileData } from 'src/app/models/FileData';
 import { FileType } from 'src/app/models/FileType';
 import { LinkData } from 'src/app/models/LinkData';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { flatMap, take, map } from 'rxjs/operators';
 
 @Component({
@@ -20,6 +20,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   videos: FileData[];
   loaded: boolean;
   counter = 0;
+  baseDir: FileData;
 
   private urlSubscription: Subscription;
 
@@ -35,39 +36,39 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   private getDirListing(directory: string) {
-    const dirs = [];
-    const vids = [];
-
-    console.log(directory);
-
     return this.fileListService.getDirectoryList(directory)
-      .pipe(take(1))
-      .subscribe((data: FileData[]) => {
-        for (const file of data) {
-          if (file.type === FileType.DIRECTORY) {
-            dirs.push(file);
-          }
-          else if (file.type === FileType.VIDEO) {
-            vids.push(file);
-          }
-        }
-        this.loaded = true;
-        this.directories = dirs;
-        this.videos = vids;
-      });
+      .pipe(take(1));
   }
 
   private decodeLocationFromUrl() {
     return this.route.url
       .pipe(
         map((segments: UrlSegment[]) => {
-          // create heading title and place
           this.loaded = false;
           return this.populateHeaders(segments);
         }),
         flatMap((directory: string) => {
-          this.getDirListing(directory);
-          return directory;
+          return this.getBaseDirData(directory);
+        }),
+        flatMap((baseDirectory: FileData) => {
+          this.baseDir = baseDirectory;
+          return this.getDirListing(baseDirectory.rel);
+        }),
+        flatMap((data: FileData[]) => {
+          const dirs = [];
+          const vids = [];
+          for (const file of data) {
+            if (file.type === FileType.DIRECTORY) {
+              dirs.push(file);
+            }
+            else if (file.type === FileType.VIDEO) {
+              vids.push(file);
+            }
+          }
+          this.loaded = true;
+          this.directories = dirs;
+          this.videos = vids;
+          return data;
         })
       ).subscribe();
   }
@@ -93,8 +94,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
     else {
       this.place = cumulativeUrl;
     }
-    console.log(this.place);
     return this.place;
+  }
+
+  getBaseDirData(rel): Observable<FileData> {
+    return this.fileListService.getOne(rel)
+      .pipe(take(1));
   }
 
   ngOnDestroy() {

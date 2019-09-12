@@ -1,4 +1,5 @@
 .directory-list {
+    position: relative;
     background-color: #fff;
     margin: 1rem;
     box-shadow: 1px 1px 4px #ccc;
@@ -11,4 +12,15 @@
         flex-direction: row;
         flex-wrap: wrap;
     }
+
+    .hover-bar {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+    // &.fav .fav-icon,
+    // .hover-bar .fav-icon:hover {
+    //     opacity: 1;
+    //     color: red;
+    // }
 }

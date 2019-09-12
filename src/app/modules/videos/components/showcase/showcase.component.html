@@ -16,4 +16,7 @@
             <app-error errorMessage="We couldn't find anything!"></app-error>
         </ng-template>
     </div>
+    <div *ngIf="directory !== undefined" class="hover-bar">
+        <app-fav-button [directory]="baseDir"></app-fav-button>
+    </div>
 </div>

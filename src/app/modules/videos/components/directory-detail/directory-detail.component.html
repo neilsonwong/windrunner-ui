@@ -8,11 +8,12 @@
             </div>
             <div class="info">
                 <div>{{ directory.birthTime | date:'medium' }}</div>
-                <div>{{ directory.metadata.fileCount | i18nPlural:filePluralMapping }}</div>
+                <div *ngIf="directory.metadata">
+                    {{ directory.metadata.fileCount | i18nPlural:filePluralMapping }}</div>
             </div>
         </div>
     </a>
     <div class="hover-bar">
-        <button class="fav-icon" (click)="toggleFav()">❤</button>
+        <app-fav-button [directory]="directory"></app-fav-button>
     </div>
 </div>

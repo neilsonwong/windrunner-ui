@@ -1,6 +1,7 @@
-<div class="directory-list">
+<div class="directory-list"
+    [class.fav]="baseDir.metadata && baseDir.metadata.isPinned">
     <app-box-header
-      [heading]="baseDir"
+      [heading]="heading"
       [watched]="watched"
       [totalVideoCount]="totalVideoCount"
       [totalCount]="totalCount"
@@ -10,5 +11,8 @@
         <app-directory-detail *ngFor="let dir of directories" 
             [directory]="dir">
         </app-directory-detail>
+    </div>
+    <div class="hover-bar">
+        <app-fav-button [directory]="baseDir"></app-fav-button>
     </div>
 </div>

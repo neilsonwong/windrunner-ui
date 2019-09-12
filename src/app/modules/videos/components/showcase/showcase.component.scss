@@ -1,4 +1,5 @@
 .showcase {
+    position: relative;
     max-width: 1331px;
     min-width: 960px;
     background-color: #fff;
@@ -12,5 +13,11 @@
     .showcase-video-list {
         display: flex;
         flex-wrap: wrap;
+    }
+    
+    .hover-bar {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
     }
 }

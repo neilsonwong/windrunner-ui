@@ -23,7 +23,7 @@ export class DirectoryDetailComponent implements OnInit {
     this.linkUrl = `/v/browse${this.directory.rel}`;
     this.setDirClass();
     this.bgColour = 'rainbow-' + (Math.floor(Math.random()*5) + 1);
-    this.isFav = this.directory.metadata.isPinned;
+    this.isFav = this.directory.metadata && this.directory.metadata.isPinned;
   }
 
   setDirClass() {

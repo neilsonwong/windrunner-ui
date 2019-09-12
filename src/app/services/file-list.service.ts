@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FileData } from '../models/FileData';
@@ -43,4 +43,9 @@ export class FileListService {
       .pipe(map(x => <string[]>x));
   }
 
+  getOne(rel: string): Observable<FileData> {
+    const url = `${api}/file`;
+    const params = new HttpParams().set('rel', rel);
+    return this.http.get<FileData>(url, { params: params });
+  }
 }
