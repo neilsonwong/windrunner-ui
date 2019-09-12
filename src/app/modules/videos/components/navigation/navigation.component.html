@@ -1,7 +1,7 @@
 <div>
   <ng-container *ngIf="loaded; else loadingBlock">
     <app-directory-list 
-      *ngIf="directories.length > 0"
+      *ngIf="directories.length > 0 || videos.length === 0"
       [baseDir]="baseDir"
       [heading]="headingTitle"
       [directories]="directories">

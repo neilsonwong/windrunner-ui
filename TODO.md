@@ -13,10 +13,10 @@ mandatory
 <!-- watch time -->
 <!-- error msg for no recents loaded -->
 <!-- navigation links -->
-add fav button on folders
+<!-- add fav button on folders -->
 favourites page
 find button / page
-fix observable stalling when lading (all things need to finish before it loads)
+<!-- fix observable stalling when lading (all things need to finish before it loads) -->
 swapping images
 badges
 
