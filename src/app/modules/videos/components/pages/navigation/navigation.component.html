@@ -1,19 +1,21 @@
 <div>
-  <ng-container *ngIf="loaded; else loadingBlock">
+  <ng-container *ngIf="(directories$ | async) as directories">
     <app-directory-list 
-      *ngIf="directories.length > 0 || videos.length === 0"
+      *ngIf="directories.length > 0"
+      [class.loading]="loading" 
       [baseDir]="baseDir"
-      [heading]="headingTitle"
+      [heading]="(headingTitle$ | async)"
       [directories]="directories">
     </app-directory-list>
+  </ng-container>
+  <ng-container *ngIf="(videos$ | async) as videos">
     <app-showcase
       *ngIf="videos.length > 0"
-      [showcaseTitle]="headingTitle"
+      [class.loading]="loading" 
+      [showcaseTitle]="(headingTitle$ | async)"
       [contents]="videos"
       [baseDir]="baseDir">
     </app-showcase>
   </ng-container>
-  <ng-template #loadingBlock>
-    <app-loading></app-loading>
-  </ng-template>
+  <app-loading *ngIf="loading"></app-loading>
 </div>

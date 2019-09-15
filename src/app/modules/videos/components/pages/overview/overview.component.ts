@@ -3,6 +3,8 @@ import { FileData } from 'src/app/models/FileData';
 import { FileListService } from 'src/app/services/file-list.service';
 import { isVideo } from '../../../videos-util';
 import { updateArrayInPlace } from '../../../../../utils/streamDataUtils';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-overview',
@@ -10,8 +12,8 @@ import { updateArrayInPlace } from '../../../../../utils/streamDataUtils';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  latest: FileData[];
-  curated: FileData[];
+  latest$: Observable<FileData[]>;
+  favourites$: Observable<FileData[]>;
   // random: FileData[];
 
   constructor(private fileListService: FileListService) { }
@@ -21,9 +23,11 @@ export class OverviewComponent implements OnInit {
   }
 
   getLatest() {
-    this.fileListService.getRecent()
-      .subscribe((data: FileData[]) => {
+    this.latest$ = this.fileListService.getRecent()
+      .pipe(map((data: FileData[]) => {
         const filtered = data.filter(e => isVideo(e.name));
+        return filtered;
+        /*
         if (!this.latest) {
           this.latest = filtered;
         }
@@ -31,11 +35,12 @@ export class OverviewComponent implements OnInit {
           // special in place update
           updateArrayInPlace<FileData>(this.latest, filtered);
         }
-      });
+        */
+      }));
 
-    this.fileListService.getPinned()
-      .subscribe((data: FileData[]) => {
-        this.curated = data;
-      });
+    this.favourites$ = this.fileListService.getPinned()
+      // .subscribe((data: FileData[]) => {
+      //   this.favourites = data;
+      // });
   }
 }

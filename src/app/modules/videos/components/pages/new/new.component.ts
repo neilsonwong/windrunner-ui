@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FileData } from 'src/app/models/FileData';
 import { isVideo } from '../../../videos-util';
-import { updateArrayInPlace } from 'src/app/utils/streamDataUtils';
 import { FileListService } from 'src/app/services/file-list.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new',
@@ -10,25 +11,19 @@ import { FileListService } from 'src/app/services/file-list.service';
   styleUrls: ['./new.component.scss']
 })
 export class NewComponent implements OnInit {
-  latest: FileData[];
+  latest$: Observable<FileData[]>;
 
   constructor(private fileListService: FileListService) { }
 
   ngOnInit() {
-    this.getLatest();
+    this.latest$ = this.getLatest();
   }
 
-  getLatest() {
-    this.fileListService.getRecent()
-      .subscribe((data: FileData[]) => {
+  getLatest(): Observable<FileData[]> {
+    return this.fileListService.getRecent()
+      .pipe(map((data: FileData[]) => {
         const filtered = data.filter(e => isVideo(e.name));
-        if (!this.latest) {
-          this.latest = filtered;
-        }
-        else {
-          // special in place update
-          updateArrayInPlace<FileData>(this.latest, filtered);
-        }
-      });
+        return filtered;
+      }));
   }
 }

@@ -1,4 +1,5 @@
 <app-showcase
+  *ngIf="(latest$ | async) as latest; else loading"
   showcaseTitle="What's New"
   [contents]="latest">
 </app-showcase>
