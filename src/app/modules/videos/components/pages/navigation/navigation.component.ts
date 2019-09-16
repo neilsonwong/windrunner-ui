@@ -6,6 +6,7 @@ import { FileListService } from 'src/app/services/file-list.service';
 import { FileData } from 'src/app/models/FileData';
 import { FileType } from 'src/app/models/FileType';
 import { LinkData } from 'src/app/models/LinkData';
+import { prettyName } from '../../../videos-util';
 
 @Component({
   selector: 'app-navigation',
@@ -42,7 +43,7 @@ export class NavigationComponent implements OnInit {
     );
 
     this.directories$ = this.selectFileDataGroup(allFiles$, FileType.DIRECTORY)
-      .pipe(tap(() => { console.log('donezo'); this.loading = false;}));
+      .pipe(tap(() => { this.loading = false;}));
     this.videos$ = this.selectFileDataGroup(allFiles$, FileType.VIDEO);
   }
 
@@ -77,13 +78,21 @@ export class NavigationComponent implements OnInit {
     return this.fileListService.getDirectoryList(directory)
       .pipe(
         take(1),
+        map((files: FileData[]) => (files.map(e => {
+          e.prettyName = prettyName(e.name);
+          return e;
+        }))),
         share(),
       );
   }
 
   private selectFileDataGroup(allFiles$: Observable<FileData[]>, type: FileType) {
     return allFiles$.pipe(
-      map(files => files.filter(file => file.type === type))
+      map((files: FileData[]) => files.filter(file => file.type === type)),
+      map((files: FileData[]) => (files.sort((a: FileData, b: FileData) => {
+        return a.prettyName.localeCompare(b.prettyName);
+      })))
     );
   }
+
 }

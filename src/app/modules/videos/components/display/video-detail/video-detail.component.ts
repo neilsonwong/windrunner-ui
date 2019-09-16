@@ -6,6 +6,7 @@ import { UserPrefService } from 'src/app/services/user-pref.service';
 import { Router } from '@angular/router';
 import { flatMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { prettyName } from '../../../videos-util';
 
 @Component({
   selector: 'app-video-detail',
@@ -35,7 +36,7 @@ export class VideoDetailComponent implements OnInit {
     this.loadingThumbnail = true;
     this.watchedStyle = {};
 
-    this.prettyName = this.getPrettyName(this.video.name);
+    this.prettyName = prettyName(this.video.name);
     this.prettySize = this.formatBytes(this.video.size, undefined);
     this.prettyDate = this.video.birthTime.substring(0, 10);
 
@@ -74,11 +75,6 @@ export class VideoDetailComponent implements OnInit {
       this.noThumbStyle = `no-thumb-deg-${Math.floor(Math.random()*18)}`;
     }
   }
-
-  private getPrettyName(name) {
-    return name.replace(/_/g, ' ').replace(/(\[[a-zA-Z0-9\- ~,\.\-&]+\]|\([a-zA-Z0-9\- ~,\.]+\))/g, '').replace(/(\.[avimk4]+$)/g, '').trim();
-  }
-
 
   private setWatchTime() {
     if (this.video.metadata &&

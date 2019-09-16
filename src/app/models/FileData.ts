@@ -9,4 +9,5 @@ export class FileData {
     size: number;
     birthTime: string;
     metadata: any;
+    prettyName: string;
 }

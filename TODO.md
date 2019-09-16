@@ -15,10 +15,16 @@ mandatory
 <!-- navigation links -->
 <!-- add fav button on folders -->
 favourites page
+    folder preview list
+    folder preview
+fav-button event emittion + styling
 find button / page
+mark viewed
 <!-- fix observable stalling when lading (all things need to finish before it loads) -->
 swapping images
 badges
+video / folder sorting
+metadata specific classes
 
 EZPZ
 <!-- background image -->
