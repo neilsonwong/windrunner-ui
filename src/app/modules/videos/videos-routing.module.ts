@@ -4,12 +4,14 @@ import { OverviewComponent } from './components/pages/overview/overview.componen
 import { NavigationComponent } from './components/pages/navigation/navigation.component';
 import { VideosComponent } from './components/videos/videos.component';
 import { NewComponent } from './components/pages/new/new.component';
+import { FavouritesComponent } from './components/pages/favourites/favourites.component';
 
 const routes: Routes = [
   { path: 'v', component: VideosComponent,
     children: [
     { path: '', component: OverviewComponent },
     { path: 'new', component: NewComponent },
+    { path: 'favourites', component: FavouritesComponent },
     { path: 'browse',
       // handle using wildcard cuz we are cheating with the folder paths
       children: [{ 

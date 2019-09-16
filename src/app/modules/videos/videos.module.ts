@@ -16,9 +16,10 @@ import { DirectoryListComponent } from './components/display/directory-list/dire
 import { DirectoryDetailComponent } from './components/display/directory-detail/directory-detail.component';
 import { FavButtonComponent } from './components/display/fav-button/fav-button.component';
 import { FavouritesComponent } from './components/pages/favourites/favourites.component';
+import { FolderPreviewComponent } from './components/display/folder-preview/folder-preview.component';
 
 @NgModule({
-  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent, NewComponent, DirectoryListComponent, DirectoryDetailComponent, FavButtonComponent, FavouritesComponent],
+  declarations: [OverviewComponent, NavigationComponent, ShowcaseComponent, SideBarComponent, VideoDetailComponent, VideosComponent, NewComponent, DirectoryListComponent, DirectoryDetailComponent, FavButtonComponent, FavouritesComponent, FolderPreviewComponent],
   imports: [
     CommonModule,
     HttpClientModule,
