@@ -1,6 +1,6 @@
 import { Component, OnChanges, Input } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { LinkData } from 'src/app/models/LinkData';
+import { LinkData } from 'src/app/modules/shared/models/LinkData';
 
 @Component({
   selector: 'app-box-header',

@@ -1,0 +1,14 @@
+<header class="grid-layout">
+    <h2>New!</h2>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+</header>
+<div class="card-list grid-layout"
+    *ngIf="(recentlyUpdatedSeries$ | async) as recents; else nothingNew">
+    <app-series-preview *ngFor="let series of recents" [series]="series">
+    </app-series-preview>
+</div>
+<ng-template #nothingNew>
+    Nothing is up... or new.
+</ng-template>

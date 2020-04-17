@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VideosModule } from './modules/videos/videos.module';
+
+import { VideoAppModule } from './modules/video-app/video-app.module';
+import { CoreModule } from './modules/core/core.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,8 @@ import { VideosModule } from './modules/videos/videos.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    VideosModule
+    CoreModule,
+    VideoAppModule
   ],
   providers: [],
   bootstrap: [AppComponent]

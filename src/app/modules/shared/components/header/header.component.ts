@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Location } from '@angular/common';
-import { LinkData } from 'src/app/models/LinkData';
+import { LinkData } from 'src/app/modules/shared/models/LinkData';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +10,7 @@ import { LinkData } from 'src/app/models/LinkData';
 export class HeaderComponent implements OnInit {
   @Input() navigation: LinkData[];
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
+
   highlight: string;
 
   constructor(private location: Location) { }
@@ -38,7 +39,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  handleSearch(query) {
+  handleSearch(query: any) {
     this.search.emit(query);
   }
 }

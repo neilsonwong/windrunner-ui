@@ -1,0 +1,7 @@
+@import "src/styles/sizes.scss";
+
+.main-content {
+    max-width: $app-max-width;
+    margin: 0 auto;
+    margin-top: $main-content-upshift;
+}

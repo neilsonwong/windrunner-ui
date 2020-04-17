@@ -1,6 +1,12 @@
 <div class="header">
     <div class="header-container">
         <div class="left side-bar">
+        </div>
+        <div class="middle">
+            <h1 class="title">WINDRUNNER</h1>
+        </div>
+        <div class="right side-bar">
+            <!-- <app-search-bar (search)="handleSearch($event)"></app-search-bar> -->
             <div class="navigation">
                 <div *ngFor="let link of navigation"
                     ngClass="nav-item {{ link.text === highlight ? 'highlight' : ''}}">
@@ -9,13 +15,6 @@
                     </a>
                 </div>
             </div>
-        </div>
-        <div class="middle">
-            <!-- <img clas="logo" src="/assets/running-48.png" /> -->
-            <h1 class="title">WINDRUNNER</h1>
-        </div>
-        <div class="right side-bar">
-            <app-search-bar (search)="handleSearch($event)"></app-search-bar>
         </div>
     </div>
 </div>

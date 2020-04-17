@@ -28,8 +28,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/colours.scss"
+              "src/styles/styles.scss",
+              "src/styles/colours.scss",
+              "src/styles/sizes.scss",
+              "src/styles/fonts.scss"
             ],
             "scripts": []
           },
@@ -125,6 +127,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "windrunner-ui"
 }

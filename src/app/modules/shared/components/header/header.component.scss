@@ -1,30 +1,27 @@
-@import "src/colours.scss";
-
-$bar-size: 350px;
-$header-height: 3rem;
-$header-content-width: 1280px;
+@import "src/styles/colours.scss";
+@import "src/styles/sizes.scss";
 
 .header {
     height: $header-height;
-    padding: 0.5rem;
+    padding: 2.5rem 0.5rem;
 
     display: flex;
     align-items: center;
     justify-content: space-around;
 
-    background-color: $header-background-colour;
+    background-color: $colour-header-background;
     box-shadow: 0 4px 4px rgba(0,0,0,0.1);
-    border-bottom: solid 1px $header-border-bottom-colour;
+    border-bottom: solid 1px $colour-header-border-bottom;
 
     .header-container {
         flex-grow: 1;
 
         display: flex;
-        align-items: center;
+        // align-items: center;
         justify-content: space-between;
 
         // max-width: $header-content-width;
-        height: 3rem;
+        height: $header-height;
     }
 
     .header-container > * {
@@ -40,25 +37,6 @@ $header-content-width: 1280px;
 
     .left {
         margin-left: 0.5rem;
-
-        .navigation {
-            display: flex;
-
-            .nav-item {
-                margin-right: 0.75rem;
-
-                a {
-                    font-size: 0.9em;
-                    color: #9d9d9d;
-                }
-
-                &.highlight a,
-                a:hover {
-                    color: #ffffff;
-                }
-            }
-
-        }
     }
 
     .middle {
@@ -70,7 +48,7 @@ $header-content-width: 1280px;
             margin: 0 0 0 1px;
             padding-left: 0.5rem;
             font-family: 'Karla', sans-serif;
-            font-size: 2rem;
+            font-size: 3.2rem;
             font-weight: 400;
 
             /* colours */
@@ -87,5 +65,23 @@ $header-content-width: 1280px;
     .right {
         flex-direction: row-reverse;
         margin-right: 0.5rem;
+
+        .navigation {
+            display: flex;
+
+            .nav-item {
+                margin-right: 1.5rem;
+
+                a {
+                    font-size: 0.8em;
+                    color: #9d9d9d;
+                }
+
+                &.highlight a,
+                a:hover {
+                    color: #ffffff;
+                }
+            }
+        }
     }
 }

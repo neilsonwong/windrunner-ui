@@ -1,0 +1,73 @@
+@import "src/styles/sizes";
+
+:host {
+    margin: 0 5vw;
+    position: relative;
+}
+
+.grid-layout {
+    display: grid;
+    grid-column-gap: 50px;
+    grid-row-gap: 40px;
+    grid-template-columns: repeat(3, $card-width);
+    justify-content: center;
+}
+
+.card-list {
+    grid-template-rows: repeat(auto-fill, 265px);
+    min-width: 0;
+    width: 100%;
+}
+
+header {
+    grid-template-rows: unset;
+
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 2230px) {
+    .grid-layout {
+        grid-template-columns: repeat(4, $card-width);
+    }
+}
+
+@media (max-width: 1345px) {
+    :host {
+        margin: 0 10vw;
+    }
+
+    header {
+        grid-template-columns: 1fr 0 1fr;
+    }
+
+    .card-list {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 40px;
+        grid-row-gap: 40px;
+    }
+}
+
+@media (max-width: 1050px) {
+    :host {
+        margin: 0 15vw;
+    }
+    .card-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1560px) {
+    :host {
+        margin: 0 1vw;
+    }
+
+    .grid-layout {
+        grid-column-gap: 20px;
+    }
+}
