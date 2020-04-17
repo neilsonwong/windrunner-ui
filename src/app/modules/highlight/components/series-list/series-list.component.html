@@ -1,0 +1,23 @@
+<header class="grid-layout">
+    <h2 [class.light-title]="first">{{ title }}</h2>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+</header>
+<ng-container *ngIf="seriesList; else loading">
+    <div *ngIf="seriesList && seriesList.length > 0; else nothingNew"
+        class="card-list grid-layout">
+        <app-series-preview *ngFor="let series of seriesList" [series]="series">
+        </app-series-preview>
+    </div>
+</ng-container>
+<ng-template #loading>
+    <div class="big-text">
+        still loading ...
+    </div>
+</ng-template>
+<ng-template #nothingNew>
+    <div class="big-text">
+        {{ emptyText }}
+    </div>
+</ng-template>

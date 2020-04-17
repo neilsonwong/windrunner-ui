@@ -1,4 +1,5 @@
 @import "src/styles/sizes";
+@import "src/styles/colours";
 
 :host {
     margin: 0 5vw;
@@ -31,6 +32,10 @@ header {
     user-select: none;
 }
 
+.light-title {
+    color: $colour-text-bright;
+}
+
 @media (min-width: 2230px) {
     .grid-layout {
         grid-template-columns: repeat(4, $card-width);
@@ -42,8 +47,8 @@ header {
         margin: 0 10vw;
     }
 
-    header {
-        grid-template-columns: 1fr 0 1fr;
+    header.grid-layout {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .card-list {
@@ -66,8 +71,12 @@ header {
     :host {
         margin: 0 1vw;
     }
+}
 
-    .grid-layout {
-        grid-column-gap: 20px;
-    }
+.big-text {
+    margin-top: 5rem;
+    font-size: 8rem;
+    font-weight: 600;
+    color: $colour-text;
+    text-align: center;
 }

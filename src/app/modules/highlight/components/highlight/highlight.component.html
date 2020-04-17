@@ -1,1 +1,11 @@
-<app-recent-list></app-recent-list>
+<app-series-list
+    title="New!"
+    [seriesList]="recentlyUpdatedSeries$ | async"
+    emptyText="Nothing new at the moment :("
+    [first]="true">
+</app-series-list>
+<app-series-list
+    title="Favourites"
+    [seriesList]="favouriteSeries$ | async"
+    emptyText="There's nothing you like? :O">
+</app-series-list>

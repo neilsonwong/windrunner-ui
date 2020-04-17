@@ -1,8 +1,11 @@
-$app-max-width: 12.8rem;
+/* for 3 and 4 cols */
+$app-max-width: 128rem;
+$app-2-col-max-width: 80rem;
+$app-min-width: 60rem;
 
 $bar-size: 3.5rem;
 $header-height: 16rem;
-$header-content-width: 12.8rem;
+$header-content-width: 128rem;
 
 $main-content-upshift: -15rem;
 
