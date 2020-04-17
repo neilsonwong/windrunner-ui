@@ -30,6 +30,10 @@ header {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    & > * {
+        min-width: $card-min-width;
+    }
 }
 
 .light-title {
@@ -42,15 +46,23 @@ header {
     }
 }
 
+@media (max-width: 2230px) {
+    .hidable-2 {
+        display: none;
+    }
+}
+
 @media (max-width: 1345px) {
     :host {
         margin: 0 10vw;
     }
 
-    header.grid-layout {
-        grid-template-columns: repeat(2, 1fr);
+    .hidable-1,
+    .hidable-2 {
+        display: none;
     }
 
+    header.grid-layout,
     .card-list {
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 40px;
@@ -58,9 +70,12 @@ header {
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
     :host {
         margin: 0 15vw;
+    }
+    header.grid-layout {
+        grid-template-columns: 1fr 0 1fr;
     }
     .card-list {
         grid-template-columns: 1fr;

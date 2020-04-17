@@ -18,7 +18,7 @@ $card-data-smaller-margin: 10px;
     box-shadow: 0 4px 6px rgba(49,54,68,.05), 0 5px 20px rgba(49,54,68,.08);
 
     height: $card-height;
-    min-width: $card-width;
+    min-width: $card-min-width;
     overflow: hidden;
     text-align: left;
     transition: box-shadow .6s ease;
