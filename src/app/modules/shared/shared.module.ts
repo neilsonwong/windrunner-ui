@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderComponent } from './components/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -18,7 +17,6 @@ import { LoadingComponent } from './components/loading/loading.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
   ],
   exports: [
     HeaderComponent,

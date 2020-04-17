@@ -1,14 +1,18 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+
+import { HttpClientModule } from '@angular/common/http';
+
 import { FileListService } from './services/file-list.service';
-import { SharedModule } from '../shared/shared.module';
+import { BannerService } from './services/banner.service';
 
 @NgModule({
   declarations: [],
   imports: [
-    SharedModule
+    HttpClientModule
   ],
   providers: [
-    FileListService
+    FileListService,
+    BannerService
   ]
 })
 export class CoreModule {

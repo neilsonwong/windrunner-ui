@@ -17,4 +17,7 @@
             </div>
         </div>
     </div>
+    <div [style.background-image]="(bannerUpdates$ | async)"
+        [style.opacity]="bannerOpacity"
+        class="bg-underlay"></div>
 </div>

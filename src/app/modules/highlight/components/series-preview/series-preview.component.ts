@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, Output, EventEmitter, HostListener } from '@angular/core';
 import { DirectoryKind, FILETYPES, SeriesDirectory } from 'src/app/modules/shared/models/Files';
 import { isSeries } from 'src/app/utils/fileTypeUtils';
 import { environment } from 'src/environments/environment';
+import { timer } from 'rxjs';
+import { BannerService } from 'src/app/modules/core/services/banner.service';
 
 const api = environment.api;
 
@@ -17,13 +19,15 @@ export class SeriesPreviewComponent implements OnInit {
     return this.identified;
   }
 
+  private mouseHere: boolean;
+
   identified: boolean;
   coverImage: string;
   bannerImage: string;
   sourceMedia: string;
   episodeCount: string = null;
 
-  constructor() { }
+  constructor(private bannerService: BannerService) { }
 
   ngOnInit() {
     if (isSeries(this.series)) {
@@ -38,11 +42,11 @@ export class SeriesPreviewComponent implements OnInit {
     }
   }
 
-  resolveEpisodeCount(epCount: number, nextEp: any): string {
+  private resolveEpisodeCount(epCount: number, nextEp: any): string {
     if (epCount !== null) {
       return epCount.toString();
     }
-    else if (nextEp !== null && nextEp.episode !== null){
+    else if (nextEp !== null && nextEp.episode !== null) {
       return `${nextEp.episode}+`;
     }
     else {
@@ -50,14 +54,14 @@ export class SeriesPreviewComponent implements OnInit {
     }
   }
 
-  resolveImage(localFile: string, externalLink: string): string {
-    return localFile ? 
+  private resolveImage(localFile: string, externalLink: string): string {
+    return localFile ?
       `${api}/img/series/${localFile}` :
       externalLink;
   }
 
-  resolveSource(source: string) {
-    switch(source) {
+  private resolveSource(source: string) {
+    switch (source) {
       case 'MANGA':
       case 'LIGHT_NOVEL':
       case 'VISUAL_NOVEL':
@@ -71,5 +75,31 @@ export class SeriesPreviewComponent implements OnInit {
       default:
         return source;
     }
+  }
+
+  private hovered() {
+    this.bannerService.showBanner(this.bannerImage);
+  }
+
+
+  @HostListener('mouseenter')
+  private onMouseEnter() {
+    // mouse has entered
+    // wait for 1 second
+
+    if (this.identified && !this.mouseHere) {
+      this.mouseHere = true;
+      timer(500).subscribe(() => {
+        if (this.mouseHere) {
+          this.hovered();
+        }
+      });
+    }
+  }
+
+  @HostListener('mouseleave')
+  private onMouseLeave() {
+    this.mouseHere = false;
+    this.bannerService.removeBanner();
   }
 }
