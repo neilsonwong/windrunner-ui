@@ -8,7 +8,13 @@ const routes: Routes = [
   { path: 'v', component: VideoAppComponent,
     children: [
       { path: '', component: HighlightComponent },
-      { path: 'browse', component: FileBrowserComponent }
+      { path: 'browse', 
+        // handle using wildcard cuz we are cheating with the folder paths
+        children: [{ 
+          path: '**',
+          component: FileBrowserComponent
+        }]
+      }
     ]
   }
 ];

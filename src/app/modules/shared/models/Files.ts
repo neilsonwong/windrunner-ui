@@ -14,6 +14,7 @@ export interface BaseFile {
   type: FILETYPES;
   filePath: string;
   name: string;
+  rel: string;
 }
 
 export interface InvalidFile extends BaseFile { }
@@ -27,6 +28,7 @@ export interface BasicFile extends BaseFile {
 
 export interface Directory extends BasicFile {
   isSeriesLeafNode: Boolean;
+  newFiles?: Array<string>;
 }
 
 export interface SeriesDirectory extends Directory {

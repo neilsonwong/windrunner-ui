@@ -1,0 +1,57 @@
+@import "src/styles/sizes";
+
+header.grid-layout {
+    grid-template-rows: unset;
+
+    & > * {
+        min-width: $card-min-width;
+    }
+}
+
+.grid-layout {
+    display: grid;
+    grid-column-gap: 50px;
+    grid-row-gap: 40px;
+    grid-template-columns: repeat(3, $card-width);
+    justify-content: center;
+}
+
+/* screens larger than 2230 will be 4 column */
+@media (min-width: $layout-4-col-screen-min) {
+    .grid-layout {
+        grid-template-columns: repeat(4, $card-width);
+    }
+}
+
+/* screens less than 2230 should only have 1 spacer in headers*/
+@media (max-width: $layout-4-col-screen-min) {
+    header.grid-layout .hidable-2 {
+        display: none;
+    }
+}
+
+/* screens smaller than 1345 should only have 2 row2 */
+/* hide both header spacers */
+@media (max-width: $layout-2-col-screen-max) {
+    .hidable-1,
+    .hidable-2 {
+        display: none;
+    }
+
+    header.grid-layout,
+    .card-list {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 40px;
+        grid-row-gap: 40px;
+    }
+}
+
+/* screens smaller than 900 should only have 1 row */
+@media (max-width: $layout-1-col-screen-max) {
+    header.grid-layout {
+        grid-template-columns: 1fr 0 1fr;
+    }
+    .card-list {
+        grid-template-columns: 1fr;
+    }
+}

@@ -24,6 +24,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     ErrorComponent,
     BoxHeaderComponent,
     LoadingComponent,
+    RouterModule,
   ]
 })
 export class SharedModule { }

@@ -26,6 +26,7 @@ export class SeriesPreviewComponent implements OnInit {
   bannerImage: string;
   sourceMedia: string;
   episodeCount: string = null;
+  seriesLink: string;
 
   constructor(private bannerService: BannerService) { }
 
@@ -40,6 +41,9 @@ export class SeriesPreviewComponent implements OnInit {
     else {
       // this is a normal dir
     }
+
+    // everybody needs a link!
+    this.seriesLink = `/v/browse${this.series.rel}`;
   }
 
   private resolveEpisodeCount(epCount: number, nextEp: any): string {
@@ -61,6 +65,7 @@ export class SeriesPreviewComponent implements OnInit {
   }
 
   private resolveSource(source: string) {
+    console.log(source);
     switch (source) {
       case 'MANGA':
       case 'LIGHT_NOVEL':

@@ -57,7 +57,7 @@
     }
 
     .left {
-        margin-left: 0.5rem;
+        margin-left: 2rem;
     }
 
     .middle {
@@ -85,23 +85,24 @@
 
     .right {
         flex-direction: row-reverse;
-        margin-right: 0.5rem;
+        margin-right: 2rem;
+    }
 
-        .navigation {
-            display: flex;
+    .navigation {
+        display: flex;
 
-            .nav-item {
-                margin-right: 1.5rem;
+        .nav-item {
+            margin-right: 1.5rem;
+            word-break: keep-all;
 
-                a {
-                    font-size: 0.8em;
-                    color: #9d9d9d;
-                }
+            a {
+                font-size: 0.8em;
+                color: $colour-text-light;
+            }
 
-                &.highlight a,
-                a:hover {
-                    color: #ffffff;
-                }
+            &.highlight a,
+            a:hover {
+                color: $colour-text-bright;
             }
         }
     }

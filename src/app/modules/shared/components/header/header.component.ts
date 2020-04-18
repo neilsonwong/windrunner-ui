@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { LinkData } from 'src/app/modules/shared/models/LinkData';
 import { BannerService } from 'src/app/modules/core/services/banner.service';
 import { Observable } from 'rxjs';
-import { map, delay, tap, filter } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({

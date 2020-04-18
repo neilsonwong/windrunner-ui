@@ -1,0 +1,46 @@
+@import "src/styles/colours";
+
+.navigation-options {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin-bottom: 1rem;;
+
+    .left .back-button {
+        margin-right: 10px;
+    }
+
+    .middle {
+        flex-grow: 1;
+        padding: 0 2rem;
+
+        .bookmarks {
+            font-weight: 600;
+            color: $colour-text-light;
+
+            display: flex;
+            justify-content: center;
+
+            .bookmark {
+                padding: 0 0.5rem;
+            }
+        }
+    }
+
+    .right .display-options {
+        text-align: right;
+
+        & > * {
+            margin-left: 1rem;
+            // cursor: pointer;
+
+            &:hover {
+                color: $colour-text-bright;
+            }
+        }
+    }
+}
+
+.file-list {
+    padding: 2rem 0;
+}

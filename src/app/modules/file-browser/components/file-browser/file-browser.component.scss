@@ -1,0 +1,35 @@
+@import "src/styles/sizes";
+@import "src/styles/colours";
+@import "src/styles/grid-layout";
+
+:host {
+    margin: 0 5vw;
+    position: relative;
+}
+
+header {
+    h2 {
+        color: $colour-text-bright;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .1rem;
+        margin: 2rem 0;
+
+        &, a {
+            user-select: none;
+        }
+    }
+
+    .bread-crumbs {
+        margin: 0.83em 0;
+
+        color: $colour-text-bright;
+        // font-size: 1.5rem;
+        font-size: 1.5em;
+        text-align: right;
+    }
+
+    & > * {
+        min-width: $card-min-width;
+    }
+}

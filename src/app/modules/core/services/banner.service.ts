@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { filter, tap, distinctUntilChanged } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 const api = environment.api;
 
@@ -9,7 +10,12 @@ const api = environment.api;
   providedIn: 'root'
 })
 export class BannerService {
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => (event instanceof NavigationEnd)),
+      tap(() => { this.removeBanner(); })
+    ).subscribe();
+  }
 
   private bannerUrl: Subject<string> = new Subject();
 
@@ -24,6 +30,7 @@ export class BannerService {
   }
 
   getBannerUpdates(): Observable<string> {
-    return this.bannerUrl;
+    return this.bannerUrl
+      .pipe(distinctUntilChanged());
   }
 }

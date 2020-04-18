@@ -31,6 +31,7 @@
               "src/styles/styles.scss",
               "src/styles/colours.scss",
               "src/styles/sizes.scss",
+              "src/styles/grid-layout.scss",
               "src/styles/fonts.scss"
             ],
             "scripts": []

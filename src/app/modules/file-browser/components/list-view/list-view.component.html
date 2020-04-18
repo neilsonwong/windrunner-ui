@@ -1,2 +1,34 @@
-<p>list-view works!</p>
-<!-- sorting help a b c d z 0 1 2 etc -->
+<div class="navigation-options">
+    <div class="left">
+        <div class="back-button">
+            <a>Back</a>
+        </div>
+    </div>
+    <div class="middle">
+        <div class="bookmarks">
+            <a class="bookmark" *ngFor="let bookmark of bookmarks">
+                {{ bookmark }}
+            </a>
+        </div>
+    </div>
+    <div class="right">
+        <div class=" display-options">
+            <a (click)="changeDisplay('line')">
+                Line
+            </a>
+            <a (click)="changeDisplay('preview')">
+                Preview
+            </a>
+        </div>
+    </div>
+</div>
+<div class="file-list"
+    *ngIf="files?.length > 0; else noFiles">
+    <app-leaf-view *ngFor="let file of files" [file]="file">
+    </app-leaf-view>
+</div>
+<ng-template #noFiles>
+    <div class="big-text">
+        No files
+    </div>
+</ng-template>

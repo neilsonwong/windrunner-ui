@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FileKind } from 'src/app/modules/shared/models/Files';
 
 @Component({
   selector: 'app-list-view',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-view.component.scss']
 })
 export class ListViewComponent implements OnInit {
+  @Input() files: FileKind[];
+  @Input() bookmarks: string[];
+  
+  displayType: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.displayType = 'line';
   }
 
+  changeDisplay(displayType: string) {
+    this.displayType = displayType;
+  }
 }

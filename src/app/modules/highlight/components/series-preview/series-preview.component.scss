@@ -31,6 +31,17 @@ $card-data-smaller-margin: 10px;
         z-index: 10;
         overflow: hidden;
 
+        .badge {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: $colour-bg-semi-transparent-blue;
+            z-index: 1;
+            color: $colour-text-bright;
+            font-size: 1.2rem;
+            padding: 0.2rem 0.4rem;
+        }
+
         img {
             position: absolute;
             width: 100%;
@@ -61,6 +72,7 @@ $card-data-smaller-margin: 10px;
                 font-size: 2.3rem;
                 font-weight: 600;
                 padding-top: 5px;
+                color: $colour-text-black;
             }
             .alt-title {
                 font-size: 1.4rem;
@@ -97,7 +109,6 @@ $card-data-smaller-margin: 10px;
                 background-color: $colour-bg-light-accent;
 
                 .rel {
-                    font-family: monospace;
                     font-size: 1.2rem;
                 }
             }
@@ -121,8 +132,12 @@ $card-data-smaller-margin: 10px;
             }
         }
     }
-}
 
-:host:hover {
-    box-shadow: 0 4px 6px rgba(49,54,68,.09), 0 10px 40px rgba(49,54,68,.3);
+    &:hover {
+        box-shadow: 0 4px 6px rgba(49,54,68,.09), 0 10px 40px rgba(49,54,68,.3);
+
+        .series-preview-content header .native-title {
+            color: $colour-text-blue;
+        }
+    }
 }

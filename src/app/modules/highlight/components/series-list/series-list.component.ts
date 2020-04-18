@@ -7,7 +7,7 @@ import { DirectoryKind } from 'src/app/modules/shared/models/Files';
   styleUrls: ['./series-list.component.scss']
 })
 export class SeriesListComponent implements OnInit {
-  @Input() title: string;
+  @Input() listName: string;
   @Input() emptyText: string;
   @Input() seriesList: DirectoryKind[];
   @Input() first: boolean;

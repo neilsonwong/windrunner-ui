@@ -1,20 +1,21 @@
 <div class="header">
     <div class="header-container">
         <div class="left side-bar">
+            <div class="navigation">
+                <div *ngFor="let link of navigation"
+                    class="nav-item"
+                    [class.highlight]="link.text === highlight">
+                    <a [routerLink]="[link.url]">
+                        {{ link.text }}
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="middle">
             <h1 class="title">WINDRUNNER</h1>
         </div>
         <div class="right side-bar">
             <!-- <app-search-bar (search)="handleSearch($event)"></app-search-bar> -->
-            <div class="navigation">
-                <div *ngFor="let link of navigation"
-                    ngClass="nav-item {{ link.text === highlight ? 'highlight' : ''}}">
-                    <a [routerLink]="[link.url]">
-                        {{ link.text }}
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
     <div [style.background-image]="(bannerUpdates$ | async)"

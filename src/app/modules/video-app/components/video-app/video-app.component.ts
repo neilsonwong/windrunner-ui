@@ -9,13 +9,16 @@ import { LinkData } from 'src/app/modules/shared/models/LinkData';
 export class VideoAppComponent implements OnInit {
 
   navigation: Array<LinkData> = [
-    { text:'Home', url: '/v' },
-    { text:'Browse', url: '/v/browse' }
+    { text: 'Home', url: '/v' },
+    { text: 'Browse', url: '/v/browse' },
+    { text: 'お勧め', url: '/v/recommend' }
   ];
 
   constructor() { }
 
   ngOnInit() {
+    this.navigation.push(
+      { text: 'maintenance', url: '/v/maintenance' }
+    );
   }
-
 }

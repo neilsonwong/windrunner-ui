@@ -1,3 +1,5 @@
+@import "src/styles/colours";
+
 html {
   font-size: 10px;
 }
@@ -5,8 +7,51 @@ html {
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.6rem;
+  color: $colour-text;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a,
+.colour-on-hover {
+  transition: color .3s;
+  transition-property: color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  outline: 0;
+}
+
+.colour-on-hover,
+a:hover {
+  color: $colour-text-blue;
+}
+
+
+.monospace {
+  font-family: monospace;
+}
+
+.non-selectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.big-text {
+    margin-top: 5rem;
+    font-size: 8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+p,
+h2,
 h3 {
   margin: 0;
 }

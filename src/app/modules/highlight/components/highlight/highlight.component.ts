@@ -18,8 +18,6 @@ export class HighlightComponent implements OnInit {
 
   ngOnInit() {
     this.recentlyUpdatedSeries$ = this.fileListService.getRecent();
-    this.favouriteSeries$ = this.fileListService.getFavourites().pipe(
-      tap(e => console.log(e))
-    );
+    this.favouriteSeries$ = this.fileListService.getFavourites();
   }
 }

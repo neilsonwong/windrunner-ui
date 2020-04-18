@@ -1,9 +1,10 @@
 /* for 3 and 4 cols */
-$app-max-width: 128rem;
-$app-2-col-max-width: 80rem;
-$app-min-width: 60rem;
+$app-max-width: 195rem;
+$app-3-col-max-width: 145rem;
+$app-2-col-max-width: 85rem;
+$app-min-width: 50rem;
 
-$bar-size: 3.5rem;
+$bar-size: 25rem;
 $header-height: 16rem;
 $header-content-width: 128rem;
 
@@ -13,3 +14,8 @@ $card-height: 26.5rem;
 $card-width: 45rem;
 $card-min-width: 40rem;
 $card-img-width: 18.5rem;
+
+$layout-4-col-screen-min: 2230px;
+/* $layout-3-col-screen: default between 4 and 2 */
+$layout-2-col-screen-max: 1345px;
+$layout-1-col-screen-max: 900px;

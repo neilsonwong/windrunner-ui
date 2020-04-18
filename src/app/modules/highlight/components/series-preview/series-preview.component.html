@@ -1,6 +1,9 @@
 <ng-container *ngIf="identified; else genericDir">
     <div class="series-preview-thumbnail">
-        <img [src]="coverImage" />
+        <a [routerLink]="[seriesLink]">
+            <div *ngIf="series.newFiles" class="badge">{{ series.newFiles.length }}</div>
+            <img [src]="coverImage" />
+        </a>
     </div>
     <div class="series-preview-content">
         <div class="pre-header">
@@ -9,7 +12,7 @@
                 <span class="noun">eps</span></p>
         </div>
         <header class="header">
-            <h3 class="native-title">{{ series.aniListData.nativeTitle }}</h3>
+            <h3 class="native-title colour-on-hover">{{ series.aniListData.nativeTitle }}</h3>
             <p class="alt-title">{{ series.aniListData.title }}</p>
         </header>
         <hr class="divider" />
@@ -25,12 +28,16 @@
 <ng-template #genericDir>
     <div class="series-preview-content">
         <header class="header">
-            <h3 class="native-title">{{ series.name }}</h3>
+            <h3 class="native-title">
+                <a [routerLink]="[seriesLink]">
+                    {{ series.name }}
+                </a>
+            </h3>
         </header>
         <hr class="divider" />
         <div class="content">
             <div class="bottom">
-                <p class="rel">{{ series.rel }}</p>
+                <p class="rel monospace">{{ series.rel }}</p>
             </div>
         </div>
     </div>
