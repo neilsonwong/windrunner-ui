@@ -10,6 +10,7 @@ import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
 })
 export class ListViewComponent implements OnInit, OnChanges {
   @Input() files: FileKind[];
+  @Input() loading: boolean;
   bookmarks: Map<string, number> = new Map<string, number>();
   
   displayMode: string;
@@ -22,6 +23,7 @@ export class ListViewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    console.log('my loading is ' + this.loading);
     this.bookmarks.clear();
     this.files.forEach((file, index) => {
       const firstChar = file.name[0];

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoxHeaderComponent } from './box-header.component';
+import { RecommendedComponent } from './recommended.component';
 
-describe('BoxHeaderComponent', () => {
-  let component: BoxHeaderComponent;
-  let fixture: ComponentFixture<BoxHeaderComponent>;
+describe('RecommendedComponent', () => {
+  let component: RecommendedComponent;
+  let fixture: ComponentFixture<RecommendedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoxHeaderComponent ]
+      declarations: [ RecommendedComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoxHeaderComponent);
+    fixture = TestBed.createComponent(RecommendedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

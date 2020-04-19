@@ -6,18 +6,20 @@
     </div>
     <div class="middle">
         <div class="bookmarks">
-            <a class="bookmark" *ngFor="let bookmark of bookmarks | keyvalue"
-                [href]="'#file' + bookmark.value">
+            <a *ngFor="let bookmark of bookmarks | keyvalue"
+                class="bookmark"
+                routerLink="./"
+                [fragment]="'file' + bookmark.value">
                 {{ bookmark.key }}
             </a>
         </div>
     </div>
     <div class="right">
-        <div class=" display-options">
-            <a (click)="displayLineMode()">
+        <div class="display-options {{ displayMode | lowercase }}">
+            <a class="line" (click)="displayLineMode()">
                 Line
             </a>
-            <a (click)="displayListMode()">
+            <a class="list"(click)="displayListMode()">
                 List
             </a>
             <!-- <a (click)="displayPreviewMode()">
@@ -26,29 +28,36 @@
         </div>
     </div>
 </div>
-<ng-container *ngIf="files?.length > 0; else noFiles">
-    <ng-container *ngIf="displayMode === 'LINE'">
-        <div class="file-list grid-layout super-compact">
-            <app-leaf-line-view
-                *ngFor="let file of files; index as i"
-                [id]="'file' + i"
-                [file]="file">
-            </app-leaf-line-view>
-        </div>
+<ng-container *ngIf="!loading; else loadingMsg">
+    <ng-container *ngIf="files?.length > 0; else noFiles">
+        <ng-container [ngSwitch]="displayMode | lowercase">
+            <div *ngSwitchCase="'line'"
+                class="file-list grid-layout super-compact">
+                <app-leaf-line-view
+                    *ngFor="let file of files; index as i"
+                    [id]="'file' + i"
+                    [file]="file">
+                </app-leaf-line-view>
+            </div>
+            <div *ngSwitchCase="'list'"
+                class="file-list grid-layout compact">
+                <app-leaf-list-view
+                    *ngFor="let file of files; index as i"
+                    [id]="'file' + i"
+                    class="card"
+                    [file]="file">
+                </app-leaf-list-view>
+            </div>
+        </ng-container>
     </ng-container>
-    <ng-container *ngIf="displayMode === 'LIST'">
-        <div class="file-list grid-layout compact">
-            <app-leaf-list-view
-                *ngFor="let file of files"
-                [id]="'file' + i"
-                class="card"
-                [file]="file">
-            </app-leaf-list-view>
+    <ng-template #noFiles>
+        <div class="big-text">
+            No files
         </div>
-    </ng-container>
+    </ng-template>
 </ng-container>
-<ng-template #noFiles>
+<ng-template #loadingMsg>
     <div class="big-text">
-        No files
+        Loading ...
     </div>
 </ng-template>

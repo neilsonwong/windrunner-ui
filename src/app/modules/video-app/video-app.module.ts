@@ -5,6 +5,8 @@ import { SharedModule } from '../shared/shared.module';
 import { VideoAppRoutingModule } from './video-app-routing.module';
 import { FileBrowserModule } from '../file-browser/file-browser.module';
 import { HighlightModule } from '../highlight/highlight.module';
+import { SeriesModule } from '../series/series.module';
+import { MaintenanceModule } from '../maintenance/maintenance.module';
 
 import { VideoAppComponent } from './components/video-app/video-app.component';
 
@@ -15,7 +17,9 @@ import { VideoAppComponent } from './components/video-app/video-app.component';
     SharedModule,
     VideoAppRoutingModule,
     HighlightModule,
-    FileBrowserModule
+    FileBrowserModule,
+    SeriesModule,
+    MaintenanceModule
   ]
 })
 export class VideoAppModule { }

@@ -107,3 +107,16 @@
         }
     }
 }
+
+.header.compact {
+    &, 
+    .header-container {
+        height: 5rem;
+        padding: 0.8rem;
+        align-items: center;
+    }
+
+    .bg-underlay {
+        display: none;
+    }
+}

@@ -3,8 +3,9 @@
 @import "src/styles/grid-layout";
 
 :host {
-    margin: 0 5vw;
     position: relative;
+    display: block;
+    margin-top: $main-content-upshift;
 }
 
 .grid-layout {

@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { VideoAppComponent } from './components/video-app/video-app.component';
 import { FileBrowserComponent } from '../file-browser/components/file-browser/file-browser.component';
 import { HighlightComponent } from '../highlight/components/highlight/highlight.component';
+import { SeriesComponent } from '../series/components/series/series.component';
+import { MaintenanceComponent } from '../maintenance/components/maintenance/maintenance.component';
 
 const routes: Routes = [
   { path: 'v', component: VideoAppComponent,
@@ -14,7 +16,15 @@ const routes: Routes = [
           path: '**',
           component: FileBrowserComponent
         }]
-      }
+      },
+      { path: 'series', 
+        // handle using wildcard cuz we are cheating with the folder paths
+        children: [{ 
+          path: '**',
+          component: SeriesComponent
+        }]
+      },
+      { path: 'maintenance', component: MaintenanceComponent },
     ]
   }
 ];

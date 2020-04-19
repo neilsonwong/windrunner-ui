@@ -43,13 +43,17 @@
                 color: $colour-text-bright;
             }
         }
+
+        &.list .list,
+        &.line .line {
+            color: $colour-text-bright;
+        }
     }
 }
 
 .file-list {
-    padding: 2rem 0;
+    padding: 0.5rem 0;
 
-    // grid-template-rows: repeat(auto-fill, $card-height);
     min-width: 0;
     width: 100%;
 }

@@ -7,7 +7,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { LazyLoadImageDirective } from './directives/lazy-load-image.directive';
 import { ErrorComponent } from './components/error/error.component';
-import { BoxHeaderComponent } from './components/box-header/box-header.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HoverDirective } from './directives/hover.directive';
 import { AbstractPromisedComponent } from './components/abstract-promised/abstract-promised.component';
@@ -18,7 +17,6 @@ import { AbstractPromisedComponent } from './components/abstract-promised/abstra
     SearchBarComponent,
     LazyLoadImageDirective,
     ErrorComponent,
-    BoxHeaderComponent,
     LoadingComponent,
     HoverDirective,
     AbstractPromisedComponent
@@ -33,7 +31,6 @@ import { AbstractPromisedComponent } from './components/abstract-promised/abstra
     HeaderComponent,
     LazyLoadImageDirective,
     ErrorComponent,
-    BoxHeaderComponent,
     LoadingComponent,
     RouterModule,
   ]

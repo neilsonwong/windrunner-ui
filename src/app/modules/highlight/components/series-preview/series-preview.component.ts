@@ -3,7 +3,7 @@ import { DirectoryKind, SeriesDirectory } from 'src/app/modules/shared/models/Fi
 import { isSeries } from 'src/app/utils/fileTypeUtils';
 import { environment } from 'src/environments/environment';
 import { timer, Observable } from 'rxjs';
-import { BannerService } from 'src/app/modules/core/services/banner.service';
+import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { AbstractPromisedComponent } from 'src/app/modules/shared/components/abstract-promised/abstract-promised.component';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { UI_ROUTES, API_ROUTES } from 'src/app/modules/core/routes';
@@ -33,7 +33,7 @@ export class SeriesPreviewComponent extends AbstractPromisedComponent<SeriesDire
   seriesLink: string;
 
   constructor(
-    private bannerService: BannerService,
+    private headerTweakService: HeaderTweakService,
     protected fileListService: FileListService) {
     super(fileListService);
   }
@@ -113,7 +113,7 @@ export class SeriesPreviewComponent extends AbstractPromisedComponent<SeriesDire
   }
 
   private hovered() {
-    this.bannerService.showBanner(this.bannerImage);
+    this.headerTweakService.showBanner(this.bannerImage);
   }
 
   @HostListener('mouseenter')
@@ -134,6 +134,6 @@ export class SeriesPreviewComponent extends AbstractPromisedComponent<SeriesDire
   @HostListener('mouseleave')
   private onMouseLeave() {
     this.mouseHere = false;
-    this.bannerService.removeBanner();
+    this.headerTweakService.removeBanner();
   }
 }

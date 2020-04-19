@@ -3,7 +3,7 @@ import { FileKind } from 'src/app/modules/shared/models/Files';
 import { Observable, of, merge } from 'rxjs';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { shareReplay, map, switchMap } from 'rxjs/operators';
+import { shareReplay, map, switchMap, tap } from 'rxjs/operators';
 import { LinkData } from 'src/app/modules/shared/models/LinkData';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 
@@ -16,7 +16,7 @@ export class FileBrowserComponent implements OnInit {
 
   place$: Observable<string>;
   breadCrumbs$: Observable<Array<string|LinkData>>;
-  loading: boolean;
+  loading: boolean = true;
   fileList$: Observable<FileKind[]>;
   bookmarks$: Observable<Map<string, number>>;
 
@@ -26,15 +26,16 @@ export class FileBrowserComponent implements OnInit {
 
   ngOnInit() {
     const urlChange$ = this.route.url.pipe(shareReplay());
-    // this.place$ = urlChange$.pipe();
     this.breadCrumbs$ = urlChange$.pipe(map((e: UrlSegment[]) => this.getBreadCrumbs(e)));
 
-    const empty = of([]);
+    const empty = of([]).pipe(tap(() => { this.loading = true; }));
     this.fileList$ = urlChange$.pipe(
       map((e: UrlSegment[]) => this.getPlace(e)),
       switchMap((rel: string) => {
         return merge(empty,
-          this.fileListService.getDirectoryListing(rel));
+          this.fileListService.getDirectoryListing(rel)
+            .pipe(tap(() => { this.loading = false; }))
+        );
       })
     );
   }

@@ -3,7 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FileListService } from './services/file-list.service';
-import { BannerService } from './services/banner.service';
+import { HeaderTweakService } from './services/header-tweak.service';
 
 @NgModule({
   declarations: [],
@@ -12,7 +12,7 @@ import { BannerService } from './services/banner.service';
   ],
   providers: [
     FileListService,
-    BannerService
+    HeaderTweakService
   ]
 })
 export class CoreModule {
