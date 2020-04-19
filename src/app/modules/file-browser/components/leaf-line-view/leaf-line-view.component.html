@@ -1,2 +1,7 @@
 <div class="file-type-icon {{ icon }}"></div>
-<a class="leaf-link" [routerLink]="[url]">{{ file.name }}</a>
+<a *ngIf="url; else fileNameLine"
+    class="leaf-link"
+    [routerLink]="[url]">{{ file.name }}</a>
+<ng-template #fileNameLine>
+    <span>{{ file.name }}</span>
+</ng-template>

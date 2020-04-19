@@ -1,9 +1,13 @@
-import { Component, OnInit, Input, HostBinding, Output, EventEmitter, HostListener } from '@angular/core';
-import { DirectoryKind, FILETYPES, SeriesDirectory } from 'src/app/modules/shared/models/Files';
+import { Component, Input, HostBinding, Output, EventEmitter, HostListener, OnChanges } from '@angular/core';
+import { DirectoryKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
 import { isSeries } from 'src/app/utils/fileTypeUtils';
 import { environment } from 'src/environments/environment';
-import { timer } from 'rxjs';
+import { timer, Observable } from 'rxjs';
 import { BannerService } from 'src/app/modules/core/services/banner.service';
+import { AbstractPromisedComponent } from 'src/app/modules/shared/components/abstract-promised/abstract-promised.component';
+import { FileListService } from 'src/app/modules/core/services/file-list.service';
+import { UI_ROUTES, API_ROUTES } from 'src/app/modules/core/routes';
+import { filter, map } from 'rxjs/operators';
 
 const api = environment.api;
 
@@ -12,7 +16,7 @@ const api = environment.api;
   templateUrl: './series-preview.component.html',
   styleUrls: ['./series-preview.component.scss']
 })
-export class SeriesPreviewComponent implements OnInit {
+export class SeriesPreviewComponent extends AbstractPromisedComponent<SeriesDirectory> implements OnChanges {
   @Input() series: DirectoryKind;
 
   @HostBinding('class.series') get isSeries() {
@@ -28,22 +32,23 @@ export class SeriesPreviewComponent implements OnInit {
   episodeCount: string = null;
   seriesLink: string;
 
-  constructor(private bannerService: BannerService) { }
+  constructor(
+    private bannerService: BannerService,
+    protected fileListService: FileListService) {
+    super(fileListService);
+  }
 
-  ngOnInit() {
+  ngOnChanges() {
     if (isSeries(this.series)) {
-      this.identified = true;
-      this.coverImage = this.resolveImage(this.series.aniListData.localCoverImage, this.series.aniListData.coverImage);
-      this.bannerImage = this.resolveImage(this.series.aniListData.localBannerImage, this.series.aniListData.bannerImage);
-      this.sourceMedia = this.resolveSource(this.series.aniListData.source);
-      this.episodeCount = this.resolveEpisodeCount(this.series.aniListData.episodes, this.series.aniListData.nextAiringEpisode);
+      this.populateSeriesValues(this.series);
     }
     else {
       // this is a normal dir
+      this.waitForPromised(this.series.promised);
+      
     }
-
     // everybody needs a link!
-    this.seriesLink = `/v/browse${this.series.rel}`;
+    this.seriesLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
   }
 
   private resolveEpisodeCount(epCount: number, nextEp: any): string {
@@ -58,9 +63,17 @@ export class SeriesPreviewComponent implements OnInit {
     }
   }
 
+  populateSeriesValues(series: SeriesDirectory) {
+      this.identified = true;
+      this.coverImage = this.resolveImage(series.aniListData.localCoverImage, series.aniListData.coverImage);
+      this.bannerImage = this.resolveImage(series.aniListData.localBannerImage, series.aniListData.bannerImage);
+      this.sourceMedia = this.resolveSource(series.aniListData.source);
+      this.episodeCount = this.resolveEpisodeCount(series.aniListData.episodes, series.aniListData.nextAiringEpisode);
+  }
+
   private resolveImage(localFile: string, externalLink: string): string {
     return localFile ?
-      `${api}/img/series/${localFile}` :
+      `${API_ROUTES.IMG_SERIES}/${localFile}` :
       externalLink;
   }
 
@@ -78,6 +91,24 @@ export class SeriesPreviewComponent implements OnInit {
         return 'Original Work';
       default:
         return source;
+    }
+  }
+
+  // abstract implementation
+  protected tryGetResource(): Observable<SeriesDirectory> {
+    return this.fileListService.getFileDetail(this.series.rel)
+      .pipe(map(result => (
+        (isSeries(result)) ?
+        result :
+        null
+      )));
+  }
+
+  // abstract implementation
+  protected handleUpdatedValue(updated: SeriesDirectory): void {
+    if (updated !== null) {
+      this.series = updated;
+      this.populateSeriesValues(updated);
     }
   }
 

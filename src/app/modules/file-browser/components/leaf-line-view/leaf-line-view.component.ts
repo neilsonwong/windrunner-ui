@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FileKind } from 'src/app/modules/shared/models/Files';
+import { Component } from '@angular/core';
 import { AbstractLeafViewComponent } from '../abstract-leaf-view/abstract-leaf-view.component';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 

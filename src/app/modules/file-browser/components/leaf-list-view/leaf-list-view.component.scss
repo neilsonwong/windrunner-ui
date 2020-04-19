@@ -8,7 +8,7 @@ $card-data-smaller-margin: 10px;
     height: auto;
     position: relative;
 
-    &:hover .heading {
+    &:hover .heading .link {
         color: $colour-text-blue;
         cursor: pointer;
     }
@@ -43,15 +43,19 @@ $card-data-smaller-margin: 10px;
             opacity: 0.25;
 
             &.directory {
-                background-image: url('/assets/folder.svg');
+                background-image: url('/assets/icons/folder.svg');
             }
-
             &.video {
-                background-image: url('/assets/video.svg');
+                background-image: url('/assets/icons/video.svg');
             }
-
             &.series {
-                background-image: url('/assets/series.svg');
+                background-image: url('/assets/icons/series.svg');
+            }
+            &.basic {
+                background-image: url('/assets/icons/basic.svg');
+            }
+            &.invalid {
+                background-image: url('/assets/icons/invalid.svg');
             }
         }
     }

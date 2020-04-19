@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { FileKind } from 'src/app/modules/shared/models/Files';
 import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
@@ -8,9 +8,9 @@ import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss']
 })
-export class ListViewComponent implements OnInit {
+export class ListViewComponent implements OnInit, OnChanges {
   @Input() files: FileKind[];
-  @Input() bookmarks: Map<string, number>;
+  bookmarks: Map<string, number> = new Map<string, number>();
   
   displayMode: string;
 
@@ -19,6 +19,16 @@ export class ListViewComponent implements OnInit {
   ngOnInit() {
     // default display mode line
     this.displayMode = DISPLAY_MODES.LINE;
+  }
+
+  ngOnChanges() {
+    this.bookmarks.clear();
+    this.files.forEach((file, index) => {
+      const firstChar = file.name[0];
+      if (!this.bookmarks.has(firstChar)) {
+        this.bookmarks.set(firstChar, index);
+      }
+    });
   }
 
   private changeDisplay(displayMode: string) {

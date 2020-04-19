@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FileKind } from 'src/app/modules/shared/models/Files';
-import { Observable } from 'rxjs';
+import { Observable, of, merge } from 'rxjs';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { tap, shareReplay, map, flatMap, switchMap } from 'rxjs/operators';
+import { shareReplay, map, switchMap } from 'rxjs/operators';
 import { LinkData } from 'src/app/modules/shared/models/LinkData';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 
@@ -28,20 +28,13 @@ export class FileBrowserComponent implements OnInit {
     const urlChange$ = this.route.url.pipe(shareReplay());
     // this.place$ = urlChange$.pipe();
     this.breadCrumbs$ = urlChange$.pipe(map((e: UrlSegment[]) => this.getBreadCrumbs(e)));
+
+    const empty = of([]);
     this.fileList$ = urlChange$.pipe(
       map((e: UrlSegment[]) => this.getPlace(e)),
-      switchMap((rel: string) => this.fileListService.getDirectoryListing(rel))
-    );
-    this.bookmarks$ = this.fileList$.pipe(
-      map((files: FileKind[]) => {
-        const bookmarks = new Map<string, number>();
-        files.forEach((file, index) => {
-          const firstChar = file.name[0];
-          if (!bookmarks.has(firstChar)) {
-            bookmarks.set(firstChar, index);
-          }
-        });
-        return bookmarks; 
+      switchMap((rel: string) => {
+        return merge(empty,
+          this.fileListService.getDirectoryListing(rel));
       })
     );
   }

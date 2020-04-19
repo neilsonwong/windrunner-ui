@@ -16,15 +16,19 @@
     }
 
     .directory {
-        background-image: url('/assets/folder.svg');
+        background-image: url('/assets/icons/folder.svg');
     }
-
     .video {
-        background-image: url('/assets/video.svg');
+        background-image: url('/assets/icons/video.svg');
     }
-
     .series {
-        background-image: url('/assets/series.svg');
+        background-image: url('/assets/icons/series.svg');
+    }
+    .basic {
+        background-image: url('/assets/icons/basic.svg');
+    }
+    .invalid {
+        background-image: url('/assets/icons/invalid.svg');
     }
 
     .leaf-link {

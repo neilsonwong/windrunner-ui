@@ -1,8 +1,13 @@
 <div class="heading">
-    <a class="link" [routerLink]="[url]">
+    <a *ngIf="url; else fileNameLine"
+        class="link" [routerLink]="[url]">
         <h3>{{ file.name }}</h3>
         <div class="file-type-icon {{ icon }}"></div>
     </a>
+    <ng-template #fileNameLine>
+        <h3>{{ file.name }}</h3>
+        <div class="file-type-icon {{ icon }}"></div>
+    </ng-template>
 </div>
 <div class="bottom">
     <p class="rel">{{ file.rel }}</p>
