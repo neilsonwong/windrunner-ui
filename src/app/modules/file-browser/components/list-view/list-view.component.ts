@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { FileKind } from 'src/app/modules/shared/models/Files';
+import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
 
 @Component({
   selector: 'app-list-view',
@@ -8,17 +10,34 @@ import { FileKind } from 'src/app/modules/shared/models/Files';
 })
 export class ListViewComponent implements OnInit {
   @Input() files: FileKind[];
-  @Input() bookmarks: string[];
+  @Input() bookmarks: Map<string, number>;
   
-  displayType: string;
+  displayMode: string;
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
-    this.displayType = 'line';
+    // default display mode line
+    this.displayMode = DISPLAY_MODES.LINE;
   }
 
-  changeDisplay(displayType: string) {
-    this.displayType = displayType;
+  private changeDisplay(displayMode: string) {
+    if (this.displayMode !== displayMode) {
+      this.displayMode = displayMode;
+    }
+  }
+
+  displayLineMode() {
+    this.changeDisplay(DISPLAY_MODES.LINE);
+  }
+  displayListMode() {
+    this.changeDisplay(DISPLAY_MODES.LIST);
+  }
+  displayPreviewMode() {
+    this.changeDisplay(DISPLAY_MODES.PREVIEW);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

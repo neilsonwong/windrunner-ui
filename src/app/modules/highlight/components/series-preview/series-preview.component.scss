@@ -14,17 +14,6 @@ $card-data-smaller-margin: 10px;
 }
 
 :host {
-    border-radius: 3px;
-    box-shadow: 0 4px 6px rgba(49,54,68,.05), 0 5px 20px rgba(49,54,68,.08);
-
-    height: $card-height;
-    min-width: $card-min-width;
-    overflow: hidden;
-    text-align: left;
-    transition: box-shadow .6s ease;
-    background-color: $colour-bg-white;
-    position: relative;
-
     .series-preview-thumbnail {
         cursor: pointer;
         position: relative;
@@ -134,8 +123,6 @@ $card-data-smaller-margin: 10px;
     }
 
     &:hover {
-        box-shadow: 0 4px 6px rgba(49,54,68,.09), 0 10px 40px rgba(49,54,68,.3);
-
         .series-preview-content header .native-title {
             color: $colour-text-blue;
         }

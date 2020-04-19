@@ -8,7 +8,7 @@
 }
 
 .card-list {
-    grid-template-rows: repeat(auto-fill, 265px);
+    grid-template-rows: repeat(auto-fill, $card-height);
     min-width: 0;
     width: 100%;
 }

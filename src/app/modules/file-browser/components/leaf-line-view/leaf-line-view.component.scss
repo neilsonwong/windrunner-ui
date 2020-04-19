@@ -1,0 +1,34 @@
+:host {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    .file-type-icon {
+        display: inline-block;
+        vertical-align: middle;
+        width: 18px;
+        height: 18px;
+        margin-right: 0.5rem;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.5;
+    }
+
+    .directory {
+        background-image: url('/assets/folder.svg');
+    }
+
+    .video {
+        background-image: url('/assets/video.svg');
+    }
+
+    .series {
+        background-image: url('/assets/series.svg');
+    }
+
+    .leaf-link {
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+}

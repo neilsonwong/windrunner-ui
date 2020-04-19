@@ -15,6 +15,10 @@ export interface BaseFile {
   filePath: string;
   name: string;
   rel: string;
+
+  // this exists due to BaseFile being a dummy fast typing
+  // indicating additional info needs to be retrieved later
+  promised?: string;
 }
 
 export interface InvalidFile extends BaseFile { }

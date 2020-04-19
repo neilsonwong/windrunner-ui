@@ -1,32 +1,52 @@
 <div class="navigation-options">
     <div class="left">
         <div class="back-button">
-            <a>Back</a>
+            <a (click)="goBack()">Back</a>
         </div>
     </div>
     <div class="middle">
         <div class="bookmarks">
-            <a class="bookmark" *ngFor="let bookmark of bookmarks">
-                {{ bookmark }}
+            <a class="bookmark" *ngFor="let bookmark of bookmarks | keyvalue"
+                [href]="'#file' + bookmark.value">
+                {{ bookmark.key }}
             </a>
         </div>
     </div>
     <div class="right">
         <div class=" display-options">
-            <a (click)="changeDisplay('line')">
+            <a (click)="displayLineMode()">
                 Line
             </a>
-            <a (click)="changeDisplay('preview')">
-                Preview
+            <a (click)="displayListMode()">
+                List
             </a>
+            <!-- <a (click)="displayPreviewMode()">
+                Preview
+            </a> -->
         </div>
     </div>
 </div>
-<div class="file-list"
-    *ngIf="files?.length > 0; else noFiles">
-    <app-leaf-view *ngFor="let file of files" [file]="file">
-    </app-leaf-view>
-</div>
+<ng-container *ngIf="files?.length > 0; else noFiles">
+    <ng-container *ngIf="displayMode === 'LINE'">
+        <div class="file-list grid-layout super-compact">
+            <app-leaf-line-view
+                *ngFor="let file of files; index as i"
+                [id]="'file' + i"
+                [file]="file">
+            </app-leaf-line-view>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="displayMode === 'LIST'">
+        <div class="file-list grid-layout compact">
+            <app-leaf-list-view
+                *ngFor="let file of files"
+                [id]="'file' + i"
+                class="card"
+                [file]="file">
+            </app-leaf-list-view>
+        </div>
+    </ng-container>
+</ng-container>
 <ng-template #noFiles>
     <div class="big-text">
         No files

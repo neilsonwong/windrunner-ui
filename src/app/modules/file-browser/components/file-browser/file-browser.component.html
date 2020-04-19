@@ -1,7 +1,5 @@
 <header class="grid-layout">
     <h2><a [routerLink]="['/v/browse']">Browse</a></h2>
-    <div class="spacer hidable-1"></div>
-    <div class="spacer hidable-2"></div>
     <div class="bread-crumbs spacer">
         <ng-container *ngIf="breadCrumbs$ | async as breadCrumbs">
             <ng-container *ngFor="let link of breadCrumbs">

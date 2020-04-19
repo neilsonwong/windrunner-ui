@@ -16,6 +16,13 @@ header.grid-layout {
     justify-content: center;
 }
 
+.grid-layout.compact {
+    grid-row-gap: 20px;
+}
+.grid-layout.super-compact {
+    grid-row-gap: 5px;
+}
+
 /* screens larger than 2230 will be 4 column */
 @media (min-width: $layout-4-col-screen-min) {
     .grid-layout {
@@ -39,7 +46,7 @@ header.grid-layout {
     }
 
     header.grid-layout,
-    .card-list {
+    .grid-layout {
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 40px;
         grid-row-gap: 40px;
@@ -51,7 +58,7 @@ header.grid-layout {
     header.grid-layout {
         grid-template-columns: 1fr 0 1fr;
     }
-    .card-list {
+    .grid-layout {
         grid-template-columns: 1fr;
     }
 }

@@ -1,0 +1,69 @@
+@import "src/styles/colours";
+@import "src/styles/sizes";
+
+$card-data-margin: 17px;
+$card-data-smaller-margin: 10px;
+
+:host {
+    height: auto;
+    position: relative;
+
+    &:hover .heading {
+        color: $colour-text-blue;
+        cursor: pointer;
+    }
+
+    .heading {
+        height: 3rem;
+        margin: $card-data-margin;
+        display: flex;
+
+        .link {
+            overflow: hidden;
+        }
+
+        h3 {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .file-type-icon {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            width: 18px;
+            height: 18px;
+            margin: 5px;
+
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.25;
+
+            &.directory {
+                background-image: url('/assets/folder.svg');
+            }
+
+            &.video {
+                background-image: url('/assets/video.svg');
+            }
+
+            &.series {
+                background-image: url('/assets/series.svg');
+            }
+        }
+    }
+}
+
+
+.bottom {
+    padding: $card-data-smaller-margin $card-data-margin;
+    background-color: $colour-bg-semi-light;
+    background-color: $colour-bg-light-accent;
+
+    .rel {
+        font-size: 1.2rem;
+    }
+}

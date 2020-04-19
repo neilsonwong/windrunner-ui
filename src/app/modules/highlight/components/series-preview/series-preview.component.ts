@@ -65,7 +65,6 @@ export class SeriesPreviewComponent implements OnInit {
   }
 
   private resolveSource(source: string) {
-    console.log(source);
     switch (source) {
       case 'MANGA':
       case 'LIGHT_NOVEL':
@@ -85,7 +84,6 @@ export class SeriesPreviewComponent implements OnInit {
   private hovered() {
     this.bannerService.showBanner(this.bannerImage);
   }
-
 
   @HostListener('mouseenter')
   private onMouseEnter() {

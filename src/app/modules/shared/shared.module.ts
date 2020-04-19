@@ -9,9 +9,10 @@ import { LazyLoadImageDirective } from './directives/lazy-load-image.directive';
 import { ErrorComponent } from './components/error/error.component';
 import { BoxHeaderComponent } from './components/box-header/box-header.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { HoverDirective } from './directives/hover.directive';
 
 @NgModule({
-  declarations: [HeaderComponent, SearchBarComponent, LazyLoadImageDirective, ErrorComponent, BoxHeaderComponent, LoadingComponent],
+  declarations: [HeaderComponent, SearchBarComponent, LazyLoadImageDirective, ErrorComponent, BoxHeaderComponent, LoadingComponent, HoverDirective],
   imports: [
     CommonModule,
     FormsModule,

@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { ListViewComponent } from './components/list-view/list-view.component';
-import { LeafViewComponent } from './components/leaf-view/leaf-view.component';
 import { FileBrowserComponent } from './components/file-browser/file-browser.component';
+import { ListViewComponent } from './components/list-view/list-view.component';
+import { LeafListViewComponent } from './components/leaf-list-view/leaf-list-view.component';
+import { LeafLineViewComponent } from './components/leaf-line-view/leaf-line-view.component';
 
 @NgModule({
-  declarations: [ListViewComponent, LeafViewComponent, FileBrowserComponent],
+  declarations: [ListViewComponent, LeafListViewComponent, FileBrowserComponent, LeafLineViewComponent],
   imports: [
     CommonModule,
     SharedModule,

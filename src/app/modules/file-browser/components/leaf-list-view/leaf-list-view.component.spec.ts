@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeafViewComponent } from './leaf-view.component';
+import { LeafListViewComponent } from './leaf-list-view.component';
 
-describe('LeafViewComponent', () => {
-  let component: LeafViewComponent;
-  let fixture: ComponentFixture<LeafViewComponent>;
+describe('LeafListViewComponent', () => {
+  let component: LeafListViewComponent;
+  let fixture: ComponentFixture<LeafListViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeafViewComponent ]
+      declarations: [ LeafListViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeafViewComponent);
+    fixture = TestBed.createComponent(LeafListViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

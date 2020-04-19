@@ -7,7 +7,10 @@
 <ng-container *ngIf="seriesList; else loading">
     <div *ngIf="seriesList && seriesList.length > 0; else nothingNew"
         class="card-list grid-layout">
-        <app-series-preview *ngFor="let series of seriesList" [series]="series">
+        <app-series-preview 
+            *ngFor="let series of seriesList"
+            [series]="series"
+            class="card">
         </app-series-preview>
     </div>
 </ng-container>

@@ -5,6 +5,7 @@ import { FileListService } from 'src/app/modules/core/services/file-list.service
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { tap, shareReplay, map, flatMap, switchMap } from 'rxjs/operators';
 import { LinkData } from 'src/app/modules/shared/models/LinkData';
+import { UI_ROUTES } from 'src/app/modules/core/routes';
 
 @Component({
   selector: 'app-file-browser',
@@ -17,7 +18,7 @@ export class FileBrowserComponent implements OnInit {
   breadCrumbs$: Observable<Array<string|LinkData>>;
   loading: boolean;
   fileList$: Observable<FileKind[]>;
-  bookmarks$: Observable<string[]>;
+  bookmarks$: Observable<Map<string, number>>;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,8 +34,14 @@ export class FileBrowserComponent implements OnInit {
     );
     this.bookmarks$ = this.fileList$.pipe(
       map((files: FileKind[]) => {
-        const uniqueSet = new Set(files.map((file: FileKind) => file.name[0]));
-        return [...uniqueSet];
+        const bookmarks = new Map<string, number>();
+        files.forEach((file, index) => {
+          const firstChar = file.name[0];
+          if (!bookmarks.has(firstChar)) {
+            bookmarks.set(firstChar, index);
+          }
+        });
+        return bookmarks; 
       })
     );
   }
@@ -45,8 +52,9 @@ export class FileBrowserComponent implements OnInit {
 
   private getBreadCrumbs(segments: UrlSegment[]): Array<string | LinkData> {
     let cumulativeUrl = '';
-    const headingTitle: Array<string | LinkData> = [{ text: '/', url: `/v/browse/`}];
+    const headingTitle: Array<string | LinkData> = [{ text: '/', url: UI_ROUTES.BROWSE }];
 
+    
     // we need to generate the headerLinks
     // as well as the full url
     for (const segment of segments) {
@@ -55,7 +63,7 @@ export class FileBrowserComponent implements OnInit {
         if (headingTitle.length > 1) {
           headingTitle.push('/');
         }
-        headingTitle.push({ text: decoded, url: `/v/browse/${cumulativeUrl}` });
+        headingTitle.push({ text: decoded, url: `${UI_ROUTES.BROWSE}${cumulativeUrl}` });
     }
 
     return headingTitle;

@@ -18,7 +18,7 @@ export class VideoAppComponent implements OnInit {
 
   ngOnInit() {
     this.navigation.push(
-      { text: 'maintenance', url: '/v/maintenance' }
+      { text: 'Maintenance', url: '/v/maintenance' }
     );
   }
 }

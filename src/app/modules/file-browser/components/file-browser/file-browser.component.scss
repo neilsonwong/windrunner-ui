@@ -7,6 +7,10 @@
     position: relative;
 }
 
+.grid-layout {
+    grid-template-columns: repeat(2, 2fr);
+}
+
 header {
     h2 {
         color: $colour-text-bright;
@@ -31,5 +35,15 @@ header {
 
     & > * {
         min-width: $card-min-width;
+    }
+}
+
+@media (max-width: $layout-2-col-screen-max) {
+    header .bread-crumbs {
+        font-size: 1.25em;
+        max-height: $grid-header-default-height;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
