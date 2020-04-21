@@ -1,0 +1,106 @@
+@import "src/styles/sizes";
+@import "src/styles/colours";
+
+.fatty {
+    margin-left: calc((#{$app-3-col-max-width} - 100vw) / 2);
+    width: 100vw;
+}
+
+.banner {
+    height: 400px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .shadow {
+        background: linear-gradient(180deg, #{$color-shadow-dark-transparent} 30%, #{$color-shadow-dark-semi-transparent});
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.series-info {
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: 25rem auto 25rem;
+
+        .pre-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            color: $colour-text-lighter;
+            font-size: 1.4rem;
+            font-weight: 600;
+
+            .episodes .noun {
+                font-size: 0.8em;
+                // color: $colour-text-lighter;
+            }
+        }
+
+        header {
+            .native-title {
+                font-size: 2.3rem;
+                font-weight: 600;
+                padding-top: 5px;
+                color: $colour-text-black;
+            }
+            .alt-title {
+                font-size: 1.4rem;
+                text-overflow: ellipsis;
+                color: $colour-text-light;
+                padding-top: 3px;
+            }
+        }
+
+        .divider {
+            opacity: 0.5;
+        }
+
+        .content {
+            margin-top: 5px;
+            .studio {
+                // font-style: italic;
+                font-weight: 600;
+                font-size: 1.2rem;
+            }
+
+            .source-media {
+                padding-top: 5px;
+                font-size: 1.2rem;
+            }
+
+            .bottom {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                // padding: $card-data-smaller-margin $card-data-margin;
+                background-color: $colour-bg-semi-light;
+                background-color: $colour-bg-light-accent;
+
+                .rel {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+}
+
+@media (min-width: 2230px) {
+    .fatty {
+        margin-left: calc((#{$app-max-width} - 100vw) / 2);
+    }
+}
+
+@media (max-width: 1345px) {
+    .fatty {
+        margin-left: calc((#{$app-2-col-max-width} - 100vw) / 2);
+    }
+}
+
+@media (max-width: 900px) {
+    .fatty {
+        margin-left: calc((#{$app-min-width} - 100vw) / 2);
+    }
+}

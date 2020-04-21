@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FileListService } from './services/file-list.service';
 import { HeaderTweakService } from './services/header-tweak.service';
+import { PendingResourceRetrievalService } from './services/pending-resource-retrieval.service';
 
 @NgModule({
   declarations: [],
@@ -12,7 +13,8 @@ import { HeaderTweakService } from './services/header-tweak.service';
   ],
   providers: [
     FileListService,
-    HeaderTweakService
+    HeaderTweakService,
+    PendingResourceRetrievalService
   ]
 })
 export class CoreModule {

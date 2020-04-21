@@ -23,7 +23,6 @@ export class ListViewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('my loading is ' + this.loading);
     this.bookmarks.clear();
     this.files.forEach((file, index) => {
       const firstChar = file.name[0];
@@ -51,5 +50,9 @@ export class ListViewComponent implements OnInit, OnChanges {
 
   goBack() {
     this.location.back();
+  }
+
+  doSomething(a) {
+    console.log(a)
   }
 }

@@ -35,11 +35,7 @@ export class HeaderComponent implements OnInit {
       filter(url => url !== ''),
       map(url => (this.sanitizer.bypassSecurityTrustStyle(`url(${url})`)))
     );
-    this.compact$ = this.headerTweakService.getCompactUpdates().pipe(
-      tap(e => {
-        console.log('banner compact is ' + e);
-      })
-    );
+    this.compact$ = this.headerTweakService.getCompactUpdates();
   }
 
   updateHighlight(newUrl: string) {

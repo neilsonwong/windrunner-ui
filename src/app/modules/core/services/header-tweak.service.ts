@@ -25,7 +25,6 @@ export class HeaderTweakService {
   resetToDefaultState(): void {
     this.removeBanner();
     this.resetCompact();
-    console.log('reset header')
   }
 
   setCompact() {

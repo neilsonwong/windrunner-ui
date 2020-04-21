@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from "@angular/core";
-import { FileKind } from 'src/app/modules/shared/models/Files';
+import { Component, OnDestroy } from "@angular/core";
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { of, Observable, throwError, Subscription } from 'rxjs';
 import { switchMap, retry, tap, delay } from 'rxjs/operators';

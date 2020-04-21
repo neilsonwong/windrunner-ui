@@ -1,10 +1,13 @@
 $colour-header-background: rgb(43, 45, 66);
+$colour-header-background-semi-transparent: rgb(43, 45, 66, 0.5);
 $colour-header-border-bottom: rgb(0,0,0);
 
+$colour-bg-grey: rgb(192, 192, 192);
 $colour-bg-semi-transparent-blue: rgba(0, 174, 255, 0.75);
 $colour-bg-semi-light: rgb(214, 235, 245);
 $colour-bg-light-accent: rgb(239, 247, 251);
 $colour-bg-light: rgb(242, 242, 242);
+$colour-bg-semi-transparent-light: rgba(242, 242, 242, 0.5);
 $colour-bg-white: rgb(255, 255, 255);
 
 $colour-text: rgb(92, 114, 138);
@@ -13,3 +16,6 @@ $colour-text-light: rgb(110,133,158);
 $colour-text-lighter: rgb(146,153,161);
 $colour-text-bright: rgb(237,241,245);
 $colour-text-black: rgb(0,0,0);
+
+$color-shadow-dark-transparent: rgb(6, 13, 34, 0);
+$color-shadow-dark-semi-transparent: rgb(6, 13, 34, 0.4);

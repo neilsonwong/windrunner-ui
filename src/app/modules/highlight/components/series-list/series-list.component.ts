@@ -17,5 +17,4 @@ export class SeriesListComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -9,7 +9,7 @@ import { LazyLoadImageDirective } from './directives/lazy-load-image.directive';
 import { ErrorComponent } from './components/error/error.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HoverDirective } from './directives/hover.directive';
-import { AbstractPromisedComponent } from './components/abstract-promised/abstract-promised.component';
+import { AbstractSeriesDataComponent } from './components/abstract-series-data/abstract-series-data.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { AbstractPromisedComponent } from './components/abstract-promised/abstra
     ErrorComponent,
     LoadingComponent,
     HoverDirective,
-    AbstractPromisedComponent
+    AbstractSeriesDataComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +33,7 @@ import { AbstractPromisedComponent } from './components/abstract-promised/abstra
     ErrorComponent,
     LoadingComponent,
     RouterModule,
+    HoverDirective
   ]
 })
 export class SharedModule { }
