@@ -1,106 +1,223 @@
 @import "src/styles/sizes";
-@import "src/styles/colours";
-
-.fatty {
-    margin-left: calc((#{$app-3-col-max-width} - 100vw) / 2);
-    width: 100vw;
-}
 
 .banner {
-    height: 400px;
+    margin-top: calc(-1 * var(--header-compact-height));
+    margin-left: calc((var(--app-width) - 100vw) / 2);
+    width: 100vw;
 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 
+    img {
+        visibility: hidden;
+    }
+
     .shadow {
-        background: linear-gradient(180deg, #{$color-shadow-dark-transparent} 30%, #{$color-shadow-dark-semi-transparent});
+        background: linear-gradient(180deg, 
+            var(--color-shadow-dark-transparent) 30%, 
+            var(--color-shadow-dark-semi-transparent));
+
         height: 100%;
         width: 100%;
+    }
+
+    &,
+    .shadow {
+        transition: max-height 0.5s;
+        max-height: min(var(--series-banner-max-height), 33vh);
     }
 }
 
 .series-info {
     padding: 2rem 0;
     display: grid;
-    grid-template-columns: 25rem auto 25rem;
+    grid-template-columns: 25rem auto var(--action-bar-width);
+    height: var(--series-info-height);
+    overflow: hidden;
 
-        .pre-header {
+    .cover {
+        padding-right: 2rem;
+
+        img {
+            max-width: 23rem;
+            height: 34.5rem;
+            object-fit: cover;
+        }
+    }
+
+    .pre-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        color: var(--colour-text-lighter);
+        font-size: 1.4rem;
+        font-weight: 600;
+
+        .episodes .noun {
+            font-size: 0.8em;
+        }
+    }
+
+    header {
+        .native-title {
+            font-size: 2.3rem;
+            font-weight: 600;
+            padding-top: 5px;
+            color: var(--colour-text-black);
+        }
+        .sides {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            color: $colour-text-lighter;
+
             font-size: 1.4rem;
+            color: var(--colour-text-light);
+            padding-top: 3px;
+
+            .genres {
+                font-size: 1.2rem;
+                color: var(--colour-text);
+            }
+        }
+    }
+
+    .divider {
+        opacity: 0.5;
+    }
+
+    .content {
+        margin-top: 5px;
+
+        .studio {
+            // font-style: italic;
             font-weight: 600;
-
-            .episodes .noun {
-                font-size: 0.8em;
-                // color: $colour-text-lighter;
-            }
+            font-size: 1.2rem;
         }
 
-        header {
-            .native-title {
-                font-size: 2.3rem;
-                font-weight: 600;
-                padding-top: 5px;
-                color: $colour-text-black;
+        .source-media {
+            padding-top: 5px;
+            font-size: 1.2rem;
+        }
+
+        .desc {
+            padding-top: 5px;
+            font-size: 1.2rem;
+            max-height: 20rem;
+            overflow-y: auto;
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: var(--colour-bg-light-accent);
+
+            .rel {
+                font-size: 1.2rem;
             }
-            .alt-title {
+        }
+    }
+
+    .actions {
+        padding-left: 2rem;
+
+        .icon-button {
+            display: flex;
+            margin-bottom: 1rem;
+
+            .button-icon {
+                display: inline-block;
+                vertical-align: middle;
+                width: 18px;
+                height: 18px;
+                background-color: var(--colour-text);
+
+                mask-repeat: no-repeat;
+                mask-position: center;
+
+            }
+
+            .button-text {
+                display: none;
                 font-size: 1.4rem;
-                text-overflow: ellipsis;
-                color: $colour-text-light;
-                padding-top: 3px;
-            }
-        }
-
-        .divider {
-            opacity: 0.5;
-        }
-
-        .content {
-            margin-top: 5px;
-            .studio {
-                // font-style: italic;
-                font-weight: 600;
-                font-size: 1.2rem;
+                font-weight: 400;
             }
 
-            .source-media {
-                padding-top: 5px;
-                font-size: 1.2rem;
-            }
+            .heart {
+                mask: url('/assets/icons/heart.svg');
+                background-color: red;
+                opacity: 0.3;
 
-            .bottom {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                left: 0;
-                // padding: $card-data-smaller-margin $card-data-margin;
-                background-color: $colour-bg-semi-light;
-                background-color: $colour-bg-light-accent;
-
-                .rel {
-                    font-size: 1.2rem;
+                &.highlight {
+                    opacity: 1;
                 }
             }
+            .directory {
+                mask: url('/assets/icons/folder.svg');
+            }
+            .info {
+                mask: url('/assets/icons/info.svg');
+            }
+            .back {
+                mask: url('/assets/icons/back.svg');
+            }
         }
+    }
+}
+
+.series-info.generic {
+    grid-template-columns: auto var(--action-bar-width);
+}
+
+.slide-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slidable {
+    display: flex;
+    flex-basis: var(--app-width) auto;
+    width: calc(2 * var(--app-width) - var(--action-bar-width));
+
+    transition: transform 0.5s ease;
+
+    .series-info {
+        width: var(--app-width);
+    }
+
+    .series-info-edit {
+        padding: 2rem 0;
+        width: calc(var(--app-width) - var(--action-bar-width));
+    }
+
+    // .series-info-edit {
+    //     background-color: red;
+    // }
+
+    &.editing {
+        transform: translateX(calc(-1 * var(--app-width)))
+            translateX(var(--action-bar-width));
+    }
 }
 
 @media (min-width: 2230px) {
-    .fatty {
-        margin-left: calc((#{$app-max-width} - 100vw) / 2);
+    .banner.expanded {
+        &,
+        .shadow {
+            max-height: 33vw;
+        }
     }
-}
 
-@media (max-width: 1345px) {
-    .fatty {
-        margin-left: calc((#{$app-2-col-max-width} - 100vw) / 2);
-    }
-}
-
-@media (max-width: 900px) {
-    .fatty {
-        margin-left: calc((#{$app-min-width} - 100vw) / 2);
+    .series-info {
+        .actions .icon-button {
+            .button-icon {
+                margin-right: 0.75rem;
+            }
+            .button-text {
+                display: inline-block;
+            }
+        }
     }
 }

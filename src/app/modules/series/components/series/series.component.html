@@ -1,5 +1,9 @@
-<app-series-details [series]="seriesDetails$ | async">
-
+<app-series-details
+    [series]="seriesDetails$ | async"
+    [isFavourite]="isFavourite$ | async"
+    [optionsList$]="optionsList$"
+    (favouriteChange)="updateFavouriteStatus($event)"
+    (seriesOptionChange)="updateSeriesOption($event)">
 </app-series-details>
 
 <!-- episode-list -->

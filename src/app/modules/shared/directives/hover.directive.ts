@@ -6,9 +6,10 @@ const EVENT_MOUSE_ENTER = 'mouseenter';
 const EVENT_MOUSE_LEAVE = 'mouseleave';
 
 @Directive({
-  selector: '[appHover]'
+  selector: '[hoverable]'
 })
 export class HoverDirective implements OnInit, OnDestroy {
+  @Input() hoverable: number;
   @Output() hoverChange: EventEmitter<boolean> = new EventEmitter();
 
   private mouseEnter$: Subject<boolean> = new Subject();
@@ -19,10 +20,12 @@ export class HoverDirective implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
+    const hoverTime = this.hoverable || 1000;
+
     this.subcription = this.mouseEnter$.pipe(
       switchMap(() => merge(this.mouseOut$, 
         of(true).pipe(
-          delay(1000),
+          delay(hoverTime),
           takeUntil(this.mouseOut$)
         )
       )),

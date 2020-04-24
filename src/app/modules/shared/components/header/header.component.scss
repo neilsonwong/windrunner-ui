@@ -30,7 +30,7 @@
         background-size: cover;
         background-position: center;
         opacity: 0.1;
-        transition: opacity .5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
     }
 
     .header-container {
@@ -48,7 +48,7 @@
         display: flex;
         align-items: center;
         height: 3rem;
-        z-index: 1;
+        z-index: 2;
     }
 
     .side-bar {
@@ -74,9 +74,9 @@
 
             /* colours */
             background-image: -webkit-gradient( linear, left top, right top,
-                color-stop(0, #66f),
-                color-stop(0.5, #f2f),
-                color-stop(1, #f66)) !important;
+                color-stop(0, rgb(102, 102, 255)),
+                color-stop(0.5, rgb(255, 34, 255)),
+                color-stop(1, rgb(255, 102, 102))) !important;
 
             color: transparent !important;
             background-clip: text;
@@ -109,14 +109,47 @@
 }
 
 .header.compact {
+    z-index: 1;
+
     &, 
     .header-container {
-        height: 5rem;
-        padding: 0.8rem;
+        box-sizing: border-box;
+        height: $header-compact-height;
+        padding: 0.6rem;
         align-items: center;
     }
 
     .bg-underlay {
         display: none;
+    }
+}
+
+.header.transparent {
+    background-color: $colour-header-background-semi-transparent;
+    border-bottom: none;
+    transition: background 0.8s ease 0s, top 0.5s ease 0s;
+
+    .middle h1.title {
+        transition: color 0.5s ease-in-out;
+        color: $colour-text-bright !important;
+    }
+
+    .navigation .nav-item {
+        a {
+            color: $colour-text-lighter;
+        }
+
+        &.highlight a,
+        a:hover {
+            color: $colour-text-bright;
+        }
+    }
+
+    &:hover {
+        background-color: $colour-header-background;
+
+        .middle h1.title {
+            color: transparent !important;
+        }
     }
 }

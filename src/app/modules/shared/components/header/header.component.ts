@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   bannerOpacity: number = 0;
 
   compact$: Observable<boolean>;
+  transparent$: Observable<boolean>;
 
   constructor(private location: Location,
     private sanitizer: DomSanitizer,
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit {
       map(url => (this.sanitizer.bypassSecurityTrustStyle(`url(${url})`)))
     );
     this.compact$ = this.headerTweakService.getCompactUpdates();
+    this.transparent$ = this.headerTweakService.getTransparentUpdates();
   }
 
   updateHighlight(newUrl: string) {

@@ -1,0 +1,18 @@
+@import "src/styles/colours.scss";
+@import "src/styles/sizes.scss";
+
+.rikka-space {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 687px;
+
+    span {
+        font-family: "Karla", sans-serif;
+        font-weight: 300;
+        letter-spacing: 10px;
+        opacity: 0.1;
+        margin-top: auto;
+        user-select: none;
+    }
+}

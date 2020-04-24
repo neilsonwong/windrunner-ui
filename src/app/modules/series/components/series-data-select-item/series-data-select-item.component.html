@@ -1,0 +1,13 @@
+<div class="titles">
+    <a (click)="updateSelected()">
+        <p class="native-title">{{ seriesOption.title.native }}</p>
+    </a>
+    <p *ngFor="let name of names"
+        class="other-title">
+        {{ name }}
+    </p>
+</div>
+<div class="extra-info">
+    <p class="format">{{ seriesOption.format }}</p>
+    <p class="year">{{ seriesOption.seasonYear }}</p>
+</div>

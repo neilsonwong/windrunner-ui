@@ -1,0 +1,7 @@
+<app-series-data-select-item 
+    *ngFor="let option of optionsList?.results"
+    class="options card"
+    [seriesOption]="option"
+    [class.current]="option.id === current"
+    (seriesOptionChange)="updateSeriesOption($event)">
+</app-series-data-select-item>

@@ -9,7 +9,7 @@
         class="card-list grid-layout">
         <app-series-preview 
             *ngFor="let series of seriesList"
-            appHover
+            [hoverable]="500"
             [series]="series"
             class="card">
         </app-series-preview>

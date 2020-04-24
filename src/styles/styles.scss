@@ -1,6 +1,7 @@
 @import "src/styles/colours";
 @import "src/styles/fonts";
 @import "src/styles/cards";
+@import "src/styles/sizes";
 
 body {
   margin: 0;
@@ -10,10 +11,29 @@ body {
   /* add rikka */
   background-image: url('/assets/rikka.png');
   background-repeat: no-repeat;
-  background-position: right 30px bottom -20px;
+  background-position: right 30px bottom 0px;
   background-attachment: fixed;
+  
+  overflow-x: hidden;
 }
 
-button:focus {
+button {
+  width: 100%;
+  padding: 0.5rem 1rem;
   outline: none;
+  border: none;
+  vertical-align: baseline;
+  text-align: center;
+  line-height: 1.8rem;
+  // border-radius: 4px;
+  // background-color: $colour-bg-light-accent;
+  // box-shadow:
+  //   0 3px 1px -2px rgba(0,0,0,.2),
+  //   0 2px 2px 0 rgba(0,0,0,.14),
+  //   0 1px 5px 0 rgba(0,0,0,.12);
+  cursor: pointer;
+
+  .button-icon {
+    display: inline-block;
+  }
 }

@@ -1,31 +1,90 @@
-<div class="banner fatty" [style.background-image]="bannerImageBg">
-    <!-- <img [src]="bannerImage" /> -->
-    <div class="shadow"></div>
-</div>
-<div class="series-info">
-    <div class="cover">
-        <img [src]="coverImage" />
-    </div>
-    <div class="series-info-content">
-        <div class="pre-header">
-            <p class="season">{{ series.aniListData.season | titlecase}} {{ series.aniListData.seasonYear }}</p>
-            <p class="episodes" *ngIf="episodeCount">{{ episodeCount }}
-                <span class="noun">eps</span></p>
+<ng-container *ngIf="series">
+    <div *ngIf="bannerImage"
+        class="banner"
+        [style.background-image]="bannerImageBg"
+        [class.expanded]="expandedBanner">
+        <div class="shadow" (click)="toggleBannerHeight()">
+            <img [src]="bannerImage" />
         </div>
-        <header class="header">
-            <h3 class="native-title colour-on-hover">{{ series.aniListData.nativeTitle }}</h3>
-            <p class="alt-title">{{ series.aniListData.title }}</p>
-        </header>
-        <hr class="divider" />
-        <div class="content">
-            <p class="studio">{{ series.aniListData.studio }}</p>
-            <p class="source-media">{{ sourceMedia | titlecase }}</p>
-            <div class="bottom">
-                <p class="rel">{{ series.rel }}</p>
+    </div>
+    <div class="slide-container">
+        <div class="slidable" [class.editing]="editing">
+            <div class="series-info" [class.generic]="!identified">
+                <ng-container *ngIf="identified; else genericInfo">
+                    <div class="cover">
+                        <img [src]="coverImage" />
+                    </div>
+                    <div class="series-info-content">
+                        <div class="pre-header">
+                            <p class="season">{{ series.aniListData.season | titlecase}} {{ series.aniListData.seasonYear }}</p>
+                            <p class="episodes" *ngIf="episodeCount">{{ episodeCount }}
+                                <span class="noun">eps</span></p>
+                        </div>
+                        <header class="header">
+                            <h3 class="native-title colour-on-hover" [class.long]="">{{ series.aniListData.nativeTitle }}</h3>
+                            <div class="sides">
+                                <p class="alt-title">{{ series.aniListData.title }}</p>
+                                <p class="genres">{{ series.aniListData.genres.join(', ') }} </p>
+                            </div>
+                        </header>
+                        <hr class="divider" />
+                        <div class="content">
+                            <p class="studio">{{ series.aniListData.studio }}</p>
+                            <p class="source-media">{{ sourceMedia | titlecase }}</p>
+                            <p class="desc" [innerHTML]="seriesDescription"></p>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #genericInfo>
+                    <div class="series-preview-content generic">
+                        <header class="header">
+                            <h3 class="native-title">
+                                {{ series.name }}
+                            </h3>
+                        </header>
+                        <hr class="divider" />
+                        <div class="content">
+                            <p class="rel monospace">{{ series.rel }}</p>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="actions">
+                    <ng-container *ngIf="!editing; else backAction">
+                        <button class="icon-button" (click)="toggleFavourite()">
+                            <div class="button-icon heart" [class.highlight]="isFavourite"></div>
+                            <span class="button-text">Favourite</span>
+                        </button>
+                        <button class="icon-button" [routerLink]="folderLink">
+                            <div class="button-icon directory"></div>
+                            <span class="button-text">Folder</span>
+                        </button>
+                        <button class="icon-button" (click)="updateAniListInfo()">
+                            <div class="button-icon info"></div>
+                            <span class="button-text">Info Details</span>
+                        </button>
+                    </ng-container>
+                    <ng-template #backAction>
+                        <button class="icon-button" (click)="updateAniListInfo()">
+                            <div class="button-icon back"></div>
+                            <span class="button-text">Back</span>
+                        </button>
+                    </ng-template>
+                </div>
             </div>
+            <ng-container *ngIf="editing; else editSpacer">
+                <div class="series-info-edit">
+                    <ng-container *ngIf="(optionsList$ | async) as optionsList">
+                        <app-series-data-select
+                            [optionsList]="optionsList"
+                            [current]="series.aniListData?.id"
+                            (seriesOptionChange)="updateSeriesOption($event)">
+                        </app-series-data-select>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <ng-template #editSpacer>
+                <div class="series-info-edit"></div>
+            </ng-template>
         </div>
     </div>
-    <div class="actions">
-        <!-- buttons -->
-    </div>
-</div>
+</ng-container>

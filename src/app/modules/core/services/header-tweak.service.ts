@@ -13,6 +13,7 @@ export class HeaderTweakService {
   constructor(private router: Router) {
     this.tweaks = {
       banner: new Subject(),
+      transparent: new BehaviorSubject(false),
       compact: new BehaviorSubject(false)
     };
 
@@ -25,6 +26,7 @@ export class HeaderTweakService {
   resetToDefaultState(): void {
     this.removeBanner();
     this.resetCompact();
+    this.resetTransparent();
   }
 
   setCompact() {
@@ -33,6 +35,14 @@ export class HeaderTweakService {
 
   resetCompact() {
     this.tweaks.compact.next(false);
+  }
+
+  setTransparent() {
+    this.tweaks.transparent.next(true);
+  }
+
+  resetTransparent() {
+    this.tweaks.transparent.next(false);
   }
 
   showBanner(url: string): void {
@@ -47,6 +57,11 @@ export class HeaderTweakService {
 
   getCompactUpdates(): Observable<boolean> {
     return this.tweaks.compact
+      .pipe(distinctUntilChanged());
+  }
+
+  getTransparentUpdates(): Observable<boolean> {
+    return this.tweaks.transparent
       .pipe(distinctUntilChanged());
   }
 

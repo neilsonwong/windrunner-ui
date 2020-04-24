@@ -10,16 +10,18 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HoverDirective } from './directives/hover.directive';
 import { AbstractSeriesDataComponent } from './components/abstract-series-data/abstract-series-data.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
+    FooterComponent,
     SearchBarComponent,
     LazyLoadImageDirective,
     ErrorComponent,
     LoadingComponent,
     HoverDirective,
-    AbstractSeriesDataComponent
+    AbstractSeriesDataComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { AbstractSeriesDataComponent } from './components/abstract-series-data/a
   ],
   exports: [
     HeaderComponent,
+    FooterComponent,
     LazyLoadImageDirective,
     ErrorComponent,
     LoadingComponent,

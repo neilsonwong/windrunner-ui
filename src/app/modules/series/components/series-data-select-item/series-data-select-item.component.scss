@@ -1,0 +1,21 @@
+:host {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+}
+
+.titles {
+    font-size: 1.2rem;
+
+    .native-title {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+}
+
+.extra-info {
+    text-align: right;
+    font-size: 1.7rem;
+    font-weight: 600;
+}

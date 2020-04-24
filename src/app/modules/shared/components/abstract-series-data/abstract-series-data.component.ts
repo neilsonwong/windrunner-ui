@@ -13,6 +13,7 @@ export class AbstractSeriesDataComponent implements OnChanges {
   sourceMedia: string;
   episodeCount: string = null;
   seriesLink: string;
+  folderLink: string;
 
   constructor() { }
 
@@ -21,9 +22,8 @@ export class AbstractSeriesDataComponent implements OnChanges {
         if (isSeries(this.series)) {
           this.populateSeriesValues(this.series);
         }
-        
-        // everybody needs a link!
-        this.seriesLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
+        this.folderLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
+        this.seriesLink = `${UI_ROUTES.SERIES}${this.series.rel}`;
     }
   }
 
