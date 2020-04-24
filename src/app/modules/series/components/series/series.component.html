@@ -5,5 +5,6 @@
     (favouriteChange)="updateFavouriteStatus($event)"
     (seriesOptionChange)="updateSeriesOption($event)">
 </app-series-details>
-
-<!-- episode-list -->
+<app-video-list
+    [videos]="seriesVideos$ | async">
+</app-video-list>

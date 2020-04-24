@@ -1,32 +1,39 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { AbstractSeriesDataComponent } from 'src/app/modules/shared/components/abstract-series-data/abstract-series-data.component';
 import { SafeStyle, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { isSeries } from 'src/app/utils/fileTypeUtils';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 import { Observable } from 'rxjs';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
+import { ImageResolverService } from 'src/app/modules/core/services/image-resolver.service';
+import { DirectoryKind } from 'src/app/modules/shared/models/Files';
+import { UI_ROUTES } from 'src/app/modules/core/routes';
 
 @Component({
   selector: 'app-series-details',
   templateUrl: './series-details.component.html',
   styleUrls: ['./series-details.component.scss']
 })
-export class SeriesDetailsComponent extends AbstractSeriesDataComponent implements OnInit, OnChanges {
+export class SeriesDetailsComponent implements OnInit, OnChanges {
+  @Input() series: DirectoryKind;
   @Input() isFavourite: boolean;
   @Input() optionsList$: Observable<SeriesOptions>;
   @Output() favouriteChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() seriesOptionChange: EventEmitter<number> = new EventEmitter<number>();
 
+  identified: boolean;
+  coverImage: string;
+  bannerImage: string;
+  altNames: Array<string>;
+  seriesLink: string;
+  folderLink: string;
+
   expandedBanner: boolean;
-  bannerImageBg: SafeStyle;
-  seriesDescription: SafeHtml;
   editing: boolean;
 
   constructor( 
+    private imgResolver: ImageResolverService,
     private headerTweakService: HeaderTweakService,
-    private sanitizer: DomSanitizer) {
-    super();
-  }
+) { }
 
   ngOnInit() {
     this.expandedBanner = false;
@@ -34,23 +41,35 @@ export class SeriesDetailsComponent extends AbstractSeriesDataComponent implemen
   }
 
   ngOnChanges() {
-    super.ngOnChanges();
-    if (this.series && isSeries(this.series)) {
-      if (this.bannerImage) {
-        this.headerTweakService.setTransparent();
-        // const imgStyle = `linear-gradient(0.25turn, rgba(242, 242, 242, 0.8), rgba(242, 242, 242, 0.5), rgba(242, 242, 242, 0.8)), url(${this.bannerImage})`;
-        const imgStyle = `url(${this.bannerImage})`;
-        this.bannerImageBg = this.sanitizer.bypassSecurityTrustStyle(imgStyle);
-      }
-      else {
-        this.headerTweakService.resetTransparent();
-      }
-
-      if (this.series.aniListData.description) {
-        this.seriesDescription = this.sanitizer.bypassSecurityTrustHtml(this.series.aniListData.description);
-      }
-    }
+    this.populateSeriesValues();
   }
+
+  private populateSeriesValues(): boolean {
+    if (this.series) {
+        if (isSeries(this.series)) {
+          this.identified = true;
+          this.coverImage = this.imgResolver.resolveImage(this.series.aniListData.localCoverImage, this.series.aniListData.coverImage);
+          this.bannerImage = this.imgResolver.resolveImage(this.series.aniListData.localBannerImage, this.series.aniListData.bannerImage);
+
+          this.altNames = [
+            this.series.aniListData.englishTitle,
+            this.series.aniListData.title
+          ];
+
+          if (this.bannerImage) {
+            this.headerTweakService.setTransparent();
+          }
+          else {
+            this.headerTweakService.resetTransparent();
+          }
+        }
+        this.folderLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
+        this.seriesLink = `${UI_ROUTES.SERIES}${this.series.rel}`;
+        return true;
+    }
+    return false;
+  }
+
 
   toggleBannerHeight() {
     this.expandedBanner = !this.expandedBanner;

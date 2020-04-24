@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileListService } from './services/file-list.service';
 import { HeaderTweakService } from './services/header-tweak.service';
 import { PendingResourceRetrievalService } from './services/pending-resource-retrieval.service';
+import { ImageResolverService } from './services/image-resolver.service';
 
 @NgModule({
   declarations: [],
@@ -14,7 +15,8 @@ import { PendingResourceRetrievalService } from './services/pending-resource-ret
   providers: [
     FileListService,
     HeaderTweakService,
-    PendingResourceRetrievalService
+    PendingResourceRetrievalService,
+    ImageResolverService,
   ]
 })
 export class CoreModule {

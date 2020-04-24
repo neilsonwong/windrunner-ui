@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 
 @Component({

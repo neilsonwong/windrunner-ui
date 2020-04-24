@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { Observable } from 'rxjs';
-import { FileKind, DetailKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
+import { FileKind, DetailKind, SeriesDirectory, Video } from 'src/app/modules/shared/models/Files';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { shareReplay, map, switchMap, tap, share, take } from 'rxjs/operators';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
+import { isVideo } from 'src/app/utils/fileTypeUtils';
 
 @Component({
   selector: 'app-series',
@@ -16,7 +17,7 @@ export class SeriesComponent implements OnInit {
 
   isFavourite$: Observable<boolean>;
   seriesDetails$: Observable<DetailKind>;
-  seriesEpisodes$: Observable<FileKind>;
+  seriesVideos$: Observable<Video[]>;
   optionsList$: Observable<SeriesOptions>;
   seriesPath: string;
 
@@ -49,6 +50,19 @@ export class SeriesComponent implements OnInit {
       switchMap((rel: string) => this.fileListService.getSeriesOptions(rel)),
       // clever manipulation
       shareReplay()
+    );
+
+    this.seriesVideos$ = filePath$.pipe(
+      switchMap((rel: string) => this.fileListService.getDirectoryListing(rel)),
+      map((files: FileKind[]) => {
+        const videos = new Array<Video>();
+        files.forEach((file: FileKind) => {
+          if (isVideo(file)) {
+            videos.push(file);
+          }
+        });
+        return videos;
+      })
     );
   }
 

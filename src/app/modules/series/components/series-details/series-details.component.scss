@@ -190,6 +190,10 @@
     .series-info-edit {
         padding: 2rem 0;
         width: calc(var(--app-width) - var(--action-bar-width));
+        min-height: var(--series-info-height);
+        max-height: var(--series-info-height);
+
+        transition: max-height 0.5s ease;
     }
 
     // .series-info-edit {
@@ -199,6 +203,10 @@
     &.editing {
         transform: translateX(calc(-1 * var(--app-width)))
             translateX(var(--action-bar-width));
+
+        .series-info-edit {
+            max-height: 100vh;
+        }
     }
 }
 

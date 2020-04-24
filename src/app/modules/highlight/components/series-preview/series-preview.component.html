@@ -8,8 +8,11 @@
     <div class="series-preview-content">
         <div class="pre-header">
             <p class="season">{{ series.aniListData.season | titlecase}} {{ series.aniListData.seasonYear }}</p>
-            <p class="episodes" *ngIf="episodeCount">{{ episodeCount }}
-                <span class="noun">eps</span></p>
+            <p class="episodes"
+                *ngIf="(series.aniListData.episodes | episodeCount:series.aniListData.nextAiringEpisode) as eps">
+                {{ eps }}
+                <span class="noun">eps</span>
+            </p>
         </div>
         <header class="header">
             <a [routerLink]="[seriesLink]">
@@ -24,7 +27,7 @@
         <hr class="divider" />
         <div class="content">
             <p class="studio">{{ series.aniListData.studio }}</p>
-            <p class="source-media">{{ sourceMedia | titlecase }}</p>
+            <p class="source-media">{{ series.aniListData.source | sourceMedia | titlecase }}</p>
             <div class="bottom">
                 <p class="rel">{{ series.rel }}</p>
             </div>

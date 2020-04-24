@@ -9,8 +9,12 @@ import { LazyLoadImageDirective } from './directives/lazy-load-image.directive';
 import { ErrorComponent } from './components/error/error.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HoverDirective } from './directives/hover.directive';
-import { AbstractSeriesDataComponent } from './components/abstract-series-data/abstract-series-data.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SourceMediaPipe } from './pipes/source-media.pipe';
+import { EpisodeCountPipe } from './pipes/episode-count.pipe';
+import { RotatingTextComponent } from './components/rotating-text/rotating-text.component';
+import { BgImagePipe } from './pipes/bg-image-url.pipe';
+import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { FooterComponent } from './components/footer/footer.component';
     ErrorComponent,
     LoadingComponent,
     HoverDirective,
-    AbstractSeriesDataComponent,
+    SourceMediaPipe,
+    EpisodeCountPipe,
+    BgImagePipe,
+    SanitizeHtmlPipe,
+    RotatingTextComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +44,12 @@ import { FooterComponent } from './components/footer/footer.component';
     ErrorComponent,
     LoadingComponent,
     RouterModule,
-    HoverDirective
+    HoverDirective,
+    SourceMediaPipe,
+    EpisodeCountPipe,
+    BgImagePipe,
+    SanitizeHtmlPipe,
+    RotatingTextComponent,
   ]
 })
 export class SharedModule { }
