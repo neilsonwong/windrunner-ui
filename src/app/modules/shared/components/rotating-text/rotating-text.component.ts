@@ -19,7 +19,6 @@ export class RotatingTextComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.texts);
     if (this.texts.length > 1) {
       this.sub = interval(5000).pipe(
         tap(() => {
@@ -36,7 +35,6 @@ export class RotatingTextComponent implements OnInit, OnDestroy {
   }
 
   rotate() {
-    console.log('maware!')
     this.index = (this.index + 1) % this.texts.length;
     this.fadingOut = false; 
     this.fadingIn = true; 

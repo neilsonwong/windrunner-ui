@@ -4,6 +4,19 @@
 $card-data-margin: 17px;
 $card-data-smaller-margin: 10px;
 
+::ng-deep :root {
+    --small-font: 2rem;
+    --tiny-font: 1.2rem;
+}
+
+@media (max-width: 1345px) {
+    ::ng-deep :root {
+        --small-font: 1.75rem;
+        --tiny-font: 1.1rem;
+    }
+}
+
+
 :host.series {
     display: inline-grid;
     grid-template-columns: $card-img-width auto;
@@ -64,7 +77,7 @@ $card-data-smaller-margin: 10px;
                 color: $colour-text-black;
             }
             .native-title.long {
-                font-size: 2rem;
+                font-size: var(--small-font);
             }
             .alt-title {
                 font-size: 1.4rem;
@@ -73,7 +86,7 @@ $card-data-smaller-margin: 10px;
                 padding-top: 3px;
             }
             .alt-title.long {
-                font-size: 1.2rem;
+                font-size: var(--tiny-font);
             }
         }
 

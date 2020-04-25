@@ -43,18 +43,19 @@ export class SeriesPreviewComponent implements OnChanges {
 
   private populateSeriesValues(): boolean {
     if (this.series) {
-        if (isSeries(this.series)) {
-          this.identified = true;
-          this.coverImage = this.imgResolver.resolveImage(this.series.aniListData.localCoverImage, this.series.aniListData.coverImage);
-          this.bannerImage = this.imgResolver.resolveImage(this.series.aniListData.localBannerImage, this.series.aniListData.bannerImage);
-        }
-        this.folderLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
-        this.seriesLink = `${UI_ROUTES.SERIES}${this.series.rel}`;
+      this.folderLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
+      this.seriesLink = `${UI_ROUTES.SERIES}${this.series.rel}`;
+
+      if (isSeries(this.series)) {
+        this.identified = true;
+        this.coverImage = this.imgResolver.resolveImage(this.series.aniListData.localCoverImage, this.series.aniListData.coverImage);
+        this.bannerImage = this.imgResolver.resolveImage(this.series.aniListData.localBannerImage, this.series.aniListData.bannerImage);
         return true;
+      }
     }
     return false;
   }
-
+  
   protected handleUpdatedValue(updated: SeriesDirectory): void {
     if (updated !== null) {
       this.series = updated;

@@ -15,6 +15,9 @@ import { EpisodeCountPipe } from './pipes/episode-count.pipe';
 import { RotatingTextComponent } from './components/rotating-text/rotating-text.component';
 import { BgImagePipe } from './pipes/bg-image-url.pipe';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { FixLongWordsDirective } from './directives/fix-long-words.directive';
+import { BytesPipe } from './pipes/bytes.pipe';
+import { EpisodePipe } from './pipes/episode.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
     BgImagePipe,
     SanitizeHtmlPipe,
     RotatingTextComponent,
+    FixLongWordsDirective,
+    BytesPipe,
+    EpisodePipe,
   ],
   imports: [
     CommonModule,
@@ -50,6 +56,9 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
     BgImagePipe,
     SanitizeHtmlPipe,
     RotatingTextComponent,
+    FixLongWordsDirective,
+    BytesPipe,
+    EpisodePipe,
   ]
 })
 export class SharedModule { }

@@ -19,12 +19,15 @@
             <a class="line" (click)="displayLineMode()">
                 Line
             </a>
-            <a class="list"(click)="displayListMode()">
+            <a class="list" (click)="displayListMode()">
                 List
             </a>
             <!-- <a (click)="displayPreviewMode()">
                 Preview
             </a> -->
+            <a *ngIf="seriesLink" class="list" [routerLink]="seriesLink">
+                Series
+            </a>
         </div>
     </div>
 </div>

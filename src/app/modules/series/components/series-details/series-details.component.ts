@@ -30,10 +30,10 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
   expandedBanner: boolean;
   editing: boolean;
 
-  constructor( 
+  constructor(
     private imgResolver: ImageResolverService,
     private headerTweakService: HeaderTweakService,
-) { }
+  ) { }
 
   ngOnInit() {
     this.expandedBanner = false;
@@ -46,26 +46,26 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
 
   private populateSeriesValues(): boolean {
     if (this.series) {
-        if (isSeries(this.series)) {
-          this.identified = true;
-          this.coverImage = this.imgResolver.resolveImage(this.series.aniListData.localCoverImage, this.series.aniListData.coverImage);
-          this.bannerImage = this.imgResolver.resolveImage(this.series.aniListData.localBannerImage, this.series.aniListData.bannerImage);
+      this.folderLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
+      this.seriesLink = `${UI_ROUTES.SERIES}${this.series.rel}`;
+      if (isSeries(this.series)) {
+        this.identified = true;
+        this.coverImage = this.imgResolver.resolveImage(this.series.aniListData.localCoverImage, this.series.aniListData.coverImage);
+        this.bannerImage = this.imgResolver.resolveImage(this.series.aniListData.localBannerImage, this.series.aniListData.bannerImage);
 
-          this.altNames = [
-            this.series.aniListData.englishTitle,
-            this.series.aniListData.title
-          ];
+        this.altNames = [
+          this.series.aniListData.englishTitle,
+          this.series.aniListData.title
+        ];
 
-          if (this.bannerImage) {
-            this.headerTweakService.setTransparent();
-          }
-          else {
-            this.headerTweakService.resetTransparent();
-          }
+        if (this.bannerImage) {
+          this.headerTweakService.setTransparent();
         }
-        this.folderLink = `${UI_ROUTES.BROWSE}${this.series.rel}`;
-        this.seriesLink = `${UI_ROUTES.SERIES}${this.series.rel}`;
+        else {
+          this.headerTweakService.resetTransparent();
+        }
         return true;
+      }
     }
     return false;
   }

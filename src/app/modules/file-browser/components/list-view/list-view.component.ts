@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
-import { FileKind } from 'src/app/modules/shared/models/Files';
+import { FileKind, DetailKind } from 'src/app/modules/shared/models/Files';
 import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
+import { isSeries, isDirectoryKind } from 'src/app/utils/fileTypeUtils';
+import { UI_ROUTES } from 'src/app/modules/core/routes';
 
 @Component({
   selector: 'app-list-view',
@@ -10,9 +12,11 @@ import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
 })
 export class ListViewComponent implements OnInit, OnChanges {
   @Input() files: FileKind[];
+  @Input() details: DetailKind;
   @Input() loading: boolean;
+
   bookmarks: Map<string, number> = new Map<string, number>();
-  
+  seriesLink: string;
   displayMode: string;
 
   constructor(private location: Location) { }
@@ -23,13 +27,30 @@ export class ListViewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.bookmarks.clear();
-    this.files.forEach((file, index) => {
-      const firstChar = file.name[0];
-      if (!this.bookmarks.has(firstChar)) {
-        this.bookmarks.set(firstChar, index);
+    this.updateBookmarks();
+    this.setSeriesLink();
+  }
+
+  private setSeriesLink(): void {
+    if (this.details) {
+      if (isDirectoryKind(this.details)) {
+        if (this.details.isSeriesLeafNode) {
+          this.seriesLink = `${UI_ROUTES.SERIES}${this.details.rel}`;
+        }
       }
-    });
+    }
+  }
+
+  private updateBookmarks(): void {
+    if (this.files && this.files.length > 0) {
+      this.bookmarks.clear();
+      this.files.forEach((file, index) => {
+        const firstChar = file.name[0];
+        if (!this.bookmarks.has(firstChar)) {
+          this.bookmarks.set(firstChar, index);
+        }
+      });
+    }
   }
 
   private changeDisplay(displayMode: string) {

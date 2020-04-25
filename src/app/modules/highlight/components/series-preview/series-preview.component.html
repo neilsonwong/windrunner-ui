@@ -16,9 +16,9 @@
         </div>
         <header class="header">
             <a [routerLink]="[seriesLink]">
-                <h3 class="native-title"
-                    [class.long]="series.aniListData.nativeTitle.length > 20">
-                    {{ series.aniListData.nativeTitle }}</h3>
+                <h3 class="native-title" [fixLongWords]="['long', 20]">
+                    {{ series.aniListData.nativeTitle }}
+                </h3>
             </a>
             <p class="alt-title"
                 [class.long]="series.aniListData.title.length > 30">

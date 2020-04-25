@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FileKind } from 'src/app/modules/shared/models/Files';
+import { FileKind, DetailKind } from 'src/app/modules/shared/models/Files';
 import { Observable, of, merge } from 'rxjs';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
@@ -18,6 +18,7 @@ export class FileBrowserComponent implements OnInit {
   breadCrumbs$: Observable<Array<string|LinkData>>;
   loading: boolean = true;
   fileList$: Observable<FileKind[]>;
+  details$: Observable<DetailKind>;
   bookmarks$: Observable<Map<string, number>>;
 
   constructor(
@@ -29,8 +30,11 @@ export class FileBrowserComponent implements OnInit {
     this.breadCrumbs$ = urlChange$.pipe(map((e: UrlSegment[]) => this.getBreadCrumbs(e)));
 
     const empty = of([]).pipe(tap(() => { this.loading = true; }));
-    this.fileList$ = urlChange$.pipe(
+    this.place$ = urlChange$.pipe(
       map((e: UrlSegment[]) => this.getPlace(e)),
+      shareReplay()
+    );
+    this.fileList$ = this.place$.pipe(
       switchMap((rel: string) => {
         return merge(empty,
           this.fileListService.getDirectoryListing(rel)
@@ -38,6 +42,8 @@ export class FileBrowserComponent implements OnInit {
         );
       })
     );
+    this.details$ = this.place$.pipe(
+      switchMap(rel => (this.fileListService.getFileDetail(rel))));
   }
 
   private getPlace(segments: UrlSegment[]): string {
@@ -45,9 +51,8 @@ export class FileBrowserComponent implements OnInit {
   }
 
   private getBreadCrumbs(segments: UrlSegment[]): Array<string | LinkData> {
-    let cumulativeUrl = '';
+    let cumulativeUrl: string = '';
     const headingTitle: Array<string | LinkData> = [{ text: '/', url: UI_ROUTES.BROWSE }];
-
     
     // we need to generate the headerLinks
     // as well as the full url

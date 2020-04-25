@@ -1,15 +1,16 @@
 <!-- <div class="video-details"> -->
     <div class="video-thumbnail">
-        <img [src]="thumbnailUrls[0]">
+        <img class="main" [src]="thumbnailUrls[index]" [class.animating]="fading"/>
+        <img class="back-image" [src]="thumbnailUrls[nextIndex]" [class.animating]="fading" />
         <!-- <ng-template #elseBlock>
             <div class="no-thumb" ngClass="no-thumb {{ noThumbStyle }}"></div>
         </ng-template> -->
     </div>
     <div ngClass="video-metadata">
-        <div class="main">{{ video.name }}</div>
+        <div class="main">{{ video.name | episode }}</div>
         <div class="sub">
             <span class="date">{{ video.created }}</span>
-            <span class="size">{{ video.size }}</span>
+            <span class="size">{{ video.size | bytes }}</span>
         </div>
         <div class="hover-mask">
             <button class="play-button" (click)="playFile()">▶</button>

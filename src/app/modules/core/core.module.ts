@@ -6,6 +6,7 @@ import { FileListService } from './services/file-list.service';
 import { HeaderTweakService } from './services/header-tweak.service';
 import { PendingResourceRetrievalService } from './services/pending-resource-retrieval.service';
 import { ImageResolverService } from './services/image-resolver.service';
+import { AgentService } from './services/agent.service';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { ImageResolverService } from './services/image-resolver.service';
   ],
   providers: [
     FileListService,
+    AgentService,
     HeaderTweakService,
     PendingResourceRetrievalService,
     ImageResolverService,

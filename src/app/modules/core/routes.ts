@@ -1,6 +1,7 @@
 import { environment } from 'src/environments/environment';
 
 const api = environment.api;
+const agent = environment.agent;
 
 export const API_ROUTES = {
     GET_FAVOURITES: `${api}/favs`,
@@ -20,4 +21,8 @@ export const API_ROUTES = {
 export const UI_ROUTES = {
     BROWSE: '/v/browse',
     SERIES: '/v/series',
+};
+
+export const AGENT_ROUTES = {
+    PLAY: `${agent}/play`,
 };
