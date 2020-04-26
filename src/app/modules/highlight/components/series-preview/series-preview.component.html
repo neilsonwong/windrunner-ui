@@ -2,7 +2,7 @@
     <div class="series-preview-thumbnail">
         <a [routerLink]="[seriesLink]">
             <div *ngIf="series.newFiles" class="badge">{{ series.newFiles.length }}</div>
-            <img [src]="coverImage" />
+            <img loading="lazy" [src]="coverImage" />
         </a>
     </div>
     <div class="series-preview-content">

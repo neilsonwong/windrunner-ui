@@ -31,36 +31,43 @@
         </div>
     </div>
 </div>
-<ng-container *ngIf="!loading; else loadingMsg">
-    <ng-container *ngIf="files?.length > 0; else noFiles">
-        <ng-container [ngSwitch]="displayMode | lowercase">
-            <div *ngSwitchCase="'line'"
-                class="file-list grid-layout super-compact">
-                <app-leaf-line-view
-                    *ngFor="let file of files; index as i"
-                    [id]="'file' + i"
-                    [file]="file">
-                </app-leaf-line-view>
-            </div>
-            <div *ngSwitchCase="'list'"
-                class="file-list grid-layout compact">
-                <app-leaf-list-view
-                    *ngFor="let file of files; index as i"
-                    [id]="'file' + i"
-                    class="card"
-                    [file]="file">
-                </app-leaf-list-view>
-            </div>
+<ng-container *ngIf="!isInvalid; else invalidFolder">
+    <ng-container *ngIf="!loading; else loadingMsg">
+        <ng-container *ngIf="files?.length > 0; else noFiles">
+            <ng-container [ngSwitch]="displayMode | lowercase">
+                <div *ngSwitchCase="'line'"
+                    class="file-list grid-layout super-compact">
+                    <app-leaf-line-view
+                        *ngFor="let file of files; index as i"
+                        [id]="'file' + i"
+                        [file]="file">
+                    </app-leaf-line-view>
+                </div>
+                <div *ngSwitchCase="'list'"
+                    class="file-list grid-layout compact">
+                    <app-leaf-list-view
+                        *ngFor="let file of files; index as i"
+                        [id]="'file' + i"
+                        class="card"
+                        [file]="file">
+                    </app-leaf-list-view>
+                </div>
+            </ng-container>
         </ng-container>
+        <ng-template #noFiles>
+            <div class="big-text">
+                No files
+            </div>
+        </ng-template>
     </ng-container>
-    <ng-template #noFiles>
+    <ng-template #loadingMsg>
         <div class="big-text">
-            No files
+            Loading ...
         </div>
     </ng-template>
 </ng-container>
-<ng-template #loadingMsg>
+<ng-template #invalidFolder>
     <div class="big-text">
-        Loading ...
+        This isn't real!
     </div>
 </ng-template>

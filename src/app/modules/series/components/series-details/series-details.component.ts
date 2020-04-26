@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { SafeStyle, DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { isSeries } from 'src/app/utils/fileTypeUtils';
+import { isSeries, isInvalid } from 'src/app/utils/fileTypeUtils';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 import { Observable } from 'rxjs';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { ImageResolverService } from 'src/app/modules/core/services/image-resolver.service';
-import { DirectoryKind } from 'src/app/modules/shared/models/Files';
+import { DirectoryKind, DetailKind } from 'src/app/modules/shared/models/Files';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 
 @Component({
@@ -14,10 +14,12 @@ import { UI_ROUTES } from 'src/app/modules/core/routes';
   styleUrls: ['./series-details.component.scss']
 })
 export class SeriesDetailsComponent implements OnInit, OnChanges {
-  @Input() series: DirectoryKind;
+  @Input() series: DetailKind;
   @Input() isFavourite: boolean;
+  @Input() isRecommend: boolean;
   @Input() optionsList$: Observable<SeriesOptions>;
   @Output() favouriteChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() recommendChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() seriesOptionChange: EventEmitter<number> = new EventEmitter<number>();
 
   identified: boolean;
@@ -29,6 +31,7 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
 
   expandedBanner: boolean;
   editing: boolean;
+  isInvalid: boolean;
 
   constructor(
     private imgResolver: ImageResolverService,
@@ -66,6 +69,9 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
         }
         return true;
       }
+      else if(isInvalid(this.series)) {
+        this.isInvalid = true;
+      }
     }
     return false;
   }
@@ -78,6 +84,11 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
   toggleFavourite() {
     this.isFavourite = !this.isFavourite;
     this.favouriteChange.emit(this.isFavourite);
+  }
+
+  toggleRecommended() {
+    this.isRecommend = !this.isRecommend;
+    this.recommendChange.emit(this.isRecommend);
   }
 
   updateAniListInfo() {

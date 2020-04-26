@@ -1,21 +1,20 @@
-@import "src/styles/colours";
-@import "src/styles/sizes";
-
-$card-data-margin: 17px;
-$card-data-smaller-margin: 10px;
+::ng-deep :root {
+    --card-data-margin: 17px;
+    --card-data-smaller-margin: 10px;
+}
 
 :host {
     height: auto;
     position: relative;
 
     &:hover .heading .link {
-        color: $colour-text-magenta;
+        color: var(--colour-text-magenta);
         cursor: pointer;
     }
 
     .heading {
         height: 3rem;
-        margin: $card-data-margin;
+        margin: var(--card-data-margin);
         display: flex;
 
         .link {
@@ -63,9 +62,8 @@ $card-data-smaller-margin: 10px;
 
 
 .bottom {
-    padding: $card-data-smaller-margin $card-data-margin;
-    background-color: $colour-bg-semi-light;
-    background-color: $colour-bg-light-accent;
+    padding: var(--card-data-smaller-margin) var(--card-data-margin);
+    background-color: var(--colour-bg-light-accent);
 
     .rel {
         font-size: 1.2rem;

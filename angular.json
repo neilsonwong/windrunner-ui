@@ -30,6 +30,7 @@
             "styles": [
               "src/styles/styles.scss",
               "src/styles/colours.scss",
+              "src/styles/screen-sizes.scss",
               "src/styles/sizes.scss",
               "src/styles/grid-layout.scss",
               "src/styles/cards.scss",

@@ -1,4 +1,4 @@
-import { SeriesDirectory, FILETYPES, FileKind, BaseFile, DetailKind, Video, DirectoryKind } from "../modules/shared/models/Files"
+import { SeriesDirectory, FILETYPES, FileKind, BaseFile, DetailKind, Video, DirectoryKind, InvalidFile } from "../modules/shared/models/Files"
 
 export const isVideo = (file: FileKind): file is Video => {
     return file.type === FILETYPES.VID;
@@ -10,6 +10,10 @@ export const isSeries = (dir: FileKind): dir is SeriesDirectory => {
 
 export const isBaseFile = (file: FileKind): file is BaseFile => {
     return file.type === FILETYPES.BASE;
+}
+
+export const isInvalid = (file: FileKind): file is InvalidFile => {
+    return file.type === FILETYPES.INVALID;
 }
 
 export const isDirectoryKind = (file: FileKind): file is DirectoryKind => {

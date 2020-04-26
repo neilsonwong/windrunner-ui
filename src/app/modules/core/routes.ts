@@ -4,10 +4,10 @@ const api = environment.api;
 const agent = environment.agent;
 
 export const API_ROUTES = {
-    GET_FAVOURITES: `${api}/favs`,
-    DEL_FAVOURITE: `${api}/fav`,
-    ADD_FAVOURITE: `${api}/fav`,
-    GET_FAVOURITE: `${api}/fav`,
+    GET_LIST: `${api}/vlist`,
+    DEL_FROM_LIST: `${api}/vlist`,
+    ADD_TO_LIST: `${api}/vlist`,
+    GET_IN_LIST: `${api}/vlist`,
     GET_BROWSE: `${api}/browse`,
     GET_RECENT: `${api}/recent`,
     GET_FILE_DETAILS: `${api}/details`,
@@ -16,6 +16,7 @@ export const API_ROUTES = {
     GET_PENDING_RESOURCE_STATUS: `${api}/resource`,
     GET_SERIES_OPTIONS: `${api}/series/options`,
     UPDATE_SERIES_OPTION: `${api}/series`,
+    GET_SERVER_LOAD: `${api}/load`,
 };
 
 export const UI_ROUTES = {
@@ -25,4 +26,5 @@ export const UI_ROUTES = {
 
 export const AGENT_ROUTES = {
     PLAY: `${agent}/play`,
+    HELLO: `${agent}/play`,
 };

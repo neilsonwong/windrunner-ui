@@ -1,6 +1,4 @@
-@import "src/styles/sizes.scss";
-
 :host {
     display: block;
-    margin-top: $main-content-upshift;
+    margin-top: var(--main-content-upshift);
 }

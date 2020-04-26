@@ -1,8 +1,10 @@
 <app-series-details
     [series]="seriesDetails$ | async"
     [isFavourite]="isFavourite$ | async"
+    [isRecommend]="isRecommend$ | async"
     [optionsList$]="optionsList$"
     (favouriteChange)="updateFavouriteStatus($event)"
+    (recommendChange)="updateRecommendStatus($event)"
     (seriesOptionChange)="updateSeriesOption($event)">
 </app-series-details>
 <app-video-list

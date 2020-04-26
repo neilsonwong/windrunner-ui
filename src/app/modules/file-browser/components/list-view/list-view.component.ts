@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { FileKind, DetailKind } from 'src/app/modules/shared/models/Files';
 import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
-import { isSeries, isDirectoryKind } from 'src/app/utils/fileTypeUtils';
+import { isSeries, isDirectoryKind, isInvalid } from 'src/app/utils/fileTypeUtils';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 
 @Component({
@@ -18,6 +18,7 @@ export class ListViewComponent implements OnInit, OnChanges {
   bookmarks: Map<string, number> = new Map<string, number>();
   seriesLink: string;
   displayMode: string;
+  isInvalid: boolean = false;
 
   constructor(private location: Location) { }
 
@@ -28,15 +29,18 @@ export class ListViewComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.updateBookmarks();
-    this.setSeriesLink();
+    this.updateDetailRelatedFields();
   }
 
-  private setSeriesLink(): void {
+  private updateDetailRelatedFields(): void {
     if (this.details) {
       if (isDirectoryKind(this.details)) {
         if (this.details.isSeriesLeafNode) {
           this.seriesLink = `${UI_ROUTES.SERIES}${this.details.rel}`;
         }
+      }
+      else if (isInvalid(this.details)) {
+        this.isInvalid = true;
       }
     }
   }

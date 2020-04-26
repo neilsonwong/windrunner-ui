@@ -1,0 +1,8 @@
+
+<span>Agent is </span>
+<ng-container *ngIf="(isAlive$ | async); else notAlive">
+    <span class="agent-status alive">Connected</span>
+</ng-container>
+<ng-template #notAlive>
+    <span class="agent-status dead">Dead</span>
+</ng-template>

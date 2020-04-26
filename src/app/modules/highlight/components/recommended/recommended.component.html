@@ -1,1 +1,5 @@
-<p>recommended works!</p>
+<app-series-list
+    listName="お勧め"
+    [seriesList]="recommended$ | async"
+    emptyText="nothing makes the cut">
+</app-series-list>

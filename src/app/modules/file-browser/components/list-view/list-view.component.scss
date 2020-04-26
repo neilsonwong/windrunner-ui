@@ -1,6 +1,3 @@
-@import "src/styles/colours";
-@import "src/styles/grid-layout";
-
 .navigation-options {
     display: flex;
     justify-content: space-between;
@@ -11,7 +8,7 @@
         margin-right: 10px;
 
         a:hover {
-            color: $colour-text-bright;
+            color: var(--colour-text-bright);
         }
     }
 
@@ -21,7 +18,7 @@
 
         .bookmarks {
             font-weight: 600;
-            color: $colour-text-light;
+            color: var(--colour-text-light);
 
             display: flex;
             justify-content: center;
@@ -40,13 +37,13 @@
             // cursor: pointer;
 
             &:hover {
-                color: $colour-text-bright;
+                color: var(--colour-text-bright);
             }
         }
 
         &.list .list,
         &.line .line {
-            color: $colour-text-bright;
+            color: var(--colour-text-bright);
         }
     }
 }

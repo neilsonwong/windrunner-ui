@@ -1,16 +1,13 @@
-@import "src/styles/colours.scss";
-@import "src/styles/sizes.scss";
-
 .header {
-    height: $header-height;
+    height: var(--header-height);
 
     display: flex;
     align-items: center;
     justify-content: space-around;
 
-    background-color: $colour-header-background;
+    background-color: var(--colour-header-background);
     box-shadow: 0 4px 4px rgba(0,0,0,0.1);
-    border-bottom: solid 1px $colour-header-border-bottom;
+    border-bottom: solid 1px var(--colour-header-border-bottom);
 
     position: relative;
 
@@ -40,8 +37,8 @@
         // align-items: center;
         justify-content: space-between;
 
-        // max-width: $header-content-width;
-        height: $header-height;
+        // max-width: var(--header-content-width);
+        height: var(--header-height);
     }
 
     .header-container > * {
@@ -52,8 +49,8 @@
     }
 
     .side-bar {
-        width: $bar-size;
-        flex-basis: $bar-size;
+        width: var(--bar-size);
+        flex-basis: var(--bar-size);
     }
 
     .left {
@@ -96,13 +93,13 @@
             word-break: keep-all;
 
             a {
-                font-size: 0.8em;
-                color: $colour-text-light;
+                font-size: 1.3rem;
+                color: var(--colour-text-light);
             }
 
             &.highlight a,
             a:hover {
-                color: $colour-text-bright;
+                color: var(--colour-text-bright);
             }
         }
     }
@@ -114,7 +111,7 @@
     &, 
     .header-container {
         box-sizing: border-box;
-        height: $header-compact-height;
+        height: var(--header-compact-height);
         padding: 0.6rem;
         align-items: center;
     }
@@ -125,28 +122,28 @@
 }
 
 .header.transparent {
-    background-color: $colour-header-background-semi-transparent;
+    background-color: var(--colour-header-background-semi-transparent);
     border-bottom: none;
     transition: background 0.8s ease 0s, top 0.5s ease 0s;
 
     .middle h1.title {
         transition: color 0.5s ease-in-out;
-        color: $colour-text-bright !important;
+        color: var(--colour-text-bright) !important;
     }
 
     .navigation .nav-item {
         a {
-            color: $colour-text-lighter;
+            color: var(--colour-text-lighter);
         }
 
         &.highlight a,
         a:hover {
-            color: $colour-text-bright;
+            color: var(--colour-text-bright);
         }
     }
 
     &:hover {
-        background-color: $colour-header-background;
+        background-color: var(--colour-header-background);
 
         .middle h1.title {
             color: transparent !important;

@@ -1,35 +1,12 @@
-/* for 3 and 4 cols */
-$app-max-width: 195rem;
-$app-3-col-max-width: 145rem;
-$app-2-col-max-width: 85rem;
-$app-min-width: 50rem;
-
-$bar-size: 25rem;
-$header-height: 16rem;
-$header-compact-height: 6.2rem;
-$header-content-width: 128rem;
-
-$main-content-upshift: -12rem;
-
-$card-height: 26.5rem;
-$card-width: 45rem;
-$card-min-width: 40rem;
-$card-img-width: 18.5rem;
-
-$grid-header-default-height: 40px;
-
-$layout-4-col-screen-min: 2230px;
-/* $layout-3-col-screen: default between 4 and 2 */
-$layout-2-col-screen-max: 1345px;
-$layout-1-col-screen-max: 900px;
-
-$series-banner-max-height: 52rem;
-$series-info-height: 39rem;
-$series-info-container-height: 43rem;
-
+@import "src/styles/screen-sizes";
 
 :root {
-  --app-width: #{$app-3-col-max-width};
+  --app-max-width: 195rem;
+  --app-3-col-max-width: 145rem;
+  --app-2-col-max-width: 85rem;
+  --app-min-width: 50rem;
+
+  --app-width: var(--app-3-col-max-width);
   --action-bar-width: 6rem;
 
   --bar-size: 25rem;
@@ -46,26 +23,31 @@ $series-info-container-height: 43rem;
 
   --grid-header-default-height: 40px;
 
+  --layout-4-col-screen-min: 2230px;
+  /* $layout-3-col-screen: default between 4 and 2 */
+  --layout-2-col-screen-max: 1345px;
+  --layout-1-col-screen-max: 900px;
+
   --series-banner-max-height: 52rem;
   --series-info-height: 39rem;
   --series-info-container-height: 43rem;
 }
 
-@media (min-width: 2230px) {
+@media (min-width: $layout-4-col-screen-min) {
   :root {
-    --app-width: #{$app-max-width};
+    --app-width: var(--app-max-width);
     --action-bar-width: 15rem;
   }
 }
 
-@media (max-width: 1345px) {
+@media (max-width: $layout-2-col-screen-max) {
   :root {
-    --app-width: #{$app-2-col-max-width};
+    --app-width: var(--app-2-col-max-width);
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: $layout-1-col-screen-max) {
   :root {
-    --app-width: #{$app-min-width};
+    --app-width: var(--app-min-width);
   }
 }

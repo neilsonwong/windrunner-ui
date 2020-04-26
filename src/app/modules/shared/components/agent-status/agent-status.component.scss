@@ -1,0 +1,16 @@
+:host {
+    font-size: 1.3rem;
+    color: var(--colour-text-light);
+
+    .agent-status {
+        // font-weight: 600;
+    }
+
+    .dead {
+        color: red;
+    }
+
+    .alive {
+        color: lightgreen;
+    }
+}

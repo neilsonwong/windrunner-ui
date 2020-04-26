@@ -11,6 +11,8 @@ export class SeriesDataSelectComponent implements OnInit {
   @Input() current: number;
   @Output() seriesOptionChange: EventEmitter<number> = new EventEmitter<number>();
 
+  manualId: string;
+
   constructor() { }
 
   ngOnInit() {
@@ -18,5 +20,16 @@ export class SeriesDataSelectComponent implements OnInit {
 
   updateSeriesOption(newAniListId: number) {
     this.seriesOptionChange.emit(newAniListId);
+  }
+
+  updateAniListEntry() {
+    // check if it's a number
+    const entered = parseInt(this.manualId, 10);
+    if (!isNaN(entered) && entered > 0) {
+      this.updateSeriesOption(entered);
+    }
+    else {
+      console.log(`${entered} was not valid`);
+    }
   }
 }

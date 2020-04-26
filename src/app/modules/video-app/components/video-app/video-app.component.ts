@@ -12,8 +12,6 @@ export class VideoAppComponent implements OnInit {
     { text: 'Home', url: '/v' },
     { text: 'Browse', url: '/v/browse' },
     { text: 'お勧め', url: '/v/recommend' }
-    // for testing
-    ,{ text: 'series', url: '/v/series/anime/Air' }
   ];
 
   constructor() { }

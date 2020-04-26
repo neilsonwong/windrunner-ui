@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { DirectoryKind } from 'src/app/modules/shared/models/Files';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { tap } from 'rxjs/operators';
+import VIDEO_LISTS from 'src/app/modules/shared/models/videoLists.enum';
 
 @Component({
   selector: 'app-highlight',
@@ -18,6 +19,6 @@ export class HighlightComponent implements OnInit {
 
   ngOnInit() {
     this.recentlyUpdatedSeries$ = this.fileListService.getRecent();
-    this.favouriteSeries$ = this.fileListService.getFavourites();
+    this.favouriteSeries$ = this.fileListService.getList(VIDEO_LISTS.FAV);
   }
 }

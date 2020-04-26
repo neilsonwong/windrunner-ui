@@ -1,12 +1,13 @@
+@import "src/styles/sizes";
 @import "src/styles/colours";
 @import "src/styles/fonts";
 @import "src/styles/cards";
-@import "src/styles/sizes";
+@import "src/styles/grid-layout";
 
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  background-color: $colour-bg-light;
+  background-color: var(--colour-bg-light);
 
   /* add rikka */
   background-image: url('/assets/rikka.png');
@@ -25,15 +26,13 @@ button {
   vertical-align: baseline;
   text-align: center;
   line-height: 1.8rem;
-  // border-radius: 4px;
-  // background-color: $colour-bg-light-accent;
-  // box-shadow:
-  //   0 3px 1px -2px rgba(0,0,0,.2),
-  //   0 2px 2px 0 rgba(0,0,0,.14),
-  //   0 1px 5px 0 rgba(0,0,0,.12);
   cursor: pointer;
 
   .button-icon {
     display: inline-block;
   }
+}
+
+button:hover {
+    background-color: var(--colour-bg-light-grey);
 }

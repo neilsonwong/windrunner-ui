@@ -1,16 +1,13 @@
-@import "src/styles/colours";
-@import "src/styles/sizes";
-
 .card {
     border-radius: 3px;
     box-shadow: 0 4px 6px rgba(49,54,68,.05), 0 5px 20px rgba(49,54,68,.08);
 
-    height: $card-height;
-    min-width: $card-min-width;
+    height: var(--card-height);
+    min-width: var(--card-min-width);
     overflow: hidden;
     text-align: left;
     transition: box-shadow .6s ease;
-    background-color: $colour-bg-white;
+    background-color: var(--colour-bg-white);
     position: relative;
 
     &:hover {

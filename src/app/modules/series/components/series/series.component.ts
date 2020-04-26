@@ -7,6 +7,7 @@ import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { shareReplay, map, switchMap, tap, share, take } from 'rxjs/operators';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 import { isVideo } from 'src/app/utils/fileTypeUtils';
+import VIDEO_LISTS from 'src/app/modules/shared/models/videoLists.enum';
 
 @Component({
   selector: 'app-series',
@@ -16,8 +17,9 @@ import { isVideo } from 'src/app/utils/fileTypeUtils';
 export class SeriesComponent implements OnInit {
 
   isFavourite$: Observable<boolean>;
+  isRecommend$: Observable<boolean>;
   seriesDetails$: Observable<DetailKind>;
-  seriesVideos$: Observable<Video[]>;
+  seriesVideos$: Observable<FileKind[]>;
   optionsList$: Observable<SeriesOptions>;
   seriesPath: string;
 
@@ -42,7 +44,12 @@ export class SeriesComponent implements OnInit {
     );
 
     this.isFavourite$ = filePath$.pipe(
-      switchMap((rel: string) => this.fileListService.getIsFavourite(rel)),
+      switchMap((rel: string) => this.fileListService.getInList(VIDEO_LISTS.FAV, rel)),
+      map(e => e.result)
+    );
+
+    this.isRecommend$ = filePath$.pipe(
+      switchMap((rel: string) => this.fileListService.getInList(VIDEO_LISTS.REC, rel)),
       map(e => e.result)
     );
 
@@ -55,13 +62,8 @@ export class SeriesComponent implements OnInit {
     this.seriesVideos$ = filePath$.pipe(
       switchMap((rel: string) => this.fileListService.getDirectoryListing(rel)),
       map((files: FileKind[]) => {
-        const videos = new Array<Video>();
-        files.forEach((file: FileKind) => {
-          if (isVideo(file)) {
-            videos.push(file);
-          }
-        });
-        return videos;
+        const isVideoRegExp = new RegExp(/(\.(avi|mkv|ogm|mp4|flv|ogg|wmv|rm|mpeg|mpg)$)/);
+        return files.filter((file: FileKind) => (isVideoRegExp.test(file.name)));
       })
     );
   }
@@ -71,7 +73,12 @@ export class SeriesComponent implements OnInit {
   }
 
   updateFavouriteStatus(isFav: boolean) {
-    this.fileListService.setFavourite(this.seriesPath, isFav).subscribe();
+    this.fileListService.toggleListItem(VIDEO_LISTS.FAV, this.seriesPath, isFav).subscribe();
+  }
+
+  updateRecommendStatus(isRecommended: boolean) {
+    console.log('updating recommended list ' + isRecommended)
+    this.fileListService.toggleListItem(VIDEO_LISTS.REC, this.seriesPath, isRecommended).subscribe();
   }
 
   updateSeriesOption(newAniListId: number) {

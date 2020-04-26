@@ -1,20 +1,29 @@
-<!-- <div class="video-details"> -->
-    <div class="video-thumbnail">
-        <img class="main" [src]="thumbnailUrls[index]" [class.animating]="fading"/>
-        <img class="back-image" [src]="thumbnailUrls[nextIndex]" [class.animating]="fading" />
-        <!-- <ng-template #elseBlock>
-            <div class="no-thumb" ngClass="no-thumb {{ noThumbStyle }}"></div>
-        </ng-template> -->
-    </div>
-    <div ngClass="video-metadata">
-        <div class="main">{{ video.name | episode }}</div>
-        <div class="sub">
-            <span class="date">{{ video.created }}</span>
-            <span class="size">{{ video.size | bytes }}</span>
+<ng-container *ngIf="isVideo; else unloadedVideo">
+    <!-- <div class="video-details"> -->
+        <div class="video-thumbnail">
+            <ng-container *ngIf="fullyLoaded; else loadingThumb">
+                <img class="main" loading="lazy" [src]="thumbnailUrls[index]" [class.animating]="fading"/>
+                <img class="back-image" loading="lazy" [src]="thumbnailUrls[nextIndex]" [class.animating]="fading" />
+            </ng-container>
+            <ng-template #loadingThumb>
+                <div class="no-thumb"></div>
+            </ng-template>
         </div>
-        <div class="hover-mask">
-            <button class="play-button" (click)="playFile()">▶</button>
+        <div class="video-metadata">
+            <div class="main">{{ video.name | episode }}</div>
+            <div class="sub">
+                <span class="date">{{ video.created | date:'medium' }}</span>
+                <span class="size">{{ video.size | bytes }}</span>
+            </div>
+            <div class="hover-mask">
+                <button class="play-button" (click)="playFile()">▶</button>
+            </div>
         </div>
+        <!-- <div class="watch-bar" [ngStyle]="watchedStyle"></div> -->
+    <!-- </div> -->
+</ng-container>
+<ng-template #unloadedVideo>
+    <div class="unloaded">
+        <p>{{ video.name }}</p>
     </div>
-    <!-- <div class="watch-bar" [ngStyle]="watchedStyle"></div> -->
-<!-- </div> -->
+</ng-template>

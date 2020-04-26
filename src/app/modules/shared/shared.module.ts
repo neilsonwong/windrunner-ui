@@ -18,6 +18,7 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { FixLongWordsDirective } from './directives/fix-long-words.directive';
 import { BytesPipe } from './pipes/bytes.pipe';
 import { EpisodePipe } from './pipes/episode.pipe';
+import { AgentStatusComponent } from './components/agent-status/agent-status.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { EpisodePipe } from './pipes/episode.pipe';
     FixLongWordsDirective,
     BytesPipe,
     EpisodePipe,
+    AgentStatusComponent,
   ],
   imports: [
     CommonModule,
@@ -44,19 +46,23 @@ import { EpisodePipe } from './pipes/episode.pipe';
     RouterModule,
   ],
   exports: [
+    RouterModule,
+    FormsModule,
+
     HeaderComponent,
     FooterComponent,
-    LazyLoadImageDirective,
     ErrorComponent,
     LoadingComponent,
-    RouterModule,
+    RotatingTextComponent,
+
+    LazyLoadImageDirective,
     HoverDirective,
+    FixLongWordsDirective,
+
     SourceMediaPipe,
     EpisodeCountPipe,
     BgImagePipe,
     SanitizeHtmlPipe,
-    RotatingTextComponent,
-    FixLongWordsDirective,
     BytesPipe,
     EpisodePipe,
   ]

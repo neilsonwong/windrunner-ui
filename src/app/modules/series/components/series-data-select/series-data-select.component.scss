@@ -1,5 +1,43 @@
+@import "src/styles/screen-sizes";
+
 .current {
     background-color: lightblue;
+}
+
+.manual-selection {
+    height: auto;
+    padding: 1rem;
+
+    p {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .split {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+
+        input {
+            flex-grow: 1;
+            margin-right: 1rem;
+        }
+
+        button {
+            flex-basis: 200px;
+        }
+    }
+
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 }
 
 :host {
@@ -10,7 +48,7 @@
     grid-row-gap: 20px;
 }
 
-@media (max-width: 1345px) {
+@media (max-width: $layout-2-col-screen-max) {
     :host {
         display: block;
 
@@ -20,7 +58,7 @@
     }
 }
 
-@media (min-width: 2230px) {
+@media (min-width: $layout-4-col-screen-min) {
     :host {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;

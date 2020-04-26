@@ -5,6 +5,7 @@ import { FileBrowserComponent } from '../file-browser/components/file-browser/fi
 import { HighlightComponent } from '../highlight/components/highlight/highlight.component';
 import { SeriesComponent } from '../series/components/series/series.component';
 import { MaintenanceComponent } from '../maintenance/components/maintenance/maintenance.component';
+import { RecommendedComponent } from '../highlight/components/recommended/recommended.component';
 
 const routes: Routes = [
   { path: 'v', component: VideoAppComponent,
@@ -24,6 +25,7 @@ const routes: Routes = [
           component: SeriesComponent
         }]
       },
+      { path: 'recommend', component: RecommendedComponent},
       { path: 'maintenance', component: MaintenanceComponent },
     ]
   }

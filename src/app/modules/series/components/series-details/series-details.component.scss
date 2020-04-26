@@ -1,4 +1,4 @@
-@import "src/styles/sizes";
+@import "src/styles/screen-sizes";
 
 .banner {
     margin-top: calc(-1 * var(--header-compact-height));
@@ -163,6 +163,18 @@
             .back {
                 mask: url('/assets/icons/back.svg');
             }
+            .refresh {
+                mask: url('/assets/icons/refresh.svg');
+            }
+            .recommend {
+                mask: url('/assets/icons/star.svg');
+                background-color: rgb(192, 180, 120);
+                opacity: 0.3;
+
+                &.highlight {
+                    opacity: 1;
+                }
+            }
         }
     }
 }
@@ -210,7 +222,7 @@
     }
 }
 
-@media (min-width: 2230px) {
+@media (min-width: $layout-4-col-screen-min) {
     .banner.expanded {
         &,
         .shadow {

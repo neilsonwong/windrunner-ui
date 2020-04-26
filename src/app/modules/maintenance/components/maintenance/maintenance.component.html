@@ -1,1 +1,9 @@
-<p>maintenance works!</p>
+<ng-container *ngIf="(serverLoad$ | async) as serverLoad">
+    <h3>Server Load</h3>
+    <div *ngIf="serverLoad">
+        <p>Max Workers: {{ serverLoad.max }}</p>
+        <p>Size: {{ serverLoad.size }}</p>
+        <p>Available: {{ serverLoad.available }}</p>
+        <p>Waiting: {{ serverLoad.waiting }}</p>
+    </div>
+</ng-container>

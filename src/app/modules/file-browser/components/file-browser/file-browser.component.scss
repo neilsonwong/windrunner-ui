@@ -1,11 +1,9 @@
-@import "src/styles/sizes";
-@import "src/styles/colours";
-@import "src/styles/grid-layout";
+@import "src/styles/screen-sizes";
 
 :host {
     position: relative;
     display: block;
-    margin-top: $main-content-upshift;
+    margin-top: var(--main-content-upshift);
 }
 
 .grid-layout {
@@ -14,7 +12,7 @@
 
 header {
     h2 {
-        color: $colour-text-bright;
+        color: var(--colour-text-bright);
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: .1rem;
@@ -28,21 +26,21 @@ header {
     .bread-crumbs {
         margin: 0.83em 0;
 
-        color: $colour-text-bright;
+        color: var(--colour-text-bright);
         // font-size: 1.5rem;
         font-size: 1.5em;
         text-align: right;
     }
 
     & > * {
-        min-width: $card-min-width;
+        min-width: var(--card-min-width);
     }
 }
 
 @media (max-width: $layout-2-col-screen-max) {
     header .bread-crumbs {
         font-size: 1.25em;
-        max-height: $grid-header-default-height;
+        max-height: var(--grid-header-default-height);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
