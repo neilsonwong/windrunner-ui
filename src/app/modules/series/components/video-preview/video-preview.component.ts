@@ -1,21 +1,22 @@
-import { Component, Input, OnChanges, HostListener, OnDestroy } from '@angular/core';
+import { Component, Input, OnChanges, HostListener, OnDestroy, ElementRef, OnInit } from '@angular/core';
 import { Video, FileKind } from 'src/app/modules/shared/models/Files';
 import { API_ROUTES } from 'src/app/modules/core/routes';
-import { Subject, of, Observable, Subscription, timer } from 'rxjs';
-import { tap, takeUntil, delay, switchMap, map } from 'rxjs/operators';
+import { Subject, of, Observable, Subscription, timer, interval } from 'rxjs';
+import { tap, takeUntil, delay, switchMap, map, shareReplay, filter } from 'rxjs/operators';
 import { AgentService } from 'src/app/modules/core/services/agent.service';
 import { isVideo } from 'src/app/utils/fileTypeUtils';
 import { PendingResourceRetrievalService } from 'src/app/modules/core/services/pending-resource-retrieval.service';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
+import { VisibilityService } from 'src/app/modules/core/services/visibility.service';
 
 @Component({
   selector: 'app-video-preview',
   templateUrl: './video-preview.component.html',
   styleUrls: ['./video-preview.component.scss']
 })
-export class VideoPreviewComponent implements OnChanges, OnDestroy {
+export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() video: FileKind;
-  
+
   nextIndex: number = 1;
   index: number = 0;
   fading: boolean;
@@ -27,11 +28,21 @@ export class VideoPreviewComponent implements OnChanges, OnDestroy {
   animateThumbnails: boolean = false;
   stopAnimating: Subject<boolean> = new Subject<boolean>();
 
+  visibility$: Observable<boolean>;
+  isVisible$: Observable<boolean>;
+  notVisible$: Observable<boolean>;
+
   subs: Array<Subscription> = [];
 
   constructor(private agentService: AgentService,
+    private visibilityService: VisibilityService,
     private pendingService: PendingResourceRetrievalService,
+    private elRef: ElementRef,
     private fileListService: FileListService) { }
+
+  ngOnInit(): void {
+    this.setupRandomRotation();
+  }
 
   ngOnDestroy(): void {
     this.subs.forEach((sub: Subscription) => {
@@ -47,6 +58,27 @@ export class VideoPreviewComponent implements OnChanges, OnDestroy {
           .pipe(tap((updated: Video) => this.handleUpdatedValue(updated))).subscribe()
       );
     }
+  }
+
+  setupRandomRotation() {
+    this.visibility$ = this.visibilityService.elementInSight(this.elRef);
+    this.isVisible$ = this.visibility$.pipe(filter(e => e));
+    this.notVisible$ = this.visibility$.pipe(filter(e => e === false));
+    this.subs.push(
+      this.isVisible$.pipe(
+        tap(() => this.randomRotation())
+      ).subscribe()
+    );
+  }
+
+  randomRotation() {
+    const randomDelay = Math.random() * 60000;
+    this.subs.push(
+      timer(randomDelay, 60000).pipe(
+        takeUntil(this.notVisible$),
+        switchMap(() => this.rotateThumbnails())
+      ).subscribe()
+    );
   }
 
   populateVideoValues(): boolean {
@@ -77,14 +109,14 @@ export class VideoPreviewComponent implements OnChanges, OnDestroy {
   }
 
   // super lazy way and NEEDS fast internet lol
-  rotateThumbnails():void {
+  tryRotateThumbnails(): void {
     timer(0, 2000).pipe(
       takeUntil(this.stopAnimating),
-      switchMap(() => this.moveIndices()),
+      switchMap(() => this.rotateThumbnails()),
     ).subscribe();
   }
 
-  moveIndices(): Observable<any> {
+  rotateThumbnails(): Observable<any> {
     return of('').pipe(
       tap(() => {
         // start fading
@@ -110,13 +142,13 @@ export class VideoPreviewComponent implements OnChanges, OnDestroy {
   private onHover(isHovered: boolean) {
     this.animateThumbnails = isHovered;
     if (this.animateThumbnails) {
-      this.rotateThumbnails();
+      this.tryRotateThumbnails();
     }
     else {
       this.stopAnimating.next(true);
     }
   }
- 
+
   playFile() {
     this.agentService.triggerPlay(this.video.rel).subscribe((res: boolean) => {
       if (res) {

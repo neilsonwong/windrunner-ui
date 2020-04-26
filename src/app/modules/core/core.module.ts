@@ -7,6 +7,7 @@ import { HeaderTweakService } from './services/header-tweak.service';
 import { PendingResourceRetrievalService } from './services/pending-resource-retrieval.service';
 import { ImageResolverService } from './services/image-resolver.service';
 import { AgentService } from './services/agent.service';
+import { VisibilityService } from './services/visibility.service';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { AgentService } from './services/agent.service';
     HeaderTweakService,
     PendingResourceRetrievalService,
     ImageResolverService,
+    VisibilityService
   ]
 })
 export class CoreModule {
