@@ -139,7 +139,7 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   @HostListener('hoverChange', ['$event'])
-  private onHover(isHovered: boolean) {
+  onHover(isHovered: boolean) {
     this.animateThumbnails = isHovered;
     if (this.animateThumbnails) {
       this.tryRotateThumbnails();
@@ -155,5 +155,9 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
         console.log(`successly triggered play for ${this.video.rel}`);
       }
     });
+  }
+
+  _isVideo(file: FileKind): file is Video {
+      return isVideo(file);
   }
 }

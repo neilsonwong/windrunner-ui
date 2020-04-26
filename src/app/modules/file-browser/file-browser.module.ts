@@ -7,9 +7,10 @@ import { FileBrowserComponent } from './components/file-browser/file-browser.com
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { LeafListViewComponent } from './components/leaf-list-view/leaf-list-view.component';
 import { LeafLineViewComponent } from './components/leaf-line-view/leaf-line-view.component';
+import { AbstractLeafViewComponent } from './components/abstract-leaf-view/abstract-leaf-view.component';
 
 @NgModule({
-  declarations: [ListViewComponent, LeafListViewComponent, FileBrowserComponent, LeafLineViewComponent],
+  declarations: [AbstractLeafViewComponent, ListViewComponent, LeafListViewComponent, FileBrowserComponent, LeafLineViewComponent],
   imports: [
     CommonModule,
     SharedModule,

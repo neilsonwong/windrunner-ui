@@ -7,7 +7,7 @@ import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { shareReplay, map, switchMap, tap, share, take } from 'rxjs/operators';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 import { isVideo } from 'src/app/utils/fileTypeUtils';
-import VIDEO_LISTS from 'src/app/modules/shared/models/videoLists.enum';
+import VIDEO_LISTS from 'src/app/modules/shared/models/VideoLists.enum';
 
 @Component({
   selector: 'app-series',

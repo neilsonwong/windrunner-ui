@@ -1,0 +1,17 @@
+.info-box {
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    
+    table.two-col {
+        border-spacing: 0;
+
+        td:first-child {
+            font-weight: 600;
+            min-width: 12rem;
+        }
+
+        td {
+            padding: 0;
+        }
+    }
+}

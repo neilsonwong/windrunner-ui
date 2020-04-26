@@ -1,0 +1,18 @@
+:host {
+    display: block;
+    position: relative;
+    margin-top: var(--main-content-upshift);
+}
+
+.flavour {
+    position: absolute;
+    width: calc(0.75 * var(--app-width));
+    top: 0;
+    right: 0;
+
+    .quote {
+        font-size: 1.2rem;
+        text-align: right;;
+        font-style: italic;
+    }
+}

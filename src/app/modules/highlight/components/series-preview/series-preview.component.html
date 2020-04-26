@@ -1,4 +1,4 @@
-<ng-container *ngIf="identified; else genericDir">
+<ng-container *ngIf="_isSeries(series); else genericDir">
     <div class="series-preview-thumbnail">
         <a [routerLink]="[seriesLink]">
             <div *ngIf="series.newFiles" class="badge">{{ series.newFiles.length }}</div>

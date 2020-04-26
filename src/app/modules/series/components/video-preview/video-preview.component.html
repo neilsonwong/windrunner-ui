@@ -1,4 +1,4 @@
-<ng-container *ngIf="isVideo; else unloadedVideo">
+<ng-container *ngIf="_isVideo(video); else unloadedVideo">
     <!-- <div class="video-details"> -->
         <div class="video-thumbnail">
             <ng-container *ngIf="fullyLoaded; else loadingThumb">

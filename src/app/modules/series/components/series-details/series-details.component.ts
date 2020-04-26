@@ -5,7 +5,7 @@ import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 import { Observable } from 'rxjs';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { ImageResolverService } from 'src/app/modules/core/services/image-resolver.service';
-import { DirectoryKind, DetailKind } from 'src/app/modules/shared/models/Files';
+import { DirectoryKind, DetailKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 
 @Component({
@@ -98,6 +98,14 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
   updateSeriesOption(newAniListId: number) {
     this.seriesOptionChange.emit(newAniListId);
     this.editing = false;
+  }
+
+  refreshFileData() {
+    
+  }
+
+  _isSeries(dir: DetailKind): dir is SeriesDirectory {
+      return isSeries(dir);
   }
 }
 

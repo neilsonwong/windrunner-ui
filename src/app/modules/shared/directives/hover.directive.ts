@@ -38,12 +38,12 @@ export class HoverDirective implements OnInit, OnDestroy {
   }
 
   @HostListener(EVENT_MOUSE_ENTER)
-  private onMouseEnter() {
+  onMouseEnter() {
     this.mouseEnter$.next(true);
   }
 
   @HostListener(EVENT_MOUSE_LEAVE)
-  private onMouseLeave() {
+  onMouseLeave() {
     this.mouseOut$.next(false);
   }
 

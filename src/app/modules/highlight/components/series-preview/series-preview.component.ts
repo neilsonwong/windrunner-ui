@@ -73,12 +73,16 @@ export class SeriesPreviewComponent implements OnChanges {
   }
 
   @HostListener('hoverChange', ['$event'])
-  private onHover(isHovered: boolean) {
+  onHover(isHovered: boolean) {
     if (isHovered) {
       this.headerTweakService.showBanner(this.bannerImage);
     }
     else {
       this.headerTweakService.removeBanner();
     }
+  }
+
+  _isSeries(dir: DirectoryKind): dir is SeriesDirectory {
+      return isSeries(dir);
   }
 }

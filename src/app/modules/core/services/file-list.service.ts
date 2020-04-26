@@ -7,7 +7,7 @@ import PromiseStatus from '../../shared/models/PromiseStatus';
 import { ResultData, FolderPathData } from '../../shared/models/GenericData';
 import { SeriesOptions, SeriesOptionUpdate } from '../../shared/models/SeriesOptions';
 import ServerLoad from '../../shared/models/ServerLoad';
-import VIDEO_LISTS from '../../shared/models/videoLists.enum';
+import VIDEO_LISTS from '../../shared/models/VideoLists.enum';
 
 @Injectable({
   providedIn: 'root'

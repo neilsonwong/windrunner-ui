@@ -1,5 +1,12 @@
 <app-series-list
     listName="お勧め"
+    [first]="true"
     [seriesList]="recommended$ | async"
     emptyText="nothing makes the cut">
 </app-series-list>
+<div class="flavour">
+    <div class="quote">
+        <p>"Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled trainers should try to win with their favorites."</p>
+        <p>- Karen (Pokemon Gold/Silver)</p>
+    </div>
+</div>

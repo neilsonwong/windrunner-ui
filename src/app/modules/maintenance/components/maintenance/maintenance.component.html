@@ -1,9 +1,39 @@
-<ng-container *ngIf="(serverLoad$ | async) as serverLoad">
+<h2>Maintenance</h2>
+
+<div class="server-info info-box">
     <h3>Server Load</h3>
-    <div *ngIf="serverLoad">
-        <p>Max Workers: {{ serverLoad.max }}</p>
-        <p>Size: {{ serverLoad.size }}</p>
-        <p>Available: {{ serverLoad.available }}</p>
-        <p>Waiting: {{ serverLoad.waiting }}</p>
+    <table class="two-col">
+        <tr>
+            <td>API Url:</td>
+            <td>{{ apiUrl }}</td>
+        </tr>
+        <tr>
+            <td>Agent Url:</td>
+            <td>{{ agentUrl }}</td>
+        </tr>
+    </table>
+</div>
+
+<ng-container *ngIf="(serverLoad$ | async) as serverLoad">
+    <div class="info-box" *ngIf="serverLoad">
+        <h3>Server Load</h3>
+        <table class="two-col">
+            <tr>
+                <td>Max Workers:</td>
+                <td>{{ serverLoad.max }}</td>
+            </tr>
+            <tr>
+                <td>Size:</td>
+                <td>{{ serverLoad.size }}</td>
+            </tr>
+            <tr>
+                <td>Available:</td>
+                <td>{{ serverLoad.available }}</td>
+            </tr>
+            <tr>
+                <td>Waiting:</td>
+                <td>{{ serverLoad.waiting }}</td>
+            </tr>
+        </table>
     </div>
 </ng-container>
