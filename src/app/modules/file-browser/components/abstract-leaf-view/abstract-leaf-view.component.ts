@@ -3,7 +3,7 @@ import { DetailKind, FileKind } from 'src/app/modules/shared/models/Files';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 import { isVideo, isDirectoryKind, isSeries } from 'src/app/utils/fileTypeUtils';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PendingResourceRetrievalService } from 'src/app/modules/core/services/pending-resource-retrieval.service';
 import { tap } from 'rxjs/operators';
 
@@ -13,16 +13,26 @@ export class AbstractLeafViewComponent implements OnChanges {
   url: string;
   icon: string;
 
+  subs: Array<Subscription> = [];
+
   constructor(protected fileListService: FileListService,
     protected pendingService: PendingResourceRetrievalService) { }
+
+  ngOnDestroy(): void {
+    this.subs.forEach((sub: Subscription) => {
+      sub.unsubscribe();
+    });
+  }
 
   ngOnChanges() {
     if (this.file) {
       this.populateValues();
       if (!isVideo(this.file)) {
         // video is our final state, we good already!
-        this.pendingService.waitForPromised<DetailKind>(this.file.promised, this.getDetails$())
-          .pipe(tap((updated: DetailKind) => this.handleUpdatedValue(updated))).subscribe();
+        this.subs.push(
+          this.pendingService.waitForPromised<DetailKind>(this.file.promised, this.getDetails$())
+            .pipe(tap((updated: DetailKind) => this.handleUpdatedValue(updated))).subscribe()
+        );
       }
     }
   }

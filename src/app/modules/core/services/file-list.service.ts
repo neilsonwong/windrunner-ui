@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { DirectoryKind, FileKind, DetailKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
 import { API_ROUTES } from '../routes';
 import PromiseStatus from '../../shared/models/PromiseStatus';
-import { ResultData, FolderPathData } from '../../shared/models/GenericData';
+import { ResultData, FolderPathData, RecentlyChangedData } from '../../shared/models/GenericData';
 import { SeriesOptions, SeriesOptionUpdate } from '../../shared/models/SeriesOptions';
 import ServerLoad from '../../shared/models/ServerLoad';
 import VIDEO_LISTS from '../../shared/models/VideoLists.enum';
@@ -21,19 +21,23 @@ export class FileListService {
     return this.http.get<FileKind[]>(url);
   }
 
-  getRecent(): Observable<DirectoryKind[]> {
+  getRecent(): Observable<RecentlyChangedData> {
     const url = API_ROUTES.GET_RECENT;
-    return this.http.get<DirectoryKind[]>(url);
+    return this.http.get<RecentlyChangedData>(url);
   }
 
   search(query: string): Observable<FileKind[]> {
     return of(null);
   }
 
-  getFileDetail(rel: string): Observable<DetailKind> {
+  getFileDetail(rel: string, refresh?: boolean): Observable<DetailKind> {
+    const params = (refresh === true) ?
+      new HttpParams().set('refresh', 'plz') :
+      new HttpParams();
+
     const encodedRelPath = encodeURIComponent(rel);
     const url = `${API_ROUTES.GET_FILE_DETAILS}/${encodedRelPath}`;
-    return this.http.get<DetailKind>(url);
+    return this.http.get<DetailKind>(url, { params });
   }
 
   getPromiseStatus(promiseId: string): Observable<PromiseStatus> {
@@ -93,5 +97,10 @@ export class FileListService {
     const encodedDir = encodeURIComponent(rel);
     const url = `${API_ROUTES.DEL_FROM_LIST}/${listType}/${encodedDir}`;
     return this.http.delete<ResultData>(url);
+  }
+
+  pruneThumbnails(): Observable<any> {
+    const url = API_ROUTES.IMG_PRUNE_THUMBNAIL;
+    return this.http.post<ResultData>(url, {});
   }
 }

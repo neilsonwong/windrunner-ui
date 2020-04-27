@@ -13,6 +13,7 @@ export const API_ROUTES = {
     GET_FILE_DETAILS: `${api}/details`,
     IMG_THUMBNAIL: `${api}/img/thumbs`,
     IMG_SERIES: `${api}/img/series`,
+    IMG_PRUNE_THUMBNAIL: `${api}/img/prune`,
     GET_PENDING_RESOURCE_STATUS: `${api}/resource`,
     GET_SERIES_OPTIONS: `${api}/series/options`,
     UPDATE_SERIES_OPTION: `${api}/series`,

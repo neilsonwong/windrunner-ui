@@ -19,6 +19,7 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
   @Input() optionsList$: Observable<SeriesOptions>;
   @Output() favouriteChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() recommendChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() refreshFolder: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() seriesOptionChange: EventEmitter<number> = new EventEmitter<number>();
 
   identified: boolean;
@@ -100,7 +101,7 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
   }
 
   refreshFileData() {
-    
+    this.refreshFolder.emit(true);
   }
 
   _isSeries(dir: DetailKind): dir is SeriesDirectory {

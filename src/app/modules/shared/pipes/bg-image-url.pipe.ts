@@ -6,6 +6,9 @@ export class BgImagePipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) { }
 
   transform(imageUrl: string): SafeStyle {
+    if (!imageUrl) {
+      return this.sanitizer.bypassSecurityTrustStyle('none');
+    }
     const imgStyle = `url(${imageUrl})`;
     return this.sanitizer.bypassSecurityTrustStyle(imgStyle);
   }

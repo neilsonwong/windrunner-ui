@@ -1,7 +1,7 @@
-import { Component, HostBinding, HostListener, OnChanges, Input } from '@angular/core';
+import { Component, HostBinding, HostListener, OnChanges, Input, OnDestroy } from '@angular/core';
 import { SeriesDirectory, DirectoryKind } from 'src/app/modules/shared/models/Files';
 import { isSeries } from 'src/app/utils/fileTypeUtils';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { map, tap } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { ImageResolverService } from 'src/app/modules/core/services/image-resolv
   templateUrl: './series-preview.component.html',
   styleUrls: ['./series-preview.component.scss']
 })
-export class SeriesPreviewComponent implements OnChanges {
+export class SeriesPreviewComponent implements OnChanges, OnDestroy {
   @Input() series: DirectoryKind;
 
   identified: boolean;
@@ -23,11 +23,19 @@ export class SeriesPreviewComponent implements OnChanges {
   seriesLink: string;
   folderLink: string;
 
+  subs: Array<Subscription> = [];
+
   constructor(
     private imgResolver: ImageResolverService,
     private headerTweakService: HeaderTweakService,
     private pendingService: PendingResourceRetrievalService,
     protected fileListService: FileListService) { }
+
+  ngOnDestroy(): void {
+    this.subs.forEach((sub: Subscription) => {
+      sub.unsubscribe();
+    });
+  }
 
   @HostBinding('class.series') get isSeries() {
     return this.identified;
@@ -36,8 +44,10 @@ export class SeriesPreviewComponent implements OnChanges {
   ngOnChanges() {
     if (!this.populateSeriesValues()) {
       // this is a normal dir atm
-      this.pendingService.waitForPromised<SeriesDirectory>(this.series.promised, this.getDetails$())
-        .pipe(tap((updated: SeriesDirectory) => this.handleUpdatedValue(updated))).subscribe();
+      this.subs.push(
+        this.pendingService.waitForPromised<SeriesDirectory>(this.series.promised, this.getDetails$())
+          .pipe(tap((updated: SeriesDirectory) => this.handleUpdatedValue(updated))).subscribe()
+      );
     }
   }
 

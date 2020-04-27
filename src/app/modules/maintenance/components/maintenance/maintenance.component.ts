@@ -22,4 +22,8 @@ export class MaintenanceComponent implements OnInit {
       switchMap(() => this.fileListService.getServerLoad())
     );
   }
+
+  pruneThumbnails() {
+    this.fileListService.pruneThumbnails().subscribe();
+  }
 }

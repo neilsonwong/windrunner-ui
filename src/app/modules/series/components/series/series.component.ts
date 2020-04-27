@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { FileKind, DetailKind } from 'src/app/modules/shared/models/Files';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { shareReplay, map, switchMap, tap } from 'rxjs/operators';
+import { shareReplay, map, switchMap, tap, flatMap, mergeAll, concatMap, mergeMap } from 'rxjs/operators';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 import VIDEO_LISTS from 'src/app/modules/shared/models/VideoLists.enum';
 
@@ -15,6 +15,7 @@ import VIDEO_LISTS from 'src/app/modules/shared/models/VideoLists.enum';
 })
 export class SeriesComponent implements OnInit {
 
+  filePath$: Observable<string>;
   isFavourite$: Observable<boolean>;
   isRecommend$: Observable<boolean>;
   seriesDetails$: Observable<DetailKind>;
@@ -32,38 +33,43 @@ export class SeriesComponent implements OnInit {
     this.headerTweakService.setCompact();
 
     const urlChange$ = this.route.url.pipe(shareReplay());
-    const filePath$ = urlChange$.pipe(
+    this.filePath$ = urlChange$.pipe(
       map((e: UrlSegment[]) => this.getPlace(e)),
       tap((e: string) => { this.seriesPath = e; }),
       shareReplay()
     );
 
-    this.seriesDetails$ = filePath$.pipe(
+    this.seriesDetails$ = this.filePath$.pipe(
       switchMap((rel: string) => this.fileListService.getFileDetail(rel))
     );
 
-    this.isFavourite$ = filePath$.pipe(
+    this.isFavourite$ = this.filePath$.pipe(
       switchMap((rel: string) => this.fileListService.getInList(VIDEO_LISTS.FAV, rel)),
       map(e => e.result)
     );
 
-    this.isRecommend$ = filePath$.pipe(
+    this.isRecommend$ = this.filePath$.pipe(
       switchMap((rel: string) => this.fileListService.getInList(VIDEO_LISTS.REC, rel)),
       map(e => e.result)
     );
 
-    this.optionsList$ = filePath$.pipe(
+    this.optionsList$ = this.filePath$.pipe(
       switchMap((rel: string) => this.fileListService.getSeriesOptions(rel)),
       // clever manipulation
       shareReplay()
     );
 
-    this.seriesVideos$ = filePath$.pipe(
+    this.seriesVideos$ = this.getSeriesVideos();
+  }
+
+  private getSeriesVideos(): Observable<FileKind[]> {
+    return this.filePath$.pipe(
       switchMap((rel: string) => this.fileListService.getDirectoryListing(rel)),
       map((files: FileKind[]) => {
         const isVideoRegExp = new RegExp(/(\.(avi|mkv|ogm|mp4|flv|ogg|wmv|rm|mpeg|mpg)$)/);
         return files.filter((file: FileKind) => (isVideoRegExp.test(file.name)));
-      })
+      }),
+      shareReplay(),
     );
   }
 
@@ -82,5 +88,13 @@ export class SeriesComponent implements OnInit {
   updateSeriesOption(newAniListId: number) {
     this.seriesDetails$ = this.fileListService.updateSeriesOption(this.seriesPath, newAniListId);
     this.seriesDetails$.subscribe();
+  }
+
+  refreshFolderFileDetails(refresh: boolean) {
+    // get the old vals
+    this.seriesVideos$ = this.seriesVideos$.pipe(
+      map((files: FileKind[]) => files.map(file => this.fileListService.getFileDetail(file.rel, true))),
+      mergeMap(q => forkJoin(q))
+    );
   }
 }
