@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { Observable } from 'rxjs';
-import { FileKind, DetailKind, SeriesDirectory, Video } from 'src/app/modules/shared/models/Files';
+import { FileKind, DetailKind } from 'src/app/modules/shared/models/Files';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { shareReplay, map, switchMap, tap, share, take } from 'rxjs/operators';
+import { shareReplay, map, switchMap, tap } from 'rxjs/operators';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
-import { isVideo } from 'src/app/utils/fileTypeUtils';
 import VIDEO_LISTS from 'src/app/modules/shared/models/VideoLists.enum';
 
 @Component({
@@ -77,7 +76,6 @@ export class SeriesComponent implements OnInit {
   }
 
   updateRecommendStatus(isRecommended: boolean) {
-    console.log('updating recommended list ' + isRecommended)
     this.fileListService.toggleListItem(VIDEO_LISTS.REC, this.seriesPath, isRecommended).subscribe();
   }
 

@@ -1,6 +1,6 @@
 import { Directive, OnInit, ElementRef, Input, Renderer2 } from '@angular/core';
 import { interval, Observable } from 'rxjs';
-import { filter, take, map, tap } from 'rxjs/operators';
+import { filter, take, map } from 'rxjs/operators';
 
 
 @Directive({

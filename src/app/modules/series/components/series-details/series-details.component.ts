@@ -1,11 +1,10 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { SafeStyle, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { isSeries, isInvalid } from 'src/app/utils/fileTypeUtils';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
 import { Observable } from 'rxjs';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { ImageResolverService } from 'src/app/modules/core/services/image-resolver.service';
-import { DirectoryKind, DetailKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
+import { DetailKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 
 @Component({

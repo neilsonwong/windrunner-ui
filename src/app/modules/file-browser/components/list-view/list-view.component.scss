@@ -4,11 +4,29 @@
     padding: 1rem 0;
     margin-bottom: 1rem;;
 
-    .left .back-button {
-        margin-right: 10px;
+    .left {
+        a {
+            margin-right: 2rem;
+            display: inline-block;
+            vertical-align: middle;
+            width: 18px;
+            height: 18px;
+            background-color: var(--colour-text);
+
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
 
         a:hover {
-            color: var(--colour-text-bright);
+            background-color: var(--colour-text-bright);
+        }
+
+        .up-button {
+            mask: url('/assets/icons/up.svg');
+        }
+
+        .back-button {
+            mask: url('/assets/icons/back2.svg');
         }
     }
 

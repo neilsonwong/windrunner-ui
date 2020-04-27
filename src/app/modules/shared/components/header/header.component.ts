@@ -3,8 +3,7 @@ import { Location } from '@angular/common';
 import { LinkData } from 'src/app/modules/shared/models/LinkData';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { Observable } from 'rxjs';
-import { map, tap, filter } from 'rxjs/operators';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { tap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -16,14 +15,13 @@ export class HeaderComponent implements OnInit {
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
   highlight: string;
-  bannerUpdates$: Observable<SafeStyle>;
+  bannerUpdates$: Observable<string>;
   bannerOpacity: number = 0;
 
   compact$: Observable<boolean>;
   transparent$: Observable<boolean>;
 
   constructor(private location: Location,
-    private sanitizer: DomSanitizer,
     private headerTweakService: HeaderTweakService) { }
 
   ngOnInit() {
@@ -34,7 +32,7 @@ export class HeaderComponent implements OnInit {
     this.bannerUpdates$ = this.headerTweakService.getBannerUpdates().pipe(
       tap(url => (this.bannerOpacity = (url) ? 0.1 : 0)),
       filter(url => url !== ''),
-      map(url => (this.sanitizer.bypassSecurityTrustStyle(`url(${url})`)))
+      // map(url => (this.sanitizer.bypassSecurityTrustStyle(`url(${url})`)))
     );
     this.compact$ = this.headerTweakService.getCompactUpdates();
     this.transparent$ = this.headerTweakService.getTransparentUpdates();

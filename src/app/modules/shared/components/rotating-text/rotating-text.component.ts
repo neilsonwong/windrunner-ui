@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
-import { tap, delay, take } from 'rxjs/operators';
+import { tap, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rotating-text',

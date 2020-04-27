@@ -12,5 +12,9 @@
         </ng-container>
     </div>
 </header>
-<app-list-view [files]="fileList$ | async" [loading]="loading" [details]="details$ | async">
+<app-list-view
+    [files]="fileList$ | async"
+    [loading]="loading"
+    [details]="details$ | async"
+    [parent]="parent$ | async">
 </app-list-view>

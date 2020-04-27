@@ -20,6 +20,7 @@ export class FileBrowserComponent implements OnInit {
   fileList$: Observable<FileKind[]>;
   details$: Observable<DetailKind>;
   bookmarks$: Observable<Map<string, number>>;
+  parent$: Observable<LinkData>;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +28,13 @@ export class FileBrowserComponent implements OnInit {
 
   ngOnInit() {
     const urlChange$ = this.route.url.pipe(shareReplay());
-    this.breadCrumbs$ = urlChange$.pipe(map((e: UrlSegment[]) => this.getBreadCrumbs(e)));
+    this.breadCrumbs$ = urlChange$.pipe(map((e: UrlSegment[]) => this.getBreadCrumbs(e)), shareReplay());
+    this.parent$ = this.breadCrumbs$.pipe(
+      map((crumbs: Array<string|LinkData>) => {
+        const links: Array<LinkData> = crumbs.filter((e: LinkData | string): e is LinkData => (e.hasOwnProperty('url')));
+        return links.length > 1 ?
+          links[links.length - 2] : null;
+      }));
 
     const empty = of([]).pipe(tap(() => { this.loading = true; }));
     this.place$ = urlChange$.pipe(
@@ -67,5 +74,4 @@ export class FileBrowserComponent implements OnInit {
 
     return headingTitle;
   }
-
 }

@@ -1,7 +1,7 @@
 import { Observable, of, throwError } from 'rxjs';
 import { FileListService } from './file-list.service';
 import { Injectable } from '@angular/core';
-import { delay, switchMap, retry, tap, catchError, take } from 'rxjs/operators';
+import { delay, switchMap, retry, catchError, take } from 'rxjs/operators';
 import PromiseStatus from '../../shared/models/PromiseStatus';
 
 @Injectable({

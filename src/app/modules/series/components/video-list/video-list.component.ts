@@ -13,13 +13,6 @@ export class VideoListComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.videos) {
-      console.time('sort');
-      // resort the video files
-      // const vals = this.videos.map((vid) => {
-      //   const epData = EpisodePipe.inferEpisodeData(vid.name);
-      //   return epData;
-      // });
-
       this.videos.sort((a: FileKind, b: FileKind) => {
         const aData = EpisodePipe.inferEpisodeData(a.name);
         const bData = EpisodePipe.inferEpisodeData(b.name);
@@ -41,7 +34,6 @@ export class VideoListComponent implements OnChanges {
           }
         }
       });
-      console.timeEnd('sort');
     }
   }
 }

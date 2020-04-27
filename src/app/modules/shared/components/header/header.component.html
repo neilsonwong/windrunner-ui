@@ -21,7 +21,7 @@
             <app-agent-status></app-agent-status>
         </div>
     </div>
-    <div [style.background-image]="(bannerUpdates$ | async)"
+    <div [style.background-image]="(bannerUpdates$ | async) | bgImage"
         [style.opacity]="bannerOpacity"
         class="bg-underlay"></div>
 </div>

@@ -24,7 +24,6 @@ export class AgentService {
     const endpoint = AGENT_ROUTES.HELLO;
     return this.http.get(endpoint, { observe: 'response', responseType: 'text' })
       .pipe(map(resp => {
-        console.log(resp);
         return resp.status === 200;
       }));
   }

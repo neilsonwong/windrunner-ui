@@ -43,7 +43,6 @@ export class FileListService {
   }
 
   getSeriesOptions(rel: string): Observable<SeriesOptions> {
-    // return of(fake);
     const encodedRelPath = encodeURIComponent(rel);
     const url = `${API_ROUTES.GET_SERIES_OPTIONS}/${encodedRelPath}`;
     return this.http.get<SeriesOptions>(url);

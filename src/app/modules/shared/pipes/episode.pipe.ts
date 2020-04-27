@@ -29,7 +29,7 @@ export class EpisodePipe implements PipeTransform {
     }
 
     // still nothing? just return cleaned :(
-    console.log(cleaned);
+    console.log(`couldn't guess ${cleaned}`);
     return cleaned;
   }
 

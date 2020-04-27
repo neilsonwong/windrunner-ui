@@ -1,6 +1,6 @@
 import { Directive, HostListener, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Subject, Observable, merge, race, Subscription, of } from 'rxjs';
-import { takeUntil, delay, switchMap, filter, tap, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, merge, Subscription, of } from 'rxjs';
+import { takeUntil, delay, switchMap, tap, distinctUntilChanged } from 'rxjs/operators';
 
 const EVENT_MOUSE_ENTER = 'mouseenter';
 const EVENT_MOUSE_LEAVE = 'mouseleave';

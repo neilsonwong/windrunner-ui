@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges } from "@angular/core";
 import { DetailKind, FileKind } from 'src/app/modules/shared/models/Files';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
-import { isVideo, isDirectoryKind } from 'src/app/utils/fileTypeUtils';
+import { isVideo, isDirectoryKind, isSeries } from 'src/app/utils/fileTypeUtils';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { Observable } from 'rxjs';
 import { PendingResourceRetrievalService } from 'src/app/modules/core/services/pending-resource-retrieval.service';
-import { tap, take } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Component({ template: '' })
 export class AbstractLeafViewComponent implements OnChanges {
@@ -29,7 +29,10 @@ export class AbstractLeafViewComponent implements OnChanges {
 
   populateValues() {
     // rel contains a slash already
-    if (isDirectoryKind(this.file)) {
+    if (isSeries(this.file)) {
+      this.url = `${UI_ROUTES.SERIES}${this.file.rel}`;
+    }
+    else if (isDirectoryKind(this.file)) {
       this.url = `${UI_ROUTES.BROWSE}${this.file.rel}`;
     }
     this.icon = this.file.type.toLocaleLowerCase();

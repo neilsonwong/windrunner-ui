@@ -88,9 +88,9 @@
                     </div>
                 </div>
                 <div class="series-info-edit">
-                    <ng-container *ngIf="editing && _isSeries(series) && (optionsList$ | async) as optionsList">
+                    <ng-container *ngIf="editing && _isSeries(series)">
                         <app-series-data-select
-                            [optionsList]="optionsList"
+                            [optionsList]="(optionsList$ | async)"
                             [current]="series.aniListData?.id"
                             (seriesOptionChange)="updateSeriesOption($event)">
                         </app-series-data-select>

@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, HostListener, OnDestroy, ElementRef, OnInit } from '@angular/core';
 import { Video, FileKind } from 'src/app/modules/shared/models/Files';
 import { API_ROUTES } from 'src/app/modules/core/routes';
-import { Subject, of, Observable, Subscription, timer, interval } from 'rxjs';
-import { tap, takeUntil, delay, switchMap, map, shareReplay, filter } from 'rxjs/operators';
+import { Subject, of, Observable, Subscription, timer } from 'rxjs';
+import { tap, takeUntil, delay, switchMap, map, filter } from 'rxjs/operators';
 import { AgentService } from 'src/app/modules/core/services/agent.service';
 import { isVideo } from 'src/app/utils/fileTypeUtils';
 import { PendingResourceRetrievalService } from 'src/app/modules/core/services/pending-resource-retrieval.service';

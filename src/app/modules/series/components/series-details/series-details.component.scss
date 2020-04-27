@@ -161,7 +161,7 @@
                 mask: url('/assets/icons/info.svg');
             }
             .back {
-                mask: url('/assets/icons/back.svg');
+                mask: url('/assets/icons/back2.svg');
             }
             .refresh {
                 mask: url('/assets/icons/refresh.svg');
@@ -200,17 +200,13 @@
     }
 
     .series-info-edit {
-        padding: 2rem 0;
+        padding: 2rem;
         width: calc(var(--app-width) - var(--action-bar-width));
         min-height: var(--series-info-height);
         max-height: var(--series-info-height);
 
         transition: max-height 0.5s ease;
     }
-
-    // .series-info-edit {
-    //     background-color: red;
-    // }
 
     &.editing {
         transform: translateX(calc(-1 * var(--app-width)))

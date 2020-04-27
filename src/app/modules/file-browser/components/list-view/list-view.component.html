@@ -1,8 +1,7 @@
 <div class="navigation-options">
     <div class="left">
-        <div class="back-button">
-            <a (click)="goBack()">Back</a>
-        </div>
+        <a class="back-button" (click)="goBack()"></a>
+        <a *ngIf="parent" class="up-button" [routerLink]="[parent.url]"></a>
     </div>
     <div class="middle">
         <div class="bookmarks">

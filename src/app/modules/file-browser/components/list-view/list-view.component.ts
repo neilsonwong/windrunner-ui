@@ -2,8 +2,9 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { FileKind, DetailKind } from 'src/app/modules/shared/models/Files';
 import DISPLAY_MODES from 'src/app/modules/shared/models/DisplayModes';
-import { isSeries, isDirectoryKind, isInvalid } from 'src/app/utils/fileTypeUtils';
+import { isDirectoryKind, isInvalid } from 'src/app/utils/fileTypeUtils';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
+import { LinkData } from 'src/app/modules/shared/models/LinkData';
 
 @Component({
   selector: 'app-list-view',
@@ -14,6 +15,7 @@ export class ListViewComponent implements OnInit, OnChanges {
   @Input() files: FileKind[];
   @Input() details: DetailKind;
   @Input() loading: boolean;
+  @Input() parent: LinkData;
 
   bookmarks: Map<string, number> = new Map<string, number>();
   seriesLink: string;
@@ -75,9 +77,5 @@ export class ListViewComponent implements OnInit, OnChanges {
 
   goBack() {
     this.location.back();
-  }
-
-  doSomething(a) {
-    console.log(a)
   }
 }
