@@ -10,6 +10,7 @@
 </app-series-details>
 <ng-container *ngIf="(seriesRecentVideos$ | async) as recents">
     <app-video-list
+        *ngIf="recents.length > 0"
         listName="Latest"
         [videos]="recents">
     </app-video-list>
