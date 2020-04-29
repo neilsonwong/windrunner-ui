@@ -19,6 +19,7 @@ export class SeriesComponent implements OnInit {
   isFavourite$: Observable<boolean>;
   isRecommend$: Observable<boolean>;
   seriesDetails$: Observable<DetailKind>;
+  seriesRecentVideos$: Observable<FileKind[]>;
   seriesVideos$: Observable<FileKind[]>;
   optionsList$: Observable<SeriesOptions>;
   seriesPath: string;
@@ -60,6 +61,7 @@ export class SeriesComponent implements OnInit {
     );
 
     this.seriesVideos$ = this.getSeriesVideos();
+    this.seriesRecentVideos$ = this.getRecentVideos();
   }
 
   private getSeriesVideos(): Observable<FileKind[]> {
@@ -70,6 +72,16 @@ export class SeriesComponent implements OnInit {
         return files.filter((file: FileKind) => (isVideoRegExp.test(file.name)));
       }),
       shareReplay(),
+    );
+  }
+
+  private getRecentVideos(): Observable<FileKind[]> {
+    return this.filePath$.pipe(
+      switchMap((rel: string) => this.fileListService.getRecentlyChangedInFolder(rel)),
+      map((files: FileKind[]) => {
+        const isVideoRegExp = new RegExp(/(\.(avi|mkv|ogm|mp4|flv|ogg|wmv|rm|mpeg|mpg)$)/);
+        return files.filter((file: FileKind) => (isVideoRegExp.test(file.name)));
+      })
     );
   }
 

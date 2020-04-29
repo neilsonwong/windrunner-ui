@@ -1,0 +1,16 @@
+.video-list-name {
+    user-select: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    padding-top: 2rem;
+
+    .amount {
+        font-size: 1.5rem;
+        color: var(--colour-text-lighter);
+    }
+}
+
+.video-list {
+    padding: 2rem 0;
+}

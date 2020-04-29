@@ -1,4 +1,11 @@
-<div class="card-list grid-layout">
+<div *ngIf="listName"
+    class="video-list-name">
+    <h2>
+        {{ listName }}
+        <span class="amount">[{{ videos.length }}]</span>
+    </h2>
+</div>
+<div class="video-list card-list grid-layout">
     <app-video-preview
         *ngFor="let video of videos"
         [hoverable]="1000"

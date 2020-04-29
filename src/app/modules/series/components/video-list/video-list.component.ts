@@ -9,6 +9,8 @@ import { EpisodePipe } from 'src/app/modules/shared/pipes/episode.pipe';
 })
 export class VideoListComponent implements OnChanges {
   @Input() videos: FileKind[];
+  @Input() listName: string;
+
   constructor() { }
 
   ngOnChanges() {

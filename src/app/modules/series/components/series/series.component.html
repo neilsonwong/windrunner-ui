@@ -8,6 +8,13 @@
     (refreshFolder)="refreshFolderFileDetails($event)"
     (seriesOptionChange)="updateSeriesOption($event)">
 </app-series-details>
+<ng-container *ngIf="(seriesRecentVideos$ | async) as recents">
+    <app-video-list
+        listName="Latest"
+        [videos]="recents">
+    </app-video-list>
+</ng-container>
 <app-video-list
+    listName="Everything"
     [videos]="seriesVideos$ | async">
 </app-video-list>

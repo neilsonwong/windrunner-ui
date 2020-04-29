@@ -103,4 +103,10 @@ export class FileListService {
     const url = API_ROUTES.IMG_PRUNE_THUMBNAIL;
     return this.http.post<ResultData>(url, {});
   }
+
+  getRecentlyChangedInFolder(rel: string): Observable<FileKind[]> {
+    const encodedRelPath = encodeURIComponent(rel);
+    const url = `${API_ROUTES.GET_RECENTLY_CHANGED}/${encodedRelPath}`;
+    return this.http.get<FileKind[]>(url);
+  }
 }

@@ -10,6 +10,7 @@ export const API_ROUTES = {
     GET_IN_LIST: `${api}/vlist`,
     GET_BROWSE: `${api}/browse`,
     GET_RECENT: `${api}/recent`,
+    GET_RECENTLY_CHANGED: `${api}/recent`,
     GET_FILE_DETAILS: `${api}/details`,
     IMG_THUMBNAIL: `${api}/img/thumbs`,
     IMG_SERIES: `${api}/img/series`,
