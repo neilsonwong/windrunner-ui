@@ -10,7 +10,7 @@ export class VideoAppComponent implements OnInit {
 
   navigation: Array<LinkData> = [
     { text: 'Home', url: '/v' },
-    { text: 'Browse', url: '/v/browse' },
+    { text: 'Browse', url: '/v/browse/anime' },
     { text: 'お勧め', url: '/v/recommend' }
   ];
 

@@ -88,10 +88,10 @@
                     </div>
                 </div>
                 <div class="series-info-edit">
-                    <ng-container *ngIf="editing && _isSeries(series)">
+                    <ng-container *ngIf="editing">
                         <app-series-data-select
                             [optionsList]="(optionsList$ | async)"
-                            [current]="series.aniListData?.id"
+                            [current]="(_isSeries(series) && series.aniListData?.id) || null"
                             (seriesOptionChange)="updateSeriesOption($event)">
                         </app-series-data-select>
                     </ng-container>
