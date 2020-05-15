@@ -35,8 +35,15 @@
         <div class="content">
             <p class="studio">{{ series.aniListData.studio }}</p>
             <p class="source-media">{{ series.aniListData.source | sourceMedia | titlecase }}</p>
+
             <div class="bottom">
                 <p class="rel">{{ series.rel }}</p>
+                <button *ngIf="hidable"
+                    class="hide-button icon-button"
+                    [class.activated]="showHideButton"
+                    (click)="hideSeries()">
+                    <div class="button-icon hide"></div>
+                </button>
             </div>
         </div>
     </div>

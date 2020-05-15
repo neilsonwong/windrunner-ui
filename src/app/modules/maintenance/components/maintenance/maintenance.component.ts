@@ -4,6 +4,7 @@ import { Observable, timer } from 'rxjs';
 import ServerLoad from 'src/app/modules/shared/models/ServerLoad';
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service';
 
 @Component({
   selector: 'app-maintenance',
@@ -15,7 +16,8 @@ export class MaintenanceComponent implements OnInit {
   agentUrl: string = environment.agent;
 
   serverLoad$: Observable<ServerLoad>;
-  constructor(private fileListService: FileListService) { }
+  constructor(private fileListService: FileListService,
+    private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.serverLoad$ = timer(0, 2000).pipe(
@@ -25,5 +27,9 @@ export class MaintenanceComponent implements OnInit {
 
   pruneThumbnails() {
     this.fileListService.pruneThumbnails().subscribe();
+  }
+
+  clearLocalStorage() {
+    this.localStorageService.clear();
   }
 }

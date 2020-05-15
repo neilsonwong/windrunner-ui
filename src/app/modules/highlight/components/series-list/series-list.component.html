@@ -11,7 +11,9 @@
             *ngFor="let series of seriesList"
             [hoverable]="500"
             [series]="series"
-            class="card">
+            class="card"
+            [hidable]="itemsHidable"
+            (hide)="hideSeries($event)">
         </app-series-preview>
     </div>
 </ng-container>

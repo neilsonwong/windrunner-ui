@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, OnChanges, Input, OnDestroy } from '@angular/core';
+import { Component, HostBinding, HostListener, OnChanges, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { SeriesDirectory, DirectoryKind } from 'src/app/modules/shared/models/Files';
 import { isSeries } from 'src/app/utils/fileTypeUtils';
 import { Observable, Subscription } from 'rxjs';
@@ -16,6 +16,8 @@ import { ImageResolverService } from 'src/app/modules/core/services/image-resolv
 })
 export class SeriesPreviewComponent implements OnChanges, OnDestroy {
   @Input() series: DirectoryKind;
+  @Input() hidable: boolean = false;
+  @Output() hide: EventEmitter<string> = new EventEmitter<string>();
 
   identified: boolean;
   coverImage: string;
@@ -23,6 +25,7 @@ export class SeriesPreviewComponent implements OnChanges, OnDestroy {
   seriesLink: string;
   folderLink: string;
 
+  showHideButton: boolean;
   subs: Array<Subscription> = [];
 
   constructor(
@@ -83,16 +86,22 @@ export class SeriesPreviewComponent implements OnChanges, OnDestroy {
   }
 
   @HostListener('hoverChange', ['$event'])
-  onHover(isHovered: boolean) {
+  public onHover(isHovered: boolean): void {
     if (isHovered) {
       this.headerTweakService.showBanner(this.bannerImage);
+      this.showHideButton = true;
     }
     else {
       this.headerTweakService.removeBanner();
+      this.showHideButton = false;
     }
   }
 
-  _isSeries(dir: DirectoryKind): dir is SeriesDirectory {
+  public hideSeries(): void {
+    this.hide.emit(this.series.rel);
+  }
+
+  public _isSeries(dir: DirectoryKind): dir is SeriesDirectory {
       return isSeries(dir);
   }
 }

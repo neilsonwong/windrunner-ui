@@ -8,6 +8,7 @@ import { PendingResourceRetrievalService } from './services/pending-resource-ret
 import { ImageResolverService } from './services/image-resolver.service';
 import { AgentService } from './services/agent.service';
 import { VisibilityService } from './services/visibility.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,8 @@ import { VisibilityService } from './services/visibility.service';
     HeaderTweakService,
     PendingResourceRetrievalService,
     ImageResolverService,
-    VisibilityService
+    VisibilityService,
+    LocalStorageService
   ]
 })
 export class CoreModule {
