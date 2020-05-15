@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -19,6 +19,7 @@ import { FixLongWordsDirective } from './directives/fix-long-words.directive';
 import { BytesPipe } from './pipes/bytes.pipe';
 import { EpisodePipe } from './pipes/episode.pipe';
 import { AgentStatusComponent } from './components/agent-status/agent-status.component';
+import { NextEpisodePipe } from './pipes/next-episode.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,11 @@ import { AgentStatusComponent } from './components/agent-status/agent-status.com
     FixLongWordsDirective,
     BytesPipe,
     EpisodePipe,
+    NextEpisodePipe,
     AgentStatusComponent,
+  ],
+  providers: [
+    DatePipe
   ],
   imports: [
     CommonModule,
@@ -65,6 +70,7 @@ import { AgentStatusComponent } from './components/agent-status/agent-status.com
     SanitizeHtmlPipe,
     BytesPipe,
     EpisodePipe,
+    NextEpisodePipe,
   ]
 })
 export class SharedModule { }

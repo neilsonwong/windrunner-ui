@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', 'Yu Gothic UI Semibold', sans-serif;
   font-size: 1.6rem;
   color: var(--colour-text);
 }
@@ -28,7 +28,6 @@ a,
 a:hover {
   color: var(--colour-text-magenta);
 }
-
 
 .monospace {
   font-family: monospace;

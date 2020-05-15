@@ -54,16 +54,29 @@
         margin: var(--card-data-margin);
 
         .pre-header {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            overflow: hidden;
             color: var(--colour-text-lighter);
             font-size: 1.4rem;
             font-weight: 600;
 
-            .episodes .noun {
-                font-size: 0.8em;
-                // color: var(--colour-text-lighter);
+            .slider {
+                height: 2rem;
+                transition: transform 0.3s ease;
+
+                .top {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+
+                    .episodes .noun {
+                        font-size: 0.8em;
+                        // color: var(--colour-text-lighter);
+                    }
+                }
+
+                .under {
+                    font-size: 1.2rem;
+                }
             }
         }
 
@@ -100,6 +113,7 @@
                 font-size: 1.2rem;
             }
 
+            .next-ep,
             .source-media {
                 padding-top: 5px;
                 font-size: 1.2rem;
@@ -141,6 +155,14 @@
     &:hover {
         .series-preview-content header .native-title {
             color: var(--colour-text-magenta);
+        }
+
+        .series-preview-content {
+            .pre-header {
+                .slider.slides {
+                    transform: translateY(-20px);
+                }
+            }
         }
     }
 }

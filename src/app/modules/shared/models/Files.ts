@@ -1,4 +1,4 @@
-import AniListData from './AniListData';
+import { AniListData } from './AniListData';
 
 export const enum FILETYPES {
   BASE = 'BASE',

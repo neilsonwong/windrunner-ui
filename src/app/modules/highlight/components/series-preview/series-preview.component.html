@@ -7,12 +7,19 @@
     </div>
     <div class="series-preview-content">
         <div class="pre-header">
-            <p class="season">{{ series.aniListData.season | titlecase}} {{ series.aniListData.seasonYear }}</p>
-            <p class="episodes"
-                *ngIf="(series.aniListData.episodes | episodeCount:series.aniListData.nextAiringEpisode) as eps">
-                {{ eps }}
-                <span class="noun">eps</span>
-            </p>
+            <div class="slider" [class.slides]="series.aniListData.nextAiringEpisode">
+                <div class="top">
+                    <p class="season">{{ series.aniListData.season | titlecase}} {{ series.aniListData.seasonYear }}</p>
+                    <p class="episodes"
+                        *ngIf="(series.aniListData.episodes | episodeCount:series.aniListData.nextAiringEpisode) as eps">
+                        {{ eps }}
+                        <span class="noun">eps</span>
+                    </p>
+                </div>
+                <div class="under">
+                    <p class="next-ep">{{ series.aniListData.nextAiringEpisode | nextEpisode }}</p>
+                </div>
+            </div>
         </div>
         <header class="header">
             <a [routerLink]="[seriesLink]">

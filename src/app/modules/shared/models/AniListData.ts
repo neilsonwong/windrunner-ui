@@ -1,4 +1,10 @@
-export default interface AniListData {
+export interface NextAiringEpData {
+  id: number;
+  airingAt: number;
+  episode: number;
+}
+
+export interface AniListData {
   id: number;
   season: string;
   seasonYear: number;
@@ -12,7 +18,7 @@ export default interface AniListData {
   color: string|null;
   bannerImage: string;
   studio: string;
-  nextAiringEpisode: any;
+  nextAiringEpisode: NextAiringEpData;
   description: string;
   localCoverImage: string|null;
   localBannerImage: string|null;
