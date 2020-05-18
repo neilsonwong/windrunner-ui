@@ -33,7 +33,7 @@ export class VariableRoutingService {
         this.agentService.heartBeat(60000).pipe(
             tap((agentAlive: Boolean) => {
                 // TODO: hard coded for now, FIX THIS
-                this.resolvableApi = agentAlive ? agent + `${proxyPrefix}${apiPrefix}` : api;
+                this.resolvableApi = agentAlive ? agent + `${proxyPrefix}${apiPrefix}` : `${api}${apiPrefix}`;
             })
         ).subscribe();
     }
