@@ -12,7 +12,7 @@ import { LocalStorageService } from 'src/app/modules/core/services/local-storage
   styleUrls: ['./maintenance.component.scss']
 })
 export class MaintenanceComponent implements OnInit {
-  apiUrl: string = environment.api;
+  apiUrl: string = `${environment.api}${environment.apiPrefix}`;
   agentUrl: string = environment.agent;
 
   serverLoad$: Observable<ServerLoad>;

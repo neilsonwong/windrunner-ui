@@ -1,24 +1,23 @@
 import { environment } from 'src/environments/environment';
 
-const api = environment.api;
 const agent = environment.agent;
 
-export const API_ROUTES = {
-    GET_LIST: `${api}/vlist`,
-    DEL_FROM_LIST: `${api}/vlist`,
-    ADD_TO_LIST: `${api}/vlist`,
-    GET_IN_LIST: `${api}/vlist`,
-    GET_BROWSE: `${api}/browse`,
-    GET_RECENT: `${api}/recent`,
-    GET_RECENTLY_CHANGED: `${api}/recent`,
-    GET_FILE_DETAILS: `${api}/details`,
-    IMG_THUMBNAIL: `${api}/img/thumbs`,
-    IMG_SERIES: `${api}/img/series`,
-    IMG_PRUNE_THUMBNAIL: `${api}/img/prune`,
-    GET_PENDING_RESOURCE_STATUS: `${api}/resource`,
-    GET_SERIES_OPTIONS: `${api}/series/options`,
-    UPDATE_SERIES_OPTION: `${api}/series`,
-    GET_SERVER_LOAD: `${api}/load`,
+export enum API_ROUTE_OPTIONS {
+    GET_LIST = 'GET_LIST',
+    DEL_FROM_LIST = 'DEL_FROM_LIST',
+    ADD_TO_LIST = 'ADD_TO_LIST',
+    GET_IN_LIST = 'GET_IN_LIST',
+    GET_BROWSE = 'GET_BROWSE',
+    GET_RECENT = 'GET_RECENT',
+    GET_RECENTLY_CHANGED = 'GET_RECENTLY_CHANGED',
+    GET_FILE_DETAILS = 'GET_FILE_DETAILS',
+    IMG_THUMBNAIL = 'IMG_THUMBNAIL',
+    IMG_SERIES = 'IMG_SERIES',
+    IMG_PRUNE_THUMBNAIL = 'IMG_PRUNE_THUMBNAIL',
+    GET_PENDING_RESOURCE_STATUS = 'GET_PENDING_RESOURCE_STATUS',
+    GET_SERIES_OPTIONS = 'GET_SERIES_OPTIONS',
+    UPDATE_SERIES_OPTION = 'UPDATE_SERIES_OPTION',
+    GET_SERVER_LOAD = 'GET_SERVER_LOAD'
 };
 
 export const UI_ROUTES = {
@@ -27,6 +26,6 @@ export const UI_ROUTES = {
 };
 
 export const AGENT_ROUTES = {
-    PLAY: `${agent}/play`,
-    HELLO: `${agent}/play`,
+    PLAY: `${agent}/api/play`,
+    DOKI: `${agent}/api/doki`,
 };

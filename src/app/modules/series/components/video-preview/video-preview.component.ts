@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, HostListener, OnDestroy, ElementRef, OnInit } from '@angular/core';
 import { Video, FileKind } from 'src/app/modules/shared/models/Files';
-import { API_ROUTES } from 'src/app/modules/core/routes';
+import { API_ROUTE_OPTIONS } from 'src/app/modules/core/routes';
 import { Subject, of, Observable, Subscription, timer } from 'rxjs';
 import { tap, takeUntil, delay, switchMap, map, filter } from 'rxjs/operators';
 import { AgentService } from 'src/app/modules/core/services/agent.service';
@@ -8,6 +8,7 @@ import { isVideo } from 'src/app/utils/fileTypeUtils';
 import { PendingResourceRetrievalService } from 'src/app/modules/core/services/pending-resource-retrieval.service';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { VisibilityService } from 'src/app/modules/core/services/visibility.service';
+import { VariableRoutingService } from 'src/app/modules/core/services/variable-routing.service';
 
 @Component({
   selector: 'app-video-preview',
@@ -38,7 +39,8 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
     private visibilityService: VisibilityService,
     private pendingService: PendingResourceRetrievalService,
     private elRef: ElementRef,
-    private fileListService: FileListService) { }
+    private fileListService: FileListService,
+    private variableRoutingService: VariableRoutingService) { }
 
   ngOnInit(): void {
     this.setupRandomRotation();
@@ -83,8 +85,8 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
 
   populateVideoValues(): boolean {
     if (isVideo(this.video)) {
-      this.thumbnailUrls = this.video.thumbnail.map(
-        (thumbId: string) => (`${API_ROUTES.IMG_THUMBNAIL}/${thumbId}`));
+      this.thumbnailUrls = this.video.thumbnail.map((thumbId: string) => 
+        (`${this.variableRoutingService.resolveRoute(API_ROUTE_OPTIONS.IMG_THUMBNAIL)}/${thumbId}`));
       this.isVideo = true;
       this.fullyLoaded = (this.video.promised === undefined);
       return true;

@@ -9,6 +9,7 @@ import { ImageResolverService } from './services/image-resolver.service';
 import { AgentService } from './services/agent.service';
 import { VisibilityService } from './services/visibility.service';
 import { LocalStorageService } from './services/local-storage.service';
+import { VariableRoutingService } from './services/variable-routing.service';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import { LocalStorageService } from './services/local-storage.service';
     PendingResourceRetrievalService,
     ImageResolverService,
     VisibilityService,
-    LocalStorageService
+    LocalStorageService,
+    VariableRoutingService
   ]
 })
 export class CoreModule {

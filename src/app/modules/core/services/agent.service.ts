@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, timer } from 'rxjs';
+import { map, switchMap, shareReplay } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AGENT_ROUTES } from '../routes';
 
@@ -21,10 +21,17 @@ export class AgentService {
   }
 
   isAlive(): Observable<boolean> {
-    const endpoint = AGENT_ROUTES.HELLO;
+    const endpoint = AGENT_ROUTES.DOKI;
     return this.http.get(endpoint, { observe: 'response', responseType: 'text' })
       .pipe(map(resp => {
-        return resp.status === 200;
+        return resp.status === 200 && resp.body === 'ドキドキ';
       }));
+  }
+
+  heartBeat(interval: number): Observable<boolean> {
+    return timer(0, interval).pipe(
+      switchMap(() => this.isAlive()),
+      shareReplay()
+    );
   }
 }

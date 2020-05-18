@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { API_ROUTES } from '../routes';
+import { VariableRoutingService } from './variable-routing.service';
+import { API_ROUTE_OPTIONS } from '../routes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageResolverService {
-  constructor() { }
+  constructor(private variableRoutingService: VariableRoutingService) { }
 
   public resolveImage(localFile: string, externalLink: string): string {
+    const route = this.variableRoutingService.resolveRoute(API_ROUTE_OPTIONS.IMG_SERIES);
     return localFile ?
-      `${API_ROUTES.IMG_SERIES}/${localFile}` :
+      `${route}/${localFile}` :
       externalLink;
   }
 }

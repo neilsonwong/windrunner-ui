@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AgentService } from 'src/app/modules/core/services/agent.service';
-import { Observable, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-agent-status',
@@ -15,8 +14,6 @@ export class AgentStatusComponent implements OnInit {
   constructor(private agentService: AgentService) { }
 
   ngOnInit() {
-    this.isAlive$ = timer(0, 60000).pipe(
-      switchMap(() => this.agentService.isAlive())
-    );
+    this.isAlive$ = this.agentService.heartBeat(60000);
   }
 }
