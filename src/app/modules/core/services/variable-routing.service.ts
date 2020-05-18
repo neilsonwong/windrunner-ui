@@ -27,13 +27,12 @@ const API_ROUTES_ENDINGS = {
   providedIn: 'root'
 })
 export class VariableRoutingService {
-    private resolvableApi: string = api;
+    private resolvableApi: string = `${api}${apiPrefix}`;
     
     constructor(private agentService: AgentService) {
         this.agentService.heartBeat(60000).pipe(
             tap((agentAlive: Boolean) => {
-                // TODO: hard coded for now, FIX THIS
-                this.resolvableApi = agentAlive ? agent + `${proxyPrefix}${apiPrefix}` : `${api}${apiPrefix}`;
+                this.resolvableApi = agentAlive ? `${agent}${proxyPrefix}${apiPrefix}` : `${api}${apiPrefix}`;
             })
         ).subscribe();
     }
