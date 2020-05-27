@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { DirectoryKind } from 'src/app/modules/shared/models/Files';
 import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service';
 
@@ -25,7 +25,9 @@ export class SeriesListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.filterSeries();
+    if (this.itemsHidable) {
+      this.filterSeries();
+    }
   }
 
   private filterSeries() {
