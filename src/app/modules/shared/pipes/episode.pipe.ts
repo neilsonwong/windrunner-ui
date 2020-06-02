@@ -8,9 +8,9 @@ import EpisodeData from '../models/EpisodeData';
 // const epAndAnime = new RegExp(/^([eE][pP])?(?<ep>[0-9]{1,3}(?<version>v\d)?)(\s+-\s+|\s+)(?<anime>.*?)$/);
 
 const allUnderscores = new RegExp(/[_]/g);
-const animeFileNameMetaData = new RegExp(/[\[|\(]([A-Za-z-& ]+)[\]|\)]|[\[|\(](([0-9]{3,4}p|([0-9]{3,4}x[0-9]{3,4})|[-_ \.,]|Hi10P|AAC|[hxXH][\.]?264|[xX][vV][iI][dD]|FLAC|BD|DVD|TX|10bit|BluRay|AC3)+)[\]|\)]|[\[|\(]([A-Z0-9]{8})[\]|\)]|[\.]?(DVD|[F]?HD)|((\s-\s)THORA)|[\.]([avimkp4]{3})/g);
-const animeAndEp = new RegExp(/^(.*?)(\s+-\s+|\s+)([eE][pP])?([0-9]{1,3})(\s)*(v\d)?$/);
-const epAndAnime = new RegExp(/^([eE][pP])?([0-9]{1,3}(v\d)?)(\s+-\s+|\s+)(.*?)$/);
+const animeFileNameMetaData = new RegExp(/[\[|\(]([a-z-& ]+)[\]|\)]|[\[|\(](([0-9]{3,4}p|([0-9]{3,4}x[0-9]{3,4})|[-_ \.,]|hi10P|aac|[hx][\.]?264|xvid|flac|bd|dvd|tx|10bit|blu-?ray|ac3)+)[\]|\)]|[\[|\(]([A-Z0-9]{8})[\]|\)]|[\.]?(DVD|[F]?HD)|((\s-\s)THORA)|[\.]([avimkp4]{3})/ig);
+const animeAndEp = new RegExp(/^(.*?)(\s+-\s+|\s+)(ep)?([0-9]{1,3})(\s)*(v\d)?$/i);
+const epAndAnime = new RegExp(/^(ep)?([0-9]{1,3}(v\d)?)(\s+-\s+|\s+)(.*?)$/i);
 
 // add metadata
 interface RegexWithNames { regex: RegExp; meta: { [key: string]: number }; }
