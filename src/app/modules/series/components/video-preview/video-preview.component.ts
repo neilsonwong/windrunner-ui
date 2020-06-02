@@ -143,6 +143,7 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
   @HostListener('hoverChange', ['$event'])
   onHover(isHovered: boolean) {
     this.animateThumbnails = isHovered;
+
     if (this.animateThumbnails) {
       this.tryRotateThumbnails();
     }

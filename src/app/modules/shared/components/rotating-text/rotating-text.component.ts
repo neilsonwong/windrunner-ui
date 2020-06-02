@@ -9,6 +9,7 @@ import { tap, delay } from 'rxjs/operators';
 })
 export class RotatingTextComponent implements OnInit, OnDestroy {
   @Input() texts: Array<string>;
+  @Input() speed: number;
 
   sub: Subscription;
 
@@ -19,8 +20,12 @@ export class RotatingTextComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
+    if (!this.speed) {
+      this.speed = 5000;
+    }
+
     if (this.texts.length > 1) {
-      this.sub = interval(5000).pipe(
+      this.sub = interval(this.speed).pipe(
         tap(() => {
           this.fadingOut = true; 
         }),

@@ -20,6 +20,7 @@ import { BytesPipe } from './pipes/bytes.pipe';
 import { EpisodePipe } from './pipes/episode.pipe';
 import { AgentStatusComponent } from './components/agent-status/agent-status.component';
 import { NextEpisodePipe } from './pipes/next-episode.pipe';
+import { EpisodeResolutionPipe } from './pipes/episode-resolution.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NextEpisodePipe } from './pipes/next-episode.pipe';
     BytesPipe,
     EpisodePipe,
     NextEpisodePipe,
+    EpisodeResolutionPipe,
     AgentStatusComponent,
   ],
   providers: [
@@ -71,6 +73,7 @@ import { NextEpisodePipe } from './pipes/next-episode.pipe';
     BytesPipe,
     EpisodePipe,
     NextEpisodePipe,
+    EpisodeResolutionPipe,
   ]
 })
 export class SharedModule { }

@@ -94,7 +94,7 @@
         flex-direction: column;
         justify-content: flex-end;
 
-        color: white;
+        color: var(--colour-text-white);
 
         /* helps visibility */
         text-shadow: 
@@ -105,10 +105,26 @@
             
         .main {
             font-size: 1.2em;
+            z-index: 1;
+            cursor: default;
         }
 
         .sub > * {
             margin-right: 1rem;
+        }
+
+        .res {
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+            float: right;
+            font-weight: 600;
+            color: var(--colour-text-bright);
+        }
+
+        &:hover {
+            .res {
+                opacity: 1;
+            }
         }
     }
 

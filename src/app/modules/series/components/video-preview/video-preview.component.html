@@ -10,10 +10,13 @@
             </ng-template>
         </div>
         <div class="video-metadata">
-            <div class="main">{{ video.name | episode }}</div>
+            <div class="main" [title]="video.name">
+                {{ video.name | episode }}
+            </div>
             <div class="sub">
                 <span class="date">{{ video.created | date:'medium' }}</span>
                 <span class="size">{{ video.size | bytes }}</span>
+                <span class="res">{{ video.name | episodeResolution }}</span>
             </div>
             <div class="hover-mask">
                 <button class="play-button" (click)="playFile()">▶</button>
