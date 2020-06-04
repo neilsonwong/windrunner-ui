@@ -8,7 +8,7 @@ export class NextEpisodePipe implements PipeTransform {
 
   transform(nextEp?: NextAiringEpData): string {
     if (nextEp !== null && nextEp.episode !== null && nextEp.airingAt !== null) {
-      return `Ep ${nextEp.episode} airing on ${this.datePipe.transform(nextEp.airingAt * 1000)}`;
+      return `Ep ${nextEp.episode} airs on ${this.datePipe.transform(nextEp.airingAt * 1000, 'MMM d, y h:mm a')}`;
     }
     else {
       return null;
