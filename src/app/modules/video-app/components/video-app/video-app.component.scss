@@ -1,4 +1,13 @@
+@import "src/styles/screen-sizes";
+
 .main-content {
     max-width: var(--app-width);
     margin: 0 auto;
+}
+
+@media (max-width: $mobile-screen-max) {
+  :host {
+    background-color: var(--colour-bg-slightly-transparent-light);
+    display: block;
+  }
 }

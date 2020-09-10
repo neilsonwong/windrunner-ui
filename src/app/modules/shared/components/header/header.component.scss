@@ -1,3 +1,5 @@
+@import "src/styles/screen-sizes";
+
 .header {
     height: var(--header-height);
 
@@ -147,6 +149,37 @@
 
         .middle h1.title {
             color: transparent !important;
+        }
+    }
+}
+
+@media (max-width: $mobile-screen-max) {
+    .header {
+        &, .header-container {
+            padding: 0;
+            align-items: center;
+        }
+
+        .header-container {
+            justify-content: flex-end;
+            flex-direction: column-reverse;
+
+            .left {
+                height: 1rem;
+            }
+
+            .middle {
+                flex-grow: 0;
+                margin: 1.5rem 0;
+            }
+
+            .right {
+                display: none;
+            }
+
+            .side-bar {
+                flex-basis: auto;
+            }
         }
     }
 }

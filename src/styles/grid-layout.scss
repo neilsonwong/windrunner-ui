@@ -58,7 +58,10 @@ header.grid-layout {
     header.grid-layout {
         grid-template-columns: 1fr 0 1fr;
     }
+
+    header.grid-layout,
     .grid-layout {
         grid-template-columns: 1fr;
+        grid-column-gap: 0px;
     }
 }

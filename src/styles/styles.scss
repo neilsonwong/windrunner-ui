@@ -36,3 +36,10 @@ button {
 button:hover {
     background-color: var(--colour-bg-light-grey);
 }
+
+@media (max-width: $mobile-screen-max) {
+  body {
+    background-position: 0% 0%; // default
+    background-size: cover;
+  }  
+}
