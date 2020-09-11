@@ -46,3 +46,22 @@ header {
         text-overflow: ellipsis;
     }
 }
+
+@media (max-width: $layout-1-col-screen-max) {
+    .grid-layout {
+        grid-template-columns: inherit;
+        row-gap: 0px;
+    }
+
+    header {
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        .bread-crumbs {
+            text-align: left;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+    }
+}

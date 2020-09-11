@@ -1,3 +1,5 @@
+@import "src/styles/screen-sizes";
+
 .navigation-options {
     display: flex;
     justify-content: space-between;
@@ -71,4 +73,14 @@
 
     min-width: 0;
     width: 100%;
+}
+
+@media (max-width: $layout-1-col-screen-max) {
+    .navigation-options {
+        padding: 0.5rem 0;
+        .right,
+        .middle {
+            display: none;
+        }
+    }
 }
