@@ -194,3 +194,21 @@
     padding: 1rem;
     background-color: var(--colour-bg-light);
 }
+
+
+
+@media (max-width: $layout-1-col-screen-max) {
+    :host {
+        .video-thumbnail {
+            min-height: auto;
+        }
+
+        .video-metadata {
+            font-size: 1rem;
+
+            .main {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

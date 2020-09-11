@@ -20,6 +20,7 @@
 
         height: 100%;
         width: 100%;
+        overflow: hidden;
     }
 
     &,
@@ -234,6 +235,26 @@
             .button-text {
                 display: inline-block;
             }
+        }
+    }
+}
+
+@media (max-width: $layout-1-col-screen-max) {
+    .series-info {
+        grid-template-columns: auto;
+
+        .cover {
+            display: none;
+        }
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .banner {
+        .shadow {
+            overflow: hidden;
         }
     }
 }

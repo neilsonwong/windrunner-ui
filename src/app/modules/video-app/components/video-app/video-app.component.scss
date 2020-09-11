@@ -5,7 +5,7 @@
     margin: 0 auto;
 }
 
-@media (max-width: $mobile-screen-max) {
+@media (max-width: $layout-1-col-screen-max) {
   :host {
     background-color: var(--colour-bg-slightly-transparent-light);
     display: block;

@@ -1,3 +1,5 @@
+@import "src/styles/screen-sizes";
+
 :host {
     display: block;
     position: relative;
@@ -14,5 +16,11 @@
         font-size: 1.2rem;
         text-align: right;;
         font-style: italic;
+    }
+}
+
+@media (max-width: $layout-1-col-screen-max) {
+    .flavour {
+        display: none;
     }
 }
