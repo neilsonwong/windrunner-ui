@@ -15,8 +15,8 @@
 
     .shadow {
         background: linear-gradient(180deg, 
-            var(--color-shadow-dark-transparent) 30%, 
-            var(--color-shadow-dark-semi-transparent));
+            var(--colour-shadow-dark-transparent) 30%, 
+            var(--colour-shadow-dark-semi-transparent));
 
         height: 100%;
         width: 100%;
@@ -148,7 +148,7 @@
 
             .heart {
                 mask: url('/assets/icons/heart.svg');
-                background-color: red;
+                background-color: var(--colour-red);
                 opacity: 0.3;
 
                 &.highlight {
@@ -169,7 +169,7 @@
             }
             .recommend {
                 mask: url('/assets/icons/star.svg');
-                background-color: rgb(192, 180, 120);
+                background-color: var(--colour-faint-gold);
                 opacity: 0.3;
 
                 &.highlight {

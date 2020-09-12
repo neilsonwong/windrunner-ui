@@ -7,7 +7,8 @@ const routerOptions: ExtraOptions = {
 };
 
 const routes: Routes = [
-  { path: '', redirectTo: 'v', pathMatch: 'full' }
+  { path: '', redirectTo: 'v', pathMatch: 'full' },
+  { path: '**', redirectTo: 'v' }
 ];
 
 @NgModule({

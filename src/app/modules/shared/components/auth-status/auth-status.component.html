@@ -1,0 +1,16 @@
+<ng-container *ngIf="(authContext | async) as email; else loginButton">
+    <div class="logout">
+        <span class="sub">{{ email }}</span>
+        <button (click)="logout()">
+            <div class="icon face"></div>
+        </button>
+    </div>
+</ng-container>
+<ng-template #loginButton>
+    <div class="login">
+        <span class="sub">Login</span>
+        <button (click)="login()">
+            <div class="icon face"></div>
+        </button>
+    </div>
+</ng-template>

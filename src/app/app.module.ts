@@ -13,9 +13,10 @@ import { CoreModule } from './modules/core/core.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     CoreModule,
-    VideoAppModule
+    VideoAppModule,
+    // AppRouting should be last!!
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

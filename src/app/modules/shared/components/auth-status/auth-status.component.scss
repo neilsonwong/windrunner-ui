@@ -1,0 +1,52 @@
+:host {
+    margin-right: 1rem;
+}
+
+.icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    margin-left: 4px;
+}
+
+.sub {
+    display: block;
+    font-size: 1rem;
+    color: var(--colour-text-light);
+}
+
+.face {
+    mask: url('/assets/icons/face.svg');
+}
+
+
+button {
+    display: inline-block;
+    padding: 0;
+    background-color: transparent;
+    width: auto;
+}
+
+.login,
+.logout {
+    display: flex;
+    align-items: center;
+}
+
+.login {
+    .icon {
+        background-color: var(--colour-text-light);
+    }
+
+    .sub {
+        display: block;
+    }
+}
+
+.logout {
+    .icon {
+        background-color: var(--colour-light-green);
+    }
+}
