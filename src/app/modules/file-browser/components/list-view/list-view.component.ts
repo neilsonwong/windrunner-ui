@@ -37,9 +37,8 @@ export class ListViewComponent implements OnInit, OnChanges {
   private updateDetailRelatedFields(): void {
     if (this.details) {
       if (isDirectoryKind(this.details)) {
-        if (this.details.isSeriesLeafNode) {
-          this.seriesLink = `${UI_ROUTES.SERIES}${this.details.rel}`;
-        }
+        // always allow series view
+        this.seriesLink = `${UI_ROUTES.SERIES}${this.details.rel}`;
       }
       else if (isInvalid(this.details)) {
         this.isInvalid = true;
