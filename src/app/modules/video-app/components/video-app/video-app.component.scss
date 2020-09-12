@@ -11,3 +11,9 @@
     display: block;
   }
 }
+
+@media(max-width: $mobile-screen-max) {
+  .main-content {
+    padding: 0 2rem;
+  }
+}
