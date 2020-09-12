@@ -1,3 +1,5 @@
+@import "src/styles/screen-sizes";
+
 .icon {
     display: block;
     width: 24px;
@@ -48,3 +50,11 @@
     }
 }
 
+@media (max-width: $layout-1-col-screen-max) {
+    .connected:hover,
+    .disconnected:hover {
+        .sub {
+            display: none;
+        }
+    }
+}
