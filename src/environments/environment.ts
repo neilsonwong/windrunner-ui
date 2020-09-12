@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
-  api: 'http://192.168.0.118:9876',
+  api: 'http://127.0.0.1:9876',
   agent: 'http://127.0.0.1:8080',
   proxyPrefix: '/proxy',
   apiPrefix: '/api/v2',
+  oauthClientId: '',
+  oauthClientSecret: '',
 };
 
 /*

@@ -32,4 +32,8 @@ export class SeriesDataSelectComponent implements OnInit {
       console.log(`${entered} was not valid`);
     }
   }
+
+  clearAniListEntry() {
+    this.updateSeriesOption(-1);
+  }
 }

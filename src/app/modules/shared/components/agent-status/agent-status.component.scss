@@ -1,16 +1,60 @@
-:host {
-    font-size: 1.3rem;
-    color: var(--colour-text-light);
+@import "src/styles/screen-sizes";
 
-    .agent-status {
-        // font-weight: 600;
+.icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    margin-left: 2px;
+}
+
+.sub {
+    font-size: 1rem;
+    display: none;
+}
+
+.connected,
+.disconnected {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.connected {
+    .icon {
+        mask: url('/assets/icons/connected.svg');
+        background-color: var(--colour-light-green);
     }
 
-    .dead {
-        color: red;
+    .sub {
+        color: var(--colour-light-green);
+    }
+}
+
+.disconnected {
+    .icon {
+        mask: url('/assets/icons/disconnected.svg');
+        background-color: var(--colour-red);
     }
 
-    .alive {
-        color: lightgreen;
+    .sub {
+        color: var(--colour-red);
+    }
+}
+
+.connected:hover,
+.disconnected:hover {
+    .sub {
+        display: block;
+    }
+}
+
+@media (max-width: $layout-1-col-screen-max) {
+    .connected:hover,
+    .disconnected:hover {
+        .sub {
+            display: none;
+        }
     }
 }

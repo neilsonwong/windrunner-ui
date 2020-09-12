@@ -10,6 +10,7 @@
     <p>Enter <a href="https://anilist.co/search/anime" target="_blank">AniList</a> ID Manually</p>
     <div class="split">
         <input type="number" [(ngModel)]="manualId"/>
+        <button (click)="clearAniListEntry()">Clear</button>
         <button (click)="updateAniListEntry()">Update</button>
     </div>
 </div>

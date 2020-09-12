@@ -21,6 +21,7 @@ import { EpisodePipe } from './pipes/episode.pipe';
 import { AgentStatusComponent } from './components/agent-status/agent-status.component';
 import { NextEpisodePipe } from './pipes/next-episode.pipe';
 import { EpisodeResolutionPipe } from './pipes/episode-resolution.pipe';
+import { AuthStatusComponent } from './components/auth-status/auth-status.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { EpisodeResolutionPipe } from './pipes/episode-resolution.pipe';
     NextEpisodePipe,
     EpisodeResolutionPipe,
     AgentStatusComponent,
+    AuthStatusComponent,
   ],
   providers: [
     DatePipe

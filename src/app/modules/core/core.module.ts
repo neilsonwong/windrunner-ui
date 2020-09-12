@@ -11,10 +11,20 @@ import { VisibilityService } from './services/visibility.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { VariableRoutingService } from './services/variable-routing.service';
 
+import { OAuthModule } from 'angular-oauth2-oidc';
+
 @NgModule({
   declarations: [],
   imports: [
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot(
+  //     {
+  //     resourceServer: {
+  //         allowedUrls: ['http://www.angular.at/api'],
+  //         sendAccessToken: true
+  //     }
+  // }
+  )
   ],
   providers: [
     FileListService,
@@ -24,7 +34,7 @@ import { VariableRoutingService } from './services/variable-routing.service';
     ImageResolverService,
     VisibilityService,
     LocalStorageService,
-    VariableRoutingService
+    VariableRoutingService,
   ]
 })
 export class CoreModule {
