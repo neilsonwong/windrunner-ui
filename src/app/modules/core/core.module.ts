@@ -18,12 +18,12 @@ import { OAuthModule } from 'angular-oauth2-oidc';
   imports: [
     HttpClientModule,
     OAuthModule.forRoot(
-  //     {
-  //     resourceServer: {
-  //         allowedUrls: ['http://www.angular.at/api'],
-  //         sendAccessToken: true
-  //     }
-  // }
+      {
+      resourceServer: {
+          allowedUrls: ['http://127.0.0.1:9876/api', 'https://windrunner.makimono.me/api'],
+          sendAccessToken: true
+      }
+  }
   )
   ],
   providers: [

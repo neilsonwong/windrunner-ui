@@ -21,6 +21,8 @@ const API_ROUTES_ENDINGS = {
     GET_SERIES_OPTIONS: `/series/options`,
     UPDATE_SERIES_OPTION: `/series`,
     GET_SERVER_LOAD: `/load`,
+    GET_SERVER_INFO: `/info`,
+    GET_SERVER_CONSOLE: `/console`,
 };
 
 @Injectable({

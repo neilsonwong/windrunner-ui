@@ -1,7 +1,7 @@
 <h2>Maintenance</h2>
 
 <div class="server-info info-box">
-    <h3>Server Load</h3>
+    <h3>UI Info</h3>
     <table class="two-col">
         <tr>
             <td>API Url:</td>
@@ -14,8 +14,27 @@
     </table>
 </div>
 
+<ng-container *ngIf="(serverInfo$ | async) as serverInfo">
+    <div>
+        <h3>Server Info</h3>
+        <table class="two-col">
+            <tr>
+                <td>Version:</td>
+                <td>{{ serverInfo.version}}</td>
+            </tr>
+            <tr>
+                <td>Api Prefix:</td>
+                <td>{{ serverInfo.apiPrefix }}</td>
+            </tr>
+            <tr>
+                <td>Port:</td>
+                <td>{{ serverInfo.port }}</td>
+            </tr>
+        </table>
+    </div>
+
 <ng-container *ngIf="(serverLoad$ | async) as serverLoad">
-    <div class="info-box" *ngIf="serverLoad">
+    <div class="info-box">
         <h3>Server Load</h3>
         <table class="two-col">
             <tr>
@@ -35,6 +54,15 @@
                 <td>{{ serverLoad.waiting }}</td>
             </tr>
         </table>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="(serverConsole$ | async) as console">
+    <div class="info-box">
+        <h3>Server Logs</h3>
+        <div>
+            {{ console }}
+        </div>
     </div>
 </ng-container>
 

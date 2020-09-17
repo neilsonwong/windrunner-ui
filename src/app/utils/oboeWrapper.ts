@@ -7,14 +7,14 @@ import * as oboe from 'oboe';
   providedIn: 'root'
 })
 export class OboeWrapper {
-    constructor(){}
-    
-    get(params) {
-        return new Observable(obs => {
-          const stream = oboe(params);
-          stream.node("!", item => obs.next(item));
-          // stream.done(obs.complete);
-          stream.fail(obs.error);
-        });
-    }
+  constructor() { }
+
+  get(params: any) {
+    return new Observable(obs => {
+      const stream = oboe(params);
+      stream.node("!", item => obs.next(item));
+      // stream.done(obs.complete);
+      stream.fail(obs.error);
+    });
+  }
 }
