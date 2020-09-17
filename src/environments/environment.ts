@@ -9,7 +9,6 @@ export const environment = {
   proxyPrefix: '/proxy',
   apiPrefix: '/api/v2',
   oauthClientId: '1075060288357-tuvdgpk67uue0djtu73ipognuc9acb6o.apps.googleusercontent.com',
-  oauthClientSecret: 'cLp_qcfxEvHLZaB7Qq63hxWC',
 };
 
 /*
