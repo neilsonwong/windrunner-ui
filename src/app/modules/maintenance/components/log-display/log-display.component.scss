@@ -1,0 +1,29 @@
+.console {
+    width: 100%;
+    max-height: 1000px;
+    padding: 1rem;
+    overflow-y: scroll;
+
+    background-color: var(--colour-bg-dark);
+    color: var(--colour-text-lighter);
+    
+    font-family: monospace, monospace;
+
+    .line {
+        margin: 4px;
+
+        .level,
+        .timestamp {
+            font-weight: 600;
+            color: var(--colour-text-blue);
+        }
+
+        .error {
+            color: var(--colour-red);
+        }
+
+        &.nothing {
+            font-style: italic;
+        }
+    }
+}

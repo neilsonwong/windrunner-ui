@@ -1,0 +1,23 @@
+.stat-block {
+    min-width: 200px;
+    box-sizing: border-box;
+    padding: 1rem 2rem;
+
+    font-weight: 600;
+    text-align: center;
+
+    background-color: var(--colour-pastel-water2);
+
+    box-shadow: 0 4px 6px rgba(49, 54, 68, 0.05), 0 5px 20px rgba(49, 54, 68, 0.08);
+
+    .heading {
+        font-size: 1.25rem;
+        height: 3rem;
+    }
+
+    .val {
+        height: 5rem;
+        font-weight: 600;
+        font-size: 2.5rem
+    }
+}

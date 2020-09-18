@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
-import { Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import ServerLoad from 'src/app/modules/shared/models/ServerLoad';
-import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service';
 import { ServerAdminService } from 'src/app/modules/core/services/server-admin.service';
 import ServerInfo from 'src/app/modules/shared/models/ServerInfo';
+import { LogMessage } from 'src/app/modules/shared/models/LogMessage';
+import { OboeObservable } from 'src/app/utils/oboeObservable';
 
 @Component({
   selector: 'app-maintenance',
@@ -17,9 +18,9 @@ export class MaintenanceComponent implements OnInit, OnDestroy {
   apiUrl: string = `${environment.api}${environment.apiPrefix}`;
   agentUrl: string = environment.agent;
 
-  serverLoad$: Observable<ServerLoad>;
+  serverLoad$: OboeObservable<ServerLoad>;
   serverInfo$: Observable<ServerInfo>;
-  serverConsole$: Observable<String>;
+  serverConsole$: OboeObservable<LogMessage>;
 
   constructor(private fileListService: FileListService,
     private serverAdminService: ServerAdminService,
@@ -41,6 +42,7 @@ export class MaintenanceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('destroyed')
+    // this.serverLoad$.abort();
+    // this.serverConsole$.abort();
   }
 }
