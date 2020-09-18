@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
 import * as oboe from 'oboe';
+import { OboeObservable } from './oboeObservable';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +8,9 @@ import * as oboe from 'oboe';
 export class OboeWrapper {
   constructor() { }
 
-  get(params: any) {
-    return new Observable(obs => {
-      const stream = oboe(params);
-      stream.node("!", item => obs.next(item));
-      // stream.done(obs.complete);
-      stream.fail(obs.error);
-    });
+  get<T>(params: any): OboeObservable<T>;
+  get(params: any): OboeObservable<any> {
+    const stream = oboe(params);
+    return new OboeObservable(stream);
   }
 }
