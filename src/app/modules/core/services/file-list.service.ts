@@ -100,11 +100,6 @@ export class FileListService {
     return this.http.delete<ResultData>(url);
   }
 
-  pruneThumbnails(): Observable<any> {
-    const url = this.getRoute(API_ROUTE_OPTIONS.IMG_PRUNE_THUMBNAIL);
-    return this.http.post<ResultData>(url, {});
-  }
-
   getRecentlyChangedInFolder(rel: string): Observable<FileKind[]> {
     const encodedRelPath = encodeURIComponent(rel);
     const url = `${this.getRoute(API_ROUTE_OPTIONS.GET_RECENTLY_CHANGED)}/${encodedRelPath}`;

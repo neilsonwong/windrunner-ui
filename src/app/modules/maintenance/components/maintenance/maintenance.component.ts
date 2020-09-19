@@ -1,9 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FileListService } from 'src/app/modules/core/services/file-list.service';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import ServerLoad from 'src/app/modules/shared/models/ServerLoad';
 import { environment } from 'src/environments/environment';
-import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service';
 import { ServerAdminService } from 'src/app/modules/core/services/server-admin.service';
 import ServerInfo from 'src/app/modules/shared/models/ServerInfo';
 import { LogMessage } from 'src/app/modules/shared/models/LogMessage';
@@ -14,7 +12,7 @@ import { OboeObservable } from 'src/app/utils/oboeObservable';
   templateUrl: './maintenance.component.html',
   styleUrls: ['./maintenance.component.scss']
 })
-export class MaintenanceComponent implements OnInit, OnDestroy {
+export class MaintenanceComponent implements OnInit {
   apiUrl: string = `${environment.api}${environment.apiPrefix}`;
   agentUrl: string = environment.agent;
 
@@ -22,27 +20,11 @@ export class MaintenanceComponent implements OnInit, OnDestroy {
   serverInfo$: Observable<ServerInfo>;
   serverConsole$: OboeObservable<LogMessage>;
 
-  constructor(private fileListService: FileListService,
-    private serverAdminService: ServerAdminService,
-    private localStorageService: LocalStorageService) { }
+  constructor(private serverAdminService: ServerAdminService) { }
 
   ngOnInit() {
-    //TODO: fix oboe library unsubscribe
     this.serverLoad$ = this.serverAdminService.getServerLoadStream();
     this.serverInfo$ = this.serverAdminService.getServerInfo();
     this.serverConsole$ = this.serverAdminService.getConsoleStream();
-  }
-
-  pruneThumbnails() {
-    this.fileListService.pruneThumbnails().subscribe();
-  }
-
-  clearLocalStorage() {
-    this.localStorageService.clear();
-  }
-
-  ngOnDestroy(): void {
-    // this.serverLoad$.abort();
-    // this.serverConsole$.abort();
   }
 }

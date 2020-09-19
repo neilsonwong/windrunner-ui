@@ -15,54 +15,53 @@
         </app-stat-block>
     </div>
 </div>
+<div>
+    <h3>API Server Info</h3>
+    <div>
+        <h4>Actions</h4>
+        <app-tool-box></app-tool-box>
+    </div>
+    <div class="api-server-info">
+        <div class="info-box">
+            <h4>Server Info</h4>
+            <div class="stats" *ngIf="(serverInfo$ | async) as serverInfo">
+                <app-stat-block
+                    title="Version"
+                    [value]="serverInfo.version">
+                </app-stat-block>
+                <app-stat-block
+                    title="Port"
+                    [value]="serverInfo.port">
+                </app-stat-block>
+                <app-stat-block
+                    title="API Prefix"
+                    [value]="serverInfo.apiPrefix">
+                </app-stat-block>
+            </div>
+        </div>
 
-<ng-container *ngIf="(serverInfo$ | async) as serverInfo">
-    <div class="info-box">
-        <h3>Server Info</h3>
-        <div class="stats">
-            <app-stat-block
-                title="Version"
-                [value]="serverInfo.version">
-            </app-stat-block>
-            <app-stat-block
-                title="Port"
-                [value]="serverInfo.port">
-            </app-stat-block>
-            <app-stat-block
-                title="API Prefix"
-                [value]="serverInfo.apiPrefix">
-            </app-stat-block>
+        <div class="info-box">
+            <h4>Server Executor Status</h4>
+            <div class="stats" *ngIf="(serverLoad$ | async) as serverLoad">
+                <app-stat-block
+                    title="Max Workers"
+                    [value]="serverLoad.max">
+                </app-stat-block>
+                <app-stat-block
+                    title="Available Workers"
+                    [value]="serverLoad.available">
+                </app-stat-block>
+                <app-stat-block
+                    title="Waiting Workers"
+                    [value]="serverLoad.waiting">
+                </app-stat-block>
+            </div>
         </div>
     </div>
-</ng-container>
-
-<ng-container *ngIf="(serverLoad$ | async) as serverLoad">
-    <div class="info-box">
-        <h3>Server Executor Status</h3>
-        <div class="stats">
-            <app-stat-block
-                title="Max Workers"
-                [value]="serverLoad.max">
-            </app-stat-block>
-            <app-stat-block
-                title="Available Workers"
-                [value]="serverLoad.available">
-            </app-stat-block>
-            <app-stat-block
-                title="Waiting Workers"
-                [value]="serverLoad.waiting">
-            </app-stat-block>
-        </div>
-    </div>
-</ng-container>
+</div>
 
 <div class="info-box">
-    <h3>Server Logs</h3>
     <app-log-display
         [consoleStream]="serverConsole$">
     </app-log-display>
 </div>
-
-<button class="prune-thumb" (click)="pruneThumbnails()">Prune Thumbnails</button>
-
-<button class="" (click)="clearLocalStorage()">Clear Storage</button>

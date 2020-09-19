@@ -9,6 +9,7 @@ import ServerInfo from '../../shared/models/ServerInfo';
 import { AuthService } from './auth.service';
 import { LogMessage } from '../../shared/models/LogMessage';
 import { OboeObservable } from 'src/app/utils/oboeObservable';
+import { ResultData } from '../../shared/models/GenericData';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,11 @@ export class ServerAdminService {
   public getServerInfo(): Observable<ServerInfo> {
     const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_INFO);
     return this.http.get<ServerInfo>(url);
+  }
+
+  public pruneThumbnails(): Observable<any> {
+    const url = this.getRoute(API_ROUTE_OPTIONS.IMG_PRUNE_THUMBNAIL);
+    return this.http.post<ResultData>(url, {});
   }
 
   private getRoute(route: string) {
