@@ -10,6 +10,9 @@ import { AuthService } from './auth.service';
 import { LogMessage } from '../../shared/models/LogMessage';
 import { ResultData } from '../../shared/models/GenericData';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+const { api, apiPrefix } = environment;
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +24,20 @@ export class ServerAdminService {
     private authService: AuthService,
     private variableRoutingService: VariableRoutingService) { }
 
+  // TODO: Currently agent doesn't play well with streams
+  // we'll just have to skip agent for these calls
+
   public getServerLoadStream(): Observable<ServerLoad> {
-    const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_LOAD);
+    // const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_LOAD);
+    const url = `${api}${apiPrefix}${API_ROUTE_OPTIONS.GET_SERVER_LOAD}`;
     return this.oboe.get<ServerLoad>(this.generateOboeParamsWithAuth(url)).pipe(
       distinctUntilChanged()
     );
   }
 
   public getConsoleStream(): Observable<LogMessage> {
-    const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_CONSOLE);
+    // const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_CONSOLE);
+    const url = `${api}${apiPrefix}${API_ROUTE_OPTIONS.GET_SERVER_CONSOLE}`;
     return this.oboe.get<LogMessage>(this.generateOboeParamsWithAuth(url));
   }
 
