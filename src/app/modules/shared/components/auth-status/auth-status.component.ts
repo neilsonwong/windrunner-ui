@@ -21,7 +21,6 @@ export class AuthStatusComponent implements OnInit {
   }
 
   public logout() {
-    console.log('logout')
     this.authService.logout();
   }
 }

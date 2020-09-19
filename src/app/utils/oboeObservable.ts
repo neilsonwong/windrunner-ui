@@ -9,10 +9,11 @@ export class OboeObservable<T> extends Observable<T> {
       oboeStream.node("!", item => obs.next(item));
       // stream.done(obs.complete);
       obs.add((e) => { 
-        console.log('abort mission!');
         oboeStream.abort();
       });
-      oboeStream.fail(obs.error);
+      oboeStream.fail((e) => {
+        obs.error('oboe stream failed');
+      });
     });
     this.stream = oboeStream;
   }
