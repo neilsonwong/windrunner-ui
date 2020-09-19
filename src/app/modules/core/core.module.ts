@@ -13,7 +13,6 @@ import { LocalStorageService } from './services/local-storage.service';
 import { VariableRoutingService } from './services/variable-routing.service';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
-const { agent, api, proxyPrefix, apiPrefix } = environment;
 
 @NgModule({
   declarations: [],
@@ -22,7 +21,10 @@ const { agent, api, proxyPrefix, apiPrefix } = environment;
     OAuthModule.forRoot(
       {
       resourceServer: {
-          allowedUrls: [`${agent}${proxyPrefix}${apiPrefix}`,`${api}${apiPrefix}`],
+          allowedUrls: [
+            `${environment.agent}${environment.proxyPrefix}${environment.apiPrefix}`,
+            `${environment.api}${environment.apiPrefix}`
+          ],
           sendAccessToken: true
       }
   }
