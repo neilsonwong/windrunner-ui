@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environment';
 import { ServerAdminService } from 'src/app/modules/core/services/server-admin.service';
 import ServerInfo from 'src/app/modules/shared/models/ServerInfo';
 import { LogMessage } from 'src/app/modules/shared/models/LogMessage';
-import { OboeObservable } from 'src/app/utils/oboeObservable';
 
 @Component({
   selector: 'app-maintenance',
@@ -16,9 +15,9 @@ export class MaintenanceComponent implements OnInit {
   apiUrl: string = `${environment.api}${environment.apiPrefix}`;
   agentUrl: string = environment.agent;
 
-  serverLoad$: OboeObservable<ServerLoad>;
+  serverLoad$: Observable<ServerLoad>;
   serverInfo$: Observable<ServerInfo>;
-  serverConsole$: OboeObservable<LogMessage>;
+  serverConsole$: Observable<LogMessage>;
 
   constructor(private serverAdminService: ServerAdminService) { }
 

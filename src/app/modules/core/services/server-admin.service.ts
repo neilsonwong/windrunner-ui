@@ -8,8 +8,8 @@ import { OboeWrapper } from 'src/app/utils/oboeWrapper';
 import ServerInfo from '../../shared/models/ServerInfo';
 import { AuthService } from './auth.service';
 import { LogMessage } from '../../shared/models/LogMessage';
-import { OboeObservable } from 'src/app/utils/oboeObservable';
 import { ResultData } from '../../shared/models/GenericData';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,14 @@ export class ServerAdminService {
     private authService: AuthService,
     private variableRoutingService: VariableRoutingService) { }
 
-  public getServerLoadStream(): OboeObservable<ServerLoad> {
+  public getServerLoadStream(): Observable<ServerLoad> {
     const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_LOAD);
-    return this.oboe.get<ServerLoad>(this.generateOboeParamsWithAuth(url));
+    return this.oboe.get<ServerLoad>(this.generateOboeParamsWithAuth(url)).pipe(
+      distinctUntilChanged()
+    );
   }
 
-  public getConsoleStream(): OboeObservable<LogMessage> {
+  public getConsoleStream(): Observable<LogMessage> {
     const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_CONSOLE);
     return this.oboe.get<LogMessage>(this.generateOboeParamsWithAuth(url));
   }
