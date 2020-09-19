@@ -1,21 +1,40 @@
-.info-box {
-    margin-bottom: 1rem;
-    padding: 1rem 0;
-    
-    table.two-col {
-        border-spacing: 0;
+:host {
+    position: relative;
+    display: block;
+    margin-top: var(--main-content-upshift);
+}
 
-        td:first-child {
-            font-weight: 600;
-            min-width: 12rem;
-        }
-
-        td {
-            padding: 0;
-        }
+header {
+    h2 {
+        color: var(--colour-text-bright);
     }
 }
 
-.prune-thumb {
-    width: 200px;
+h3, 
+h4 {
+    margin-bottom: 1rem;
+}
+
+.api-server-info {
+    display: flex;
+}
+
+.info-box {
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+
+
+    .stats {
+        display: flex;
+        flex-wrap: wrap;
+
+        app-stat-block {
+            margin-right: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        // app-stat-block:last-child {
+        //     margin-right: 0;
+        // }
+    }
 }

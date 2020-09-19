@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FileListService } from 'src/app/modules/core/services/file-list.service';
-import { Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import ServerLoad from 'src/app/modules/shared/models/ServerLoad';
-import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service';
+import { ServerAdminService } from 'src/app/modules/core/services/server-admin.service';
+import ServerInfo from 'src/app/modules/shared/models/ServerInfo';
+import { LogMessage } from 'src/app/modules/shared/models/LogMessage';
 
 @Component({
   selector: 'app-maintenance',
@@ -16,20 +16,14 @@ export class MaintenanceComponent implements OnInit {
   agentUrl: string = environment.agent;
 
   serverLoad$: Observable<ServerLoad>;
-  constructor(private fileListService: FileListService,
-    private localStorageService: LocalStorageService) { }
+  serverInfo$: Observable<ServerInfo>;
+  serverConsole$: Observable<LogMessage>;
+
+  constructor(private serverAdminService: ServerAdminService) { }
 
   ngOnInit() {
-    this.serverLoad$ = timer(0, 2000).pipe(
-      switchMap(() => this.fileListService.getServerLoad())
-    );
-  }
-
-  pruneThumbnails() {
-    this.fileListService.pruneThumbnails().subscribe();
-  }
-
-  clearLocalStorage() {
-    this.localStorageService.clear();
+    this.serverLoad$ = this.serverAdminService.getServerLoadStream();
+    this.serverInfo$ = this.serverAdminService.getServerInfo();
+    this.serverConsole$ = this.serverAdminService.getConsoleStream();
   }
 }

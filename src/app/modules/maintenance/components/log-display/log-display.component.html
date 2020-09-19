@@ -1,0 +1,19 @@
+<div class="top">
+    <h3>Server Logs</h3>
+    <button class="icon-button" (click)="clearLogs()">
+        <div class="button-icon clear"></div>
+        <span class="button-text">Clear Console</span>
+    </button>
+</div>
+<div class="console">
+    <ng-container *ngIf="((console$ | async) && lines.length) > 0; else noLogs">
+        <p class="line" *ngFor="let line of lines">
+            <span class="timestamp">{{ line.timestamp }} </span>
+            <span class="level {{ line.level }}">{{ line.level | uppercase }}: </span>
+            <span class="message">{{ line.message }}</span>
+        </p>
+    </ng-container>
+    <ng-template #noLogs>
+        <p class="line nothing">Nothing's here yet!... what a boring server :[</p>
+    </ng-template>
+</div>

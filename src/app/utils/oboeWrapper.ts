@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
 import * as oboe from 'oboe';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OboeWrapper {
-    constructor(){}
-    
-    get(params) {
-        return new Observable(obs => {
-          const stream = oboe(params);
-          stream.node("!", item => obs.next(item));
-          // stream.done(obs.complete);
-          stream.fail(obs.error);
-        });
-    }
+  constructor() { }
+
+  get<T>(params: any): Observable<T>;
+
+  get(params: any): Observable<any> {
+    const oboeStream = oboe(params);
+    return new Observable((obs) => {
+      oboeStream.node("!", item => obs.next(item));
+      // stream.done(obs.complete);
+      obs.add((e) => { 
+        oboeStream.abort();
+      });
+      oboeStream.fail((e) => {
+        obs.error('oboe stream failed');
+      });
+    });
+  }
 }

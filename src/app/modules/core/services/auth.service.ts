@@ -33,4 +33,8 @@ export class AuthService {
     this.oauthService.revokeTokenAndLogout();
     this.authContextSubject$.next(undefined);
   }
+
+  public getAccessToken(): String {
+    return this.oauthService.getAccessToken();
+  }
 }

@@ -1,0 +1,26 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+button {
+    width: auto;
+    margin-right: 2rem;
+    box-shadow: 0 4px 6px rgba(49, 54, 68, 0.05), 0 5px 20px rgba(49, 54, 68, 0.08);
+
+    .button-icon {
+        display: inline-block;
+        vertical-align: middle;
+        width: 18px;
+        height: 18px;
+        background-color: var(--colour-text);
+        margin-right: 0.75rem;
+
+        &.prune {
+            mask: url('/assets/icons/prune.svg');
+        }
+        &.clear {
+            mask: url('/assets/icons/restore.svg');
+        }
+    }
+}
