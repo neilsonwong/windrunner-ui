@@ -8,12 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./agent-status.component.scss']
 })
 export class AgentStatusComponent implements OnInit {
-
-  isAlive$: Observable<boolean>;
+  public isAlive$: Observable<boolean>;
 
   constructor(private agentService: AgentService) { }
 
   ngOnInit() {
-    this.isAlive$ = this.agentService.heartBeat(60000);
+    this.isAlive$ = this.agentService.heartbeat$;
   }
 }

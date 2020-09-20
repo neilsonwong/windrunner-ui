@@ -12,7 +12,7 @@ export class VariableRoutingService {
     private resolvableApi: string = `${api}${apiPrefix}`;
     
     constructor(private agentService: AgentService) {
-        this.agentService.heartBeat(60000).pipe(
+        this.agentService.heartbeat$.pipe(
             tap((agentAlive: Boolean) => {
                 this.resolvableApi = agentAlive ? `${agent}${proxyPrefix}${apiPrefix}` : `${api}${apiPrefix}`;
             })

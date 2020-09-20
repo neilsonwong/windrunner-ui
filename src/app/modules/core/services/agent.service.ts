@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable, timer, of } from 'rxjs';
-import { map, switchMap, shareReplay, catchError } from 'rxjs/operators';
+import { map, switchMap, shareReplay, catchError, tap, distinctUntilChanged } from 'rxjs/operators';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { AGENT_ROUTES } from '../routes';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AgentService {
-  heartbeat$: Observable<boolean>;
+  public heartbeat$: Observable<boolean>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.heartbeat$ = timer(1, environment.agentHeartbeatInterval).pipe(
+      switchMap(() => this.isAlive()),
+      distinctUntilChanged(),
+      tap(e => console.log('beat ' + e)),
+      shareReplay(),
+    );
+  }
 
-  triggerPlay(rel: string): Observable<boolean> {
+  public triggerPlay(rel: string): Observable<boolean> {
     const endpoint = AGENT_ROUTES.PLAY;
     const payload = new HttpParams().set('file', rel);
     return this.http.post(endpoint, payload, { observe: 'response', responseType: 'text'})
@@ -21,7 +29,7 @@ export class AgentService {
       }));
   }
 
-  isAlive(): Observable<boolean> {
+  private isAlive(): Observable<boolean> {
     const endpoint = AGENT_ROUTES.DOKI;
     return this.http.get(endpoint, { observe: 'response', responseType: 'text' })
       .pipe(
@@ -32,15 +40,5 @@ export class AgentService {
           return of(false);
         })
       );
-  }
-
-  heartBeat(interval: number): Observable<boolean> {
-    if (!this.heartbeat$) {
-      this.heartbeat$ = timer(0, interval).pipe(
-        switchMap(() => this.isAlive()),
-        shareReplay()
-      );
-    }
-    return this.heartbeat$;
   }
 }
