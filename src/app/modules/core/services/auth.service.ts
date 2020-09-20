@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { OAuthErrorEvent, OAuthService } from 'angular-oauth2-oidc';
-import { BehaviorSubject, combineLatest, Observable, ReplaySubject } from 'rxjs';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { authCodeFlowConfig } from '../auth.config';
 
@@ -34,7 +33,7 @@ export class AuthService {
     this.authContextSubject$.next(undefined);
   }
 
-  public getAccessToken(): String {
+  public getAccessToken(): string {
     return this.oauthService.getAccessToken();
   }
 }

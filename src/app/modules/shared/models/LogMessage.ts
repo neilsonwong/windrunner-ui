@@ -1,5 +1,5 @@
 export interface LogMessage {
-    message: String;
-    level: String;
-    timestamp: String;
+    message: string;
+    level: string;
+    timestamp: string;
 }

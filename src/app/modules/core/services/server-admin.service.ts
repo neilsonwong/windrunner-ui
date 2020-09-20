@@ -55,7 +55,7 @@ export class ServerAdminService {
     return this.variableRoutingService.resolveRoute(route);
   }
 
-  private generateOboeParamsWithAuth(url: String) {
+  private generateOboeParamsWithAuth(url: string) {
     const token = this.authService.getAccessToken();
     return {
       url: url,

@@ -40,19 +40,14 @@ export class HeaderComponent implements OnInit {
 
   updateHighlight(newUrl: string) {
     for (const navItem of this.navigation) {
-      if (navItem.url === newUrl) {
+      if (navItem.match.test(newUrl)) {
         this.highlight = navItem.text;
         return;
       }
     }
 
-    // couldn't find an exact match, partial matches are ok now
-    for (const navItem of this.navigation) {
-      if (navItem.url.startsWith(newUrl)) {
-        this.highlight = navItem.text;
-        return;
-      }
-    }
+    // no highlights, nothing matched
+    this.highlight = '';
   }
 
   handleSearch(query: any) {

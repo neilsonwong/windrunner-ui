@@ -1,5 +1,5 @@
 export default interface ServerInfo {
-    version: String;
-    apiPrefix: String;
+    version: string;
+    apiPrefix: string;
     port: number;
 };

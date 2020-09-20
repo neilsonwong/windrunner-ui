@@ -9,16 +9,16 @@ import { LinkData } from 'src/app/modules/shared/models/LinkData';
 export class VideoAppComponent implements OnInit {
 
   navigation: Array<LinkData> = [
-    { text: 'Home', url: '/v' },
-    { text: 'Browse', url: '/v/browse/anime' },
-    { text: 'お勧め', url: '/v/recommend' }
+    { text: 'Home', url: '/v', match: new RegExp('/v$') },
+    { text: 'Browse', url: '/v/browse/anime', match: new RegExp('/v/(browse|series)/.*') },
+    { text: 'お勧め', url: '/v/recommend', match: new RegExp('/v/recommend') }
   ];
 
   constructor() { }
 
   ngOnInit() {
     this.navigation.push(
-      { text: 'Maintenance', url: '/v/maintenance' }
+      { text: 'Maintenance', url: '/v/maintenance', match: new RegExp('/v/maintenance') }
     );
   }
 }
