@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { API_ROUTE_OPTIONS } from '../routes';
 import ServerLoad from '../../shared/models/ServerLoad';
 import { VariableRoutingService } from './variable-routing.service';
@@ -9,8 +9,9 @@ import ServerInfo from '../../shared/models/ServerInfo';
 import { AuthService } from './auth.service';
 import { LogMessage } from '../../shared/models/LogMessage';
 import { ResultData } from '../../shared/models/GenericData';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { FailReason } from 'oboe';
 
 const { api, apiPrefix } = environment;
 
@@ -25,7 +26,7 @@ export class ServerAdminService {
     private variableRoutingService: VariableRoutingService) { }
 
   // TODO: Currently agent doesn't play well with streams
-  // we'll just have to skip agent for these calls
+  // we'll just have to skip agent proxy for these calls
 
   public getServerLoadStream(): Observable<ServerLoad> {
     // const url = this.getRoute(API_ROUTE_OPTIONS.GET_SERVER_LOAD);

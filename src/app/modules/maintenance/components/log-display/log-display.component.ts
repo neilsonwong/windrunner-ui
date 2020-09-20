@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LogMessage } from 'src/app/modules/shared/models/LogMessage';
@@ -8,7 +8,7 @@ import { LogMessage } from 'src/app/modules/shared/models/LogMessage';
   templateUrl: './log-display.component.html',
   styleUrls: ['./log-display.component.scss']
 })
-export class LogDisplayComponent implements OnInit {
+export class LogDisplayComponent implements OnChanges {
   @Input() consoleStream: Observable<LogMessage>;
 
   public console$: Observable<LogMessage>;
@@ -16,7 +16,7 @@ export class LogDisplayComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.console$ = this.consoleStream.pipe(
       tap(log => this.lines.unshift(log))
     );

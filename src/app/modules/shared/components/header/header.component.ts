@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
 
   updateHighlight(newUrl: string) {
     for (const navItem of this.navigation) {
-      if (navItem.match.test(newUrl)) {
+      if (navItem.match && navItem.match.test(newUrl)) {
         this.highlight = navItem.text;
         return;
       }

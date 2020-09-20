@@ -38,3 +38,14 @@ h4 {
         // }
     }
 }
+
+.auth-error {
+    color: var(--colour-red);
+    font-style: italic;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    background-color: var(--colour-bg-slightly-transparent-light);
+    box-shadow: 0 4px 6px rgba(49, 54, 68, 0.05), 0 5px 20px rgba(49, 54, 68, 0.08);
+    margin-bottom: 1rem;
+}

@@ -1,8 +1,8 @@
-<button class="icon-button" (click)="pruneThumbnails()">
+<button class="icon-button" (click)="pruneThumbnails()" [disabled]="disabled">
     <div class="button-icon prune"></div>
     <span class="button-text">Prune Thumbnails</span>
 </button>
-<button class="icon-button" (click)="clearLocalStorage()">
+<button class="icon-button" (click)="clearLocalStorage()" [disabled]="disabled">
     <div class="button-icon clear"></div>
     <span class="button-text">Clear Storage</span>
 </button>

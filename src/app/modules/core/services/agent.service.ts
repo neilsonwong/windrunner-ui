@@ -15,7 +15,6 @@ export class AgentService {
     this.heartbeat$ = timer(1, environment.agentHeartbeatInterval).pipe(
       switchMap(() => this.isAlive()),
       distinctUntilChanged(),
-      tap(e => console.log('beat ' + e)),
       shareReplay(),
     );
   }

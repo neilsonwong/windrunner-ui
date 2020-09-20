@@ -1,5 +1,5 @@
 export interface LinkData {
     text: string;
     url: string;
-    match: RegExp;
+    match?: RegExp;
 }

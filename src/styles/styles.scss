@@ -34,8 +34,16 @@ button {
   }
 }
 
-button:hover {
-    background-color: var(--colour-bg-light-grey);
+button:hover:enabled {
+  background-color: var(--colour-bg-light-grey);
+}
+
+button:disabled {
+  .button-icon {
+    // imitate a disabled look
+    opacity: 0.5;
+  }
+  cursor: auto;
 }
 
 @media (max-width: $mobile-screen-max) {

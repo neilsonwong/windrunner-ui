@@ -17,9 +17,17 @@
 </div>
 <div>
     <h3>API Server Info</h3>
+    <div class="auth-error" *ngIf="notAdmin">
+        <p>
+            Looks like you aren't logged in as an admin. <br />
+            You'll need to log in correctly to see anything interesting :) <br />
+            Here's some fake stats and logs just for eye candy!
+        </p>
+    </div>
     <div>
         <h4>Actions</h4>
-        <app-tool-box></app-tool-box>
+        <app-tool-box [disabled]="notAdmin">
+        </app-tool-box>
     </div>
     <div class="api-server-info">
         <div class="info-box">
