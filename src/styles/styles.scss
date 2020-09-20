@@ -39,10 +39,10 @@ button:hover:enabled {
 }
 
 button:disabled {
-  .button-icon {
+  // .button-icon {
     // imitate a disabled look
-    opacity: 0.5;
-  }
+    opacity: 0.75;
+  // }
   cursor: auto;
 }
 

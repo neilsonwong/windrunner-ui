@@ -36,6 +36,18 @@ button {
 }
 
 .login {
+    button {
+        transition: 0.5s;
+    }
+    
+    button:hover:enabled {
+        background-color: inherit;
+
+        .icon {
+            background-color: var(--colour-light-green);
+        }
+    }
+
     .icon {
         background-color: var(--colour-text-light);
     }

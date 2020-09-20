@@ -6,6 +6,7 @@ import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.s
 import { ImageResolverService } from 'src/app/modules/core/services/image-resolver.service';
 import { DetailKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
+import { AuthService } from 'src/app/modules/core/services/auth.service';
 
 @Component({
   selector: 'app-series-details',
@@ -29,6 +30,8 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
   seriesLink: string;
   folderLink: string;
 
+  isAuthenticated$: Observable<boolean>;
+
   expandedBanner: boolean;
   editing: boolean;
   isInvalid: boolean;
@@ -36,11 +39,13 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
   constructor(
     private imgResolver: ImageResolverService,
     private headerTweakService: HeaderTweakService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.expandedBanner = false;
     this.editing = false;
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 
   ngOnChanges() {
@@ -91,7 +96,7 @@ export class SeriesDetailsComponent implements OnInit, OnChanges {
     this.recommendChange.emit(this.isRecommend);
   }
 
-  updateAniListInfo() {
+  toggleUpdateAniListInfo() {
     this.editing = !this.editing;
   }
 

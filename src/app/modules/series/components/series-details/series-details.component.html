@@ -56,35 +56,37 @@
                         </div>
                     </ng-template>
                     <div class="actions">
-                        <ng-container *ngIf="!editing; else backAction">
-                            <button class="icon-button" (click)="toggleFavourite()">
-                                <div class="button-icon heart" [class.highlight]="isFavourite"></div>
-                                <span class="button-text">Favourite</span>
-                            </button>
-                            <button class="icon-button" [routerLink]="folderLink">
-                                <div class="button-icon directory"></div>
-                                <span class="button-text">Folder</span>
-                            </button>
-                            <!-- these onwards are more maintainance -->
-                            <button class="icon-button" (click)="toggleRecommended()">
-                                <div class="button-icon recommend" [class.highlight]="isRecommend"></div>
-                                <span class="button-text">最高です</span>
-                            </button>
-                            <button class="icon-button" (click)="refreshFileData()">
-                                <div class="button-icon refresh"></div>
-                                <span class="button-text">Refresh</span>
-                            </button>
-                            <button class="icon-button" (click)="updateAniListInfo()">
-                                <div class="button-icon info"></div>
-                                <span class="button-text">Info Details</span>
-                            </button>
+                        <ng-container *ngIf="{ isAuthed: isAuthenticated$ | async } as obs">
+                            <ng-container *ngIf="!editing; else backAction">
+                                <button class="icon-button" (click)="toggleFavourite()" [disabled]="!obs.isAuthed">
+                                    <div class="button-icon heart" [class.highlight]="isFavourite"></div>
+                                    <span class="button-text">Favourite</span>
+                                </button>
+                                <button class="icon-button" [routerLink]="folderLink">
+                                    <div class="button-icon directory"></div>
+                                    <span class="button-text">Folder</span>
+                                </button>
+                                <!-- these onwards are more maintainance -->
+                                <button class="icon-button" (click)="toggleRecommended()" [disabled]="!obs.isAuthed">
+                                    <div class="button-icon recommend" [class.highlight]="isRecommend"></div>
+                                    <span class="button-text">最高です</span>
+                                </button>
+                                <button class="icon-button" (click)="refreshFileData()" [disabled]="!obs.isAuthed">
+                                    <div class="button-icon refresh"></div>
+                                    <span class="button-text">Refresh</span>
+                                </button>
+                                <button class="icon-button" (click)="toggleUpdateAniListInfo()" [disabled]="!obs.isAuthed">
+                                    <div class="button-icon info"></div>
+                                    <span class="button-text">Info Details</span>
+                                </button>
+                            </ng-container>
+                            <ng-template #backAction>
+                                <button class="icon-button" (click)="toggleUpdateAniListInfo()" [disabled]="!obs.isAuthed">
+                                    <div class="button-icon back"></div>
+                                    <span class="button-text">Back</span>
+                                </button>
+                            </ng-template>
                         </ng-container>
-                        <ng-template #backAction>
-                            <button class="icon-button" (click)="updateAniListInfo()">
-                                <div class="button-icon back"></div>
-                                <span class="button-text">Back</span>
-                            </button>
-                        </ng-template>
                     </div>
                 </div>
                 <div class="series-info-edit">
