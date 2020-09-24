@@ -4,6 +4,7 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 const routerOptions: ExtraOptions = {
   useHash: false,
   anchorScrolling: 'enabled',
+  scrollPositionRestoration: 'enabled',
 };
 
 const routes: Routes = [

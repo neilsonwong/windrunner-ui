@@ -1,6 +1,6 @@
 import { environment } from 'src/environments/environment';
 
-const agent = environment.agent;
+const { api, apiPrefix, agent } = environment;
 
 export const API_ROUTE_OPTIONS = {
     GET_LIST: `/vlist`,
@@ -25,9 +25,15 @@ export const API_ROUTE_OPTIONS = {
 export const UI_ROUTES = {
     BROWSE: '/v/browse',
     SERIES: '/v/series',
+    PLAY: '/v/play',
 };
 
 export const AGENT_ROUTES = {
     PLAY: `${agent}/api/play`,
     DOKI: `${agent}/api/doki`,
 };
+
+export const STREAM_ROUTES = {
+    GET_STREAM: `${api}${apiPrefix}/stream`,
+    GET_SUBTITLE: `${api}${apiPrefix}/subtitle`,
+}

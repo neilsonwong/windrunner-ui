@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, HostListener, OnDestroy, ElementRef, OnInit } from '@angular/core';
 import { Video, FileKind } from 'src/app/modules/shared/models/Files';
-import { API_ROUTE_OPTIONS } from 'src/app/modules/core/routes';
-import { Subject, of, Observable, Subscription, timer } from 'rxjs';
+import { API_ROUTE_OPTIONS, UI_ROUTES } from 'src/app/modules/core/routes';
+import { Subject, of, Observable, Subscription, timer, EMPTY } from 'rxjs';
 import { tap, takeUntil, delay, switchMap, map, filter } from 'rxjs/operators';
 import { AgentService } from 'src/app/modules/core/services/agent.service';
 import { isVideo } from 'src/app/utils/fileTypeUtils';
@@ -9,6 +9,7 @@ import { PendingResourceRetrievalService } from 'src/app/modules/core/services/p
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { VisibilityService } from 'src/app/modules/core/services/visibility.service';
 import { VariableRoutingService } from 'src/app/modules/core/services/variable-routing.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-video-preview',
@@ -35,12 +36,14 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
 
   subs: Array<Subscription> = [];
 
-  constructor(private agentService: AgentService,
+  constructor(
+    private agentService: AgentService,
     private visibilityService: VisibilityService,
     private pendingService: PendingResourceRetrievalService,
     private elRef: ElementRef,
     private fileListService: FileListService,
-    private variableRoutingService: VariableRoutingService) { }
+    private variableRoutingService: VariableRoutingService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.setupRandomRotation();
@@ -152,12 +155,23 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  playFile() {
-    this.agentService.triggerPlay(this.video.rel).subscribe((res: boolean) => {
-      if (res) {
-        console.log(`successly triggered play for ${this.video.rel}`);
-      }
-    });
+  playFile(videoFile: Video) {
+    this.agentService.heartbeat$.pipe(
+      switchMap(isAlive => {
+        if (isAlive) {
+          this.agentService.triggerPlay(videoFile.rel).pipe(
+            tap((res: boolean) => {
+              if (res) {
+                console.log(`successly triggered play for ${videoFile.rel}`);
+              }
+            }));
+        }
+        else {
+          this.router.navigate([UI_ROUTES.PLAY, videoFile.id ]);
+          return EMPTY;
+        }
+      })
+    ).subscribe()
   }
 
   _isVideo(file: FileKind): file is Video {

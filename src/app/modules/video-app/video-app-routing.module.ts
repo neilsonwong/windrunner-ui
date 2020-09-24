@@ -6,6 +6,7 @@ import { HighlightComponent } from '../highlight/components/highlight/highlight.
 import { SeriesComponent } from '../series/components/series/series.component';
 import { MaintenanceComponent } from '../maintenance/components/maintenance/maintenance.component';
 import { RecommendedComponent } from '../highlight/components/recommended/recommended.component';
+import { PlayerComponent } from '../player/components/player/player.component';
 
 const routes: Routes = [
   { path: 'v', component: VideoAppComponent,
@@ -27,6 +28,7 @@ const routes: Routes = [
       },
       { path: 'recommend', component: RecommendedComponent},
       { path: 'maintenance', component: MaintenanceComponent },
+      { path: 'play/:fileId', component: PlayerComponent },
     ]
   }
 ];

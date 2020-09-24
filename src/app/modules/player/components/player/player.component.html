@@ -1,0 +1,17 @@
+<div>
+    back button
+</div>
+<div>
+    some meta data
+</div>
+<ng-container *ngIf="(readyToStream$ | async) as source; else loading">
+    <app-video-player
+        [streamSource]="source.stream"
+        [subtitleSource]="source.subs">
+    </app-video-player>
+</ng-container>
+<ng-template #loading>
+    <div class="big-text">
+        loading ...
+    </div>
+</ng-template>

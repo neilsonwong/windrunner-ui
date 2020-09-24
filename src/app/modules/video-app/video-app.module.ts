@@ -7,6 +7,7 @@ import { FileBrowserModule } from '../file-browser/file-browser.module';
 import { HighlightModule } from '../highlight/highlight.module';
 import { SeriesModule } from '../series/series.module';
 import { MaintenanceModule } from '../maintenance/maintenance.module';
+import { PlayerModule } from '../player/player.module';
 
 import { VideoAppComponent } from './components/video-app/video-app.component';
 
@@ -19,7 +20,8 @@ import { VideoAppComponent } from './components/video-app/video-app.component';
     HighlightModule,
     FileBrowserModule,
     SeriesModule,
-    MaintenanceModule
+    MaintenanceModule,
+    PlayerModule,
   ]
 })
 export class VideoAppModule { }
