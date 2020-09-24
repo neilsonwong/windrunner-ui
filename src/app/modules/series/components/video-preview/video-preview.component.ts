@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, HostListener, OnDestroy, ElementRef, OnInit } from '@angular/core';
 import { Video, FileKind } from 'src/app/modules/shared/models/Files';
-import { API_ROUTE_OPTIONS, UI_ROUTES } from 'src/app/modules/core/routes';
+import { API_ROUTE_OPTIONS } from 'src/app/modules/core/routes';
 import { Subject, of, Observable, Subscription, timer, EMPTY } from 'rxjs';
 import { tap, takeUntil, delay, switchMap, map, filter } from 'rxjs/operators';
 import { AgentService } from 'src/app/modules/core/services/agent.service';
@@ -9,7 +9,7 @@ import { PendingResourceRetrievalService } from 'src/app/modules/core/services/p
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { VisibilityService } from 'src/app/modules/core/services/visibility.service';
 import { VariableRoutingService } from 'src/app/modules/core/services/variable-routing.service';
-import { Router } from '@angular/router';
+import { WebPlayerService } from 'src/app/modules/core/services/web-player.service';
 
 @Component({
   selector: 'app-video-preview',
@@ -43,7 +43,7 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
     private elRef: ElementRef,
     private fileListService: FileListService,
     private variableRoutingService: VariableRoutingService,
-    private router: Router) { }
+    private webPlayerService: WebPlayerService) { }
 
   ngOnInit(): void {
     this.setupRandomRotation();
@@ -167,7 +167,7 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
             }));
         }
         else {
-          this.router.navigate([UI_ROUTES.PLAY, videoFile.id ]);
+          this.webPlayerService.playVideo(videoFile);
           return EMPTY;
         }
       })

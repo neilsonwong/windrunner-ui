@@ -1,6 +1,7 @@
 .video-player {
     height: 100%;
     width: 100%;
+    display: block;
 }
 
 video::cue {
@@ -32,4 +33,8 @@ video::cue {
         -2px 1px 0 #000,
         2px -1px 0 #000,
         -2px -1px 0 #000;
+}
+
+:host {
+    margin: 0 2rem;
 }

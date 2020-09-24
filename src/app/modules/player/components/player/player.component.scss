@@ -1,0 +1,21 @@
+header {
+    a {
+        margin-right: 2rem;
+        display: inline-block;
+        vertical-align: middle;
+        width: 18px;
+        height: 18px;
+        background-color: var(--colour-text);
+
+        mask-repeat: no-repeat;
+        mask-position: center;
+
+        &:hover {
+            background-color: var(--colour-text-bright);
+        }
+
+        &.back-button {
+            mask: url('/assets/icons/back2.svg');
+        }
+    }
+}

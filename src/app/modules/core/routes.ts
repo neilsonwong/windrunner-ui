@@ -11,6 +11,7 @@ export const API_ROUTE_OPTIONS = {
     GET_RECENT: `/recent`,
     GET_RECENTLY_CHANGED: `/recent`,
     GET_FILE_DETAILS: `/details`,
+    GET_FILE_DETAILS_BY_ID: `/detailz`,
     IMG_THUMBNAIL: `/img/thumbs`,
     IMG_SERIES: `/img/series`,
     IMG_PRUNE_THUMBNAIL: `/img/prune`,
@@ -34,6 +35,6 @@ export const AGENT_ROUTES = {
 };
 
 export const STREAM_ROUTES = {
-    GET_STREAM: `${api}${apiPrefix}/stream`,
+    GET_STREAM: `${apiPrefix}/stream`,
     GET_SUBTITLE: `${api}${apiPrefix}/subtitle`,
 }

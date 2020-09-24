@@ -1,8 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
-import { first, map, mapTo, share, switchMap, tap } from 'rxjs/operators';
-import { STREAM_ROUTES } from 'src/app/modules/core/routes';
+import { first, map, switchMap, tap } from 'rxjs/operators';
+import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
+import { WebPlayerService } from 'src/app/modules/core/services/web-player.service';
+import { Video } from 'src/app/modules/shared/models/Files';
 
 @Component({
   selector: 'app-player',
@@ -10,24 +12,52 @@ import { STREAM_ROUTES } from 'src/app/modules/core/routes';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  // public file$: Observable<string>;
-  public streamSource$: Observable<string>;
-  public subSource$: Observable<string>;
-  public readyToStream$: Observable<{stream: string, subs: string}>;
+  public video: Video;
+  public streamSrc: string;
+  public subtitleSrc: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private webPlayerService: WebPlayerService,
+    private headerTweakService: HeaderTweakService,
+    private location: Location
+    ) { }
 
   ngOnInit() {
-    const fileId$ = this.route.paramMap.pipe(
-      map(params => params.get('fileId')),
-      share(),
-    );
+    this.headerTweakService.setCompact();
 
-    // this.file$ = fileId$.pipe(switchMap(fileId => this.fileListService.getFileDetail()))
-    this.streamSource$ = fileId$.pipe(first(), map(fileId => `${STREAM_ROUTES.GET_STREAM}/${fileId}`));
-    this.subSource$ = fileId$.pipe(first(), map(fileId => `${STREAM_ROUTES.GET_SUBTITLE}/${fileId}`));
-    this.readyToStream$ = forkJoin([this.streamSource$, this.subSource$]).pipe(
-      map(([stream, subs]) => ({stream, subs}))
-    );
+    // setup player and load info based on url param!
+    if (!this.webPlayerService.nowPlaying) {
+      this.loadPlayerBasedOnParamFileId();
+    }
+    else {
+      this.setupSources();
+    }
+  }
+
+  private loadPlayerBasedOnParamFileId() {
+    this.route.paramMap.pipe(
+      map(params => params.get('fileId')),
+      first(),
+      tap(fileId => {
+        this.webPlayerService.setSources(fileId);
+        this.setupSources();
+      }),
+      switchMap(fileId => this.webPlayerService.loadVideoData(fileId)),
+      tap(() => {
+        this.video = this.webPlayerService.nowPlaying;
+        console.log(this.video);
+      })
+    ).subscribe();
+  }
+
+  private setupSources() {
+    this.video = this.webPlayerService.nowPlaying;
+    this.streamSrc = this.webPlayerService.streamSource;
+    this.subtitleSrc = this.webPlayerService.subSource;
+  }
+
+  public goBack() {
+    this.location.back();
   }
 }

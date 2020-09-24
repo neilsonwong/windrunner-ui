@@ -1,17 +1,13 @@
+<app-video-player
+    [streamSource]="streamSrc"
+    [subtitleSource]="subtitleSrc">
+</app-video-player>
 <div>
-    back button
+    <a class="back-button" (click)="goBack()"></a>
 </div>
-<div>
-    some meta data
+<div *ngIf="video">
+    {{ video.name | episode }}
+    {{ video.name }}
+    {{ video.created | date:'medium' }}
+    {{ video.size | bytes }}
 </div>
-<ng-container *ngIf="(readyToStream$ | async) as source; else loading">
-    <app-video-player
-        [streamSource]="source.stream"
-        [subtitleSource]="source.subs">
-    </app-video-player>
-</ng-container>
-<ng-template #loading>
-    <div class="big-text">
-        loading ...
-    </div>
-</ng-template>

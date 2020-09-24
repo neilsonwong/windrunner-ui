@@ -31,6 +31,12 @@ export class FileListService {
     return of(null);
   }
 
+  getFileDetailById(fileId: string): Observable<DetailKind> {
+    const encodedFileId = encodeURIComponent(fileId);
+    const url = `${this.getRoute(API_ROUTE_OPTIONS.GET_FILE_DETAILS_BY_ID)}/${encodedFileId}`;
+    return this.http.get<DetailKind>(url);
+  }
+
   getFileDetail(rel: string, refresh?: boolean): Observable<DetailKind> {
     const params = (refresh === true) ?
       new HttpParams().set('refresh', 'plz') :

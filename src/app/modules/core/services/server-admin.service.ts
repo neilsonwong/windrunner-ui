@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { API_ROUTE_OPTIONS } from '../routes';
 import ServerLoad from '../../shared/models/ServerLoad';
 import { VariableRoutingService } from './variable-routing.service';
@@ -9,9 +9,8 @@ import ServerInfo from '../../shared/models/ServerInfo';
 import { AuthService } from './auth.service';
 import { LogMessage } from '../../shared/models/LogMessage';
 import { ResultData } from '../../shared/models/GenericData';
-import { catchError, distinctUntilChanged, tap } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { FailReason } from 'oboe';
 
 const { api, apiPrefix } = environment;
 
