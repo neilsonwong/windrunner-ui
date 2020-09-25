@@ -1,13 +1,31 @@
-<app-video-player
-    [streamSource]="streamSrc"
-    [subtitleSource]="subtitleSrc">
-</app-video-player>
-<div>
-    <a class="back-button" (click)="goBack()"></a>
+<div class="player-background">
+    <div class="player-container" *ngIf="(streamSource$ | async) as streamSource">
+        <div class="meta-controls">
+            <div class="left">
+                <div class="control">
+                    <a class="prev-button" (click)="playPrev()"></a>
+                </div>
+            </div>
+            <div class="right">
+                <div class="control">
+                    <a class="next-button" (click)="playNext()"></a>
+                </div>
+            </div>
+        </div>
+        <app-video-player 
+            [streamSource]="streamSource.streamSrc"
+            [subtitleSource]="streamSource.subtitleSrc">
+        </app-video-player>
+    </div>
 </div>
-<div *ngIf="video">
-    {{ video.name | episode }}
-    {{ video.name }}
-    {{ video.created | date:'medium' }}
-    {{ video.size | bytes }}
+<div *ngIf="(video$ | async) as video" class="video-info">
+    <div class="video-name">{{ video.name | episode }}</div>
+    <p class="sub">{{ video.name }}</p>
+    <p class="extra">
+        <span class="extra-item">{{ video.created | date:'medium' }}</span>
+        <span class="extra-item">{{ video.size | bytes }}</span>
+    </p>
+</div>
+<div class="series-button" *ngIf="seriesLink$ | async as seriesLink">
+    <a [routerLink]="[seriesLink]">Back to series</a>
 </div>

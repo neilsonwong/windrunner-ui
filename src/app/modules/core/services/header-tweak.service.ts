@@ -18,6 +18,10 @@ export class HeaderTweakService {
     };
 
     this.router.events.pipe(
+      filter(() => {
+        const extrasState = router.getCurrentNavigation().extras.state;
+        return !extrasState || extrasState.suppressHeaderReset !== true;
+      }),
       filter(event => (event instanceof NavigationEnd)),
       tap(() => { this.resetToDefaultState() })
     ).subscribe();

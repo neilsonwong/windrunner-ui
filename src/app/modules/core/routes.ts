@@ -35,6 +35,6 @@ export const AGENT_ROUTES = {
 };
 
 export const STREAM_ROUTES = {
-    GET_STREAM: `${apiPrefix}/stream`,
+    GET_STREAM: `${api}${apiPrefix}/stream`,
     GET_SUBTITLE: `${api}${apiPrefix}/subtitle`,
-}
+};

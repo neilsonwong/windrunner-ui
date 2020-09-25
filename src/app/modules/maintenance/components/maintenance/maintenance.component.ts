@@ -8,6 +8,7 @@ import { LogMessage } from 'src/app/modules/shared/models/LogMessage';
 import { catchError, map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { fakeLogs } from './fake-logs';
+import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 
 @Component({
   selector: 'app-maintenance',
@@ -24,9 +25,11 @@ export class MaintenanceComponent implements OnInit {
 
   public notAdmin: Boolean = false;
 
-  constructor(private serverAdminService: ServerAdminService) { }
+  constructor(private serverAdminService: ServerAdminService,
+    private headerTweakService: HeaderTweakService) { }
 
   ngOnInit() {
+    this.headerTweakService.setCompact();
     this.serverLoad$ = this.serverAdminService.getServerLoadStream().pipe(
       catchError(e => this.handleUnauthorized(e)));
     this.serverInfo$ = this.serverAdminService.getServerInfo().pipe(

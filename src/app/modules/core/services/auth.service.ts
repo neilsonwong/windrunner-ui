@@ -18,8 +18,7 @@ export class AuthService {
       shareReplay(),
     );
     this.isAuthenticated$ = this.authContext$.pipe(
-      map(a => (a !== null && a !== undefined)),
-      tap(a => console.log(a)),
+      map(a => (a !== null && a !== undefined))
     );
 
     this.oauthService.events

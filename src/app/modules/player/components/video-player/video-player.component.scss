@@ -2,9 +2,12 @@
     height: 100%;
     width: 100%;
     display: block;
+    outline: none;
+    border: none;
 }
 
 video::cue {
+    display: block;
     font-family: Arial, Helvetica, sans-serif;
     background-color: transparent;
     color: white;
@@ -35,6 +38,6 @@ video::cue {
         -2px -1px 0 #000;
 }
 
-:host {
-    margin: 0 2rem;
+video::-webkit-media-text-track-display {
+    transform: translateY(-1em);
 }

@@ -1,21 +1,119 @@
-header {
-    a {
-        margin-right: 2rem;
-        display: inline-block;
-        vertical-align: middle;
-        width: 18px;
-        height: 18px;
-        background-color: var(--colour-text);
 
-        mask-repeat: no-repeat;
-        mask-position: center;
+.player-background {
+    margin-left: calc((var(--app-width) - 100vw) / 2);
+    width: 100vw;
+    background-color: black;
+    margin-bottom: 2rem;
 
-        &:hover {
-            background-color: var(--colour-text-bright);
-        }
+    .player-container {
+        margin: auto;
+        max-width: var(--app-width);
 
-        &.back-button {
-            mask: url('/assets/icons/back2.svg');
+        &:hover .meta-controls {
+            opacity: 1;
         }
     }
+}
+
+.meta-controls {
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    width: var(--app-width);
+
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.2) 30%, 
+        rgba(0, 0, 0, 0.1) 50%, 
+        rgba(0, 0, 0, 0) 100%);
+
+    display: flex;
+    justify-content: space-between;
+
+    .right,
+    .left {
+        display: flex;
+    }
+
+    .control {
+        border-radius: 2.95rem;
+        padding: 0.8rem;
+        transition: 0.5s;
+
+        &:hover {
+            background-color: var(--colour-bg-semi-transparent-dark);
+        }
+
+        &.last-child {
+            margin-right: 0;
+        }
+
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            width: 36px;
+            height: 36px;
+
+            mask-repeat: no-repeat;
+            mask-position: center;
+
+            background-color: var(--colour-text-white);
+
+            &.back-button {
+                mask: url('/assets/icons/back2.svg');
+            }
+
+            &.prev-button {
+                mask: url('/assets/icons/previous.svg');
+            }
+
+            &.next-button {
+                mask: url('/assets/icons/next.svg');
+            }
+
+        }
+    }
+}
+
+.video-info {
+    .video-name,
+    .sub {
+        padding-bottom: 0.5rem;
+    }
+
+    .video-name {
+        font-size: 3.2rem;
+        font-weight: 600;
+        padding-top: 5px;
+        color: var(--colour-text-black);
+    }
+
+    .sub {
+        font-size: 1.4rem;
+        color: var(--colour-text-light);
+    }
+
+    .extra {
+        .extra-item {
+            font-size: 1.2rem;
+        }
+
+        .extra-item::after {
+            display: inline-block;
+            margin: 0 0.5rem;
+            content: '|';
+            opacity: 0.5;
+        }
+
+        .extra-item:last-child::after {
+            content: '';
+        }
+    }
+}
+
+.series-button {
+    margin-top: 2rem;
 }
