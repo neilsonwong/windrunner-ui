@@ -32,6 +32,7 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit() {
     this.headerTweakService.setCompact();
+    this.headerTweakService.resetTransparent();
 
     this.video$ = this.webPlayerService.nowPlaying$;
     this.streamSource$ = this.webPlayerService.source$;

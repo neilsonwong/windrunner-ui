@@ -159,7 +159,7 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
     this.agentService.heartbeat$.pipe(
       switchMap(isAlive => {
         if (isAlive) {
-          this.agentService.triggerPlay(videoFile.rel).pipe(
+          return this.agentService.triggerPlay(videoFile.rel).pipe(
             tap((res: boolean) => {
               if (res) {
                 console.log(`successly triggered play for ${videoFile.rel}`);
