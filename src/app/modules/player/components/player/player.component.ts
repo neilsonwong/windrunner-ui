@@ -1,11 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { first, map, switchMap, take, tap } from 'rxjs/operators';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { WebPlayerService } from 'src/app/modules/core/services/web-player.service';
+import { APP_TITLE } from 'src/app/modules/shared/constants';
 import { Video } from 'src/app/modules/shared/models/Files';
 import StreamSource from 'src/app/modules/shared/models/StreamSource';
 
@@ -25,6 +27,7 @@ export class PlayerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private titleService: Title,
     private webPlayerService: WebPlayerService,
     private headerTweakService: HeaderTweakService,
     private location: Location
@@ -34,7 +37,9 @@ export class PlayerComponent implements OnInit {
     this.headerTweakService.setCompact();
     this.headerTweakService.resetTransparent();
 
-    this.video$ = this.webPlayerService.nowPlaying$;
+    this.video$ = this.webPlayerService.nowPlaying$.pipe(
+      tap(v => this.setTitle(v))
+    );
     this.streamSource$ = this.webPlayerService.source$;
     this.seriesLink$ = this.webPlayerService.sourceFolder$.pipe(
       map(rel => `${UI_ROUTES.SERIES}${rel}`)
@@ -55,6 +60,12 @@ export class PlayerComponent implements OnInit {
       map(e => e[relatedName]),
       tap(fileId => this.playFile(fileId))
     );
+  }
+
+  private setTitle(video: Video) {
+    if (video && video.name) {
+      this.titleService.setTitle(`${video.name} - ${APP_TITLE}`);
+    }
   }
 
   private playFile(fileId: string) {
