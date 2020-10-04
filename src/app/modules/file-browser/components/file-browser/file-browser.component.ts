@@ -6,6 +6,8 @@ import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { shareReplay, map, switchMap, tap } from 'rxjs/operators';
 import { LinkData } from 'src/app/modules/shared/models/LinkData';
 import { UI_ROUTES } from 'src/app/modules/core/routes';
+import { Title } from '@angular/platform-browser';
+import { APP_TITLE } from 'src/app/modules/shared/constants';
 
 @Component({
   selector: 'app-file-browser',
@@ -24,6 +26,7 @@ export class FileBrowserComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private titleService: Title,
     private fileListService: FileListService) { }
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class FileBrowserComponent implements OnInit {
 
     const empty = of([]).pipe(tap(() => { this.loading = true; }));
     this.place$ = urlChange$.pipe(
+      tap((e: UrlSegment[]) => this.setTitle(e)),
       map((e: UrlSegment[]) => this.getPlace(e)),
       shareReplay()
     );
@@ -55,6 +59,17 @@ export class FileBrowserComponent implements OnInit {
 
   private getPlace(segments: UrlSegment[]): string {
     return '/' + segments.map(segment => decodeURIComponent(segment.toString())).join('/');
+  }
+
+  private setTitle(segments: UrlSegment[]): void {
+    if (segments.length > 0) {
+      const segment = segments[segments.length-1];
+      const folderName = decodeURIComponent(segment.toString());
+      this.titleService.setTitle(`${folderName} - ${APP_TITLE}`);
+    }
+    else {
+      this.titleService.setTitle(`Browse - ${APP_TITLE}`);
+    }
   }
 
   private getBreadCrumbs(segments: UrlSegment[]): Array<string | LinkData> {

@@ -5,6 +5,8 @@ import { FileListService } from 'src/app/modules/core/services/file-list.service
 import VIDEO_LISTS from 'src/app/modules/shared/models/VideoLists.enum';
 import { RecentlyChangedData } from 'src/app/modules/shared/models/GenericData';
 import { map } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
+import { APP_TITLE } from 'src/app/modules/shared/constants';
 
 @Component({
   selector: 'app-highlight',
@@ -16,9 +18,12 @@ export class HighlightComponent implements OnInit {
   recentlyUpdatedSeries$: Observable<DirectoryKind[]>;
   favouriteSeries$: Observable<DirectoryKind[]>;
 
-  constructor(private fileListService: FileListService) { }
+  constructor(
+    private titleService: Title,
+    private fileListService: FileListService) { }
 
   ngOnInit() {
+    this.titleService.setTitle(`${APP_TITLE}`)
     this.recentlyUpdatedSeries$ = this.fileListService.getRecent().pipe(
       map((changed: RecentlyChangedData) => changed.changed));
 

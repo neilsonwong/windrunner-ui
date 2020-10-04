@@ -9,6 +9,8 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { fakeLogs } from './fake-logs';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
+import { Title } from '@angular/platform-browser';
+import { APP_TITLE } from 'src/app/modules/shared/constants';
 
 @Component({
   selector: 'app-maintenance',
@@ -25,10 +27,12 @@ export class MaintenanceComponent implements OnInit {
 
   public notAdmin: Boolean = false;
 
-  constructor(private serverAdminService: ServerAdminService,
+  constructor(private titleService: Title,
+    private serverAdminService: ServerAdminService,
     private headerTweakService: HeaderTweakService) { }
 
   ngOnInit() {
+    this.titleService.setTitle(`Maintenance - ${APP_TITLE}`);
     this.headerTweakService.setCompact();
     this.serverLoad$ = this.serverAdminService.getServerLoadStream().pipe(
       catchError(e => this.handleUnauthorized(e)));
