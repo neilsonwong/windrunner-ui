@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, HostListener, OnDestroy, ElementRef, OnIni
 import { Video, FileKind } from 'src/app/modules/shared/models/Files';
 import { API_ROUTE_OPTIONS } from 'src/app/modules/core/routes';
 import { Subject, of, Observable, Subscription, timer, EMPTY } from 'rxjs';
-import { tap, takeUntil, delay, switchMap, map, filter } from 'rxjs/operators';
+import { tap, takeUntil, delay, switchMap, map, filter, take } from 'rxjs/operators';
 import { AgentService } from 'src/app/modules/core/services/agent.service';
 import { isVideo } from 'src/app/utils/fileTypeUtils';
 import { PendingResourceRetrievalService } from 'src/app/modules/core/services/pending-resource-retrieval.service';
@@ -157,6 +157,7 @@ export class VideoPreviewComponent implements OnInit, OnChanges, OnDestroy {
 
   playFile(videoFile: Video) {
     this.agentService.heartbeat$.pipe(
+      take(1),
       switchMap(isAlive => {
         if (isAlive) {
           return this.agentService.triggerPlay(videoFile.rel).pipe(
