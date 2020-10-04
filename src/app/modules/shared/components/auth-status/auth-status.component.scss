@@ -61,4 +61,7 @@ button {
     .icon {
         background-color: var(--colour-light-green);
     }
+    button:hover:enabled {
+        background-color: transparent;
+    }
 }
