@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderTweakService } from 'src/app/modules/core/services/header-tweak.service';
 import { Observable, forkJoin } from 'rxjs';
-import { FileKind, DetailKind } from 'src/app/modules/shared/models/Files';
+import { FileKind, DetailKind, SeriesDirectory } from 'src/app/modules/shared/models/Files';
 import { FileListService } from 'src/app/modules/core/services/file-list.service';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { shareReplay, map, switchMap, tap, flatMap, mergeAll, concatMap, mergeMap } from 'rxjs/operators';
+import { shareReplay, map, switchMap, tap, mergeMap } from 'rxjs/operators';
 import { SeriesOptions } from 'src/app/modules/shared/models/SeriesOptions';
+import { Title } from '@angular/platform-browser';
 import VIDEO_LISTS from 'src/app/modules/shared/models/VideoLists.enum';
+import { APP_TITLE } from 'src/app/modules/shared/constants';
 
 @Component({
   selector: 'app-series',
@@ -24,11 +26,11 @@ export class SeriesComponent implements OnInit {
   optionsList$: Observable<SeriesOptions>;
   seriesPath: string;
 
-  constructor(private fileListService: FileListService,
+  constructor(private titleService: Title,
+    private fileListService: FileListService,
     private route: ActivatedRoute,
     private headerTweakService: HeaderTweakService
   ) { }
-
 
   ngOnInit() {
     this.headerTweakService.setCompact();
@@ -41,7 +43,11 @@ export class SeriesComponent implements OnInit {
     );
 
     this.seriesDetails$ = this.filePath$.pipe(
-      switchMap((rel: string) => this.fileListService.getFileDetail(rel))
+      switchMap((rel: string) => this.fileListService.getFileDetail(rel)),
+      tap((series: DetailKind) => {
+        const seriesTitle = (series as SeriesDirectory).aniListData.nativeTitle || series.name;
+        this.titleService.setTitle(`${seriesTitle} - ${APP_TITLE}`);
+      })
     );
 
     this.isFavourite$ = this.filePath$.pipe(
