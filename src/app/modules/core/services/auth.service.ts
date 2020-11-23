@@ -18,7 +18,7 @@ export class AuthService {
   ) {
     this.authContext$ = this.authContextSubject$.asObservable().pipe(
       distinctUntilChanged(),
-      shareReplay(),
+      shareReplay(1),
     );
     this.isAuthenticated$ = this.authContext$.pipe(
       map(a => (a !== null && a !== undefined))
@@ -51,6 +51,7 @@ export class AuthService {
   private handleLoginSuccess(): void {
     const claims = this.oauthService.getIdentityClaims();
     this.authContextSubject$.next(claims['email']);
+    console.log('logged in: ' + claims['email']);
     if (this.oauthService.state && this.oauthService.state !== 'undefined' && this.oauthService.state !== 'null') {
       this.router.navigateByUrl(this.oauthService.state);
     }
