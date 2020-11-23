@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, tap } from 'rxjs/operators';
@@ -12,7 +13,9 @@ export class AuthService {
   public authContext$: Observable<string>;
   public isAuthenticated$: Observable<boolean>;
 
-  constructor(private oauthService: OAuthService) {
+  constructor(private oauthService: OAuthService,
+    private router: Router
+  ) {
     this.authContext$ = this.authContextSubject$.asObservable().pipe(
       distinctUntilChanged(),
       shareReplay(),
@@ -24,8 +27,7 @@ export class AuthService {
     this.oauthService.events
       .subscribe(e => {
         if (this.oauthService.hasValidAccessToken()) {
-          const claims = this.oauthService.getIdentityClaims();
-          this.authContextSubject$.next(claims['email']);
+          this.handleLoginSuccess();
         }
       });
 
@@ -33,8 +35,8 @@ export class AuthService {
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
-  public login() {
-    this.oauthService.initLoginFlow();
+  public login(redirectTo?: string) {
+    this.oauthService.initLoginFlow(redirectTo || this.router.url);
   }
 
   public logout() {
@@ -44,5 +46,13 @@ export class AuthService {
 
   public getAccessToken(): string {
     return this.oauthService.getAccessToken();
+  }
+
+  private handleLoginSuccess(): void {
+    const claims = this.oauthService.getIdentityClaims();
+    this.authContextSubject$.next(claims['email']);
+    if (this.oauthService.state && this.oauthService.state !== 'undefined' && this.oauthService.state !== 'null') {
+      this.router.navigateByUrl(this.oauthService.state);
+    }
   }
 }
