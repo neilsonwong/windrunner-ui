@@ -45,7 +45,8 @@ export class SeriesComponent implements OnInit {
     this.seriesDetails$ = this.filePath$.pipe(
       switchMap((rel: string) => this.fileListService.getFileDetail(rel)),
       tap((series: DetailKind) => {
-        const seriesTitle = (series as SeriesDirectory).aniListData.nativeTitle || series.name;
+        const castedSeries = series as SeriesDirectory;
+        const seriesTitle = castedSeries.aniListData ?  castedSeries.aniListData.nativeTitle : series.name;
         this.titleService.setTitle(`${seriesTitle} - ${APP_TITLE}`);
       })
     );
