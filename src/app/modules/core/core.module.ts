@@ -12,7 +12,8 @@ import { VisibilityService } from './services/visibility.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { VariableRoutingService } from './services/variable-routing.service';
 
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { authStorageFactory } from './oauth-storage';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     VisibilityService,
     LocalStorageService,
     VariableRoutingService,
+    { provide: OAuthStorage, useFactory: authStorageFactory }
   ]
 })
 export class CoreModule {
