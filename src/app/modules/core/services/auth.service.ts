@@ -39,8 +39,8 @@ export class AuthService {
     this.oauthService.initLoginFlow(redirectTo || this.router.url);
   }
 
-  public logout() {
-    this.oauthService.revokeTokenAndLogout();
+  public async logout() {
+    await this.oauthService.revokeTokenAndLogout();
     this.authContextSubject$.next(undefined);
   }
 
