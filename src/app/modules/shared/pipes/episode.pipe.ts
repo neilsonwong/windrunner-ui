@@ -9,8 +9,8 @@ import EpisodeData from '../models/EpisodeData';
 
 const allUnderscores = new RegExp(/[_]/g);
 const animeFileNameMetaData = new RegExp(/[\[|\(]([a-z-& ]+)[\]|\)]|[\[|\(](([0-9]{3,4}p|([0-9]{3,4}x[0-9]{3,4})|[-_ \.,]|hi10P|aac|[hx][\.]?264|xvid|flac|bd|dvd|tx|10bit|blu-?ray|ac3|bd-rip)+)[\]|\)]|[\[|\(]([A-Z0-9]{8})[\]|\)]|[\.]?(DVD|[F]?HD)|((\s-\s)THORA)|[\.]([avimkp4]{3})/ig);
-const animeAndEp = new RegExp(/^(.*?)(\s+-\s+|\s+)(ep)?([0-9]{1,3})(\s)*(v\d)?(.*)?$/i);
-const epAndAnime = new RegExp(/^(ep)?([0-9]{1,3}(v\d)?)(\s+-\s+|\s+)(.*?)$/i);
+const animeAndEp = new RegExp(/^(.*?)(\s+-\s+|\s+)(ep)?([0-9]{1,4})(\s)*(v\d)?(.*)?$/i);
+const epAndAnime = new RegExp(/^(ep)?([0-9]{1,4}(v\d)?)(\s+-\s+|\s+)(.*?)$/i);
 
 // add metadata
 interface RegexWithNames { regex: RegExp; meta: { [key: string]: number }; }
